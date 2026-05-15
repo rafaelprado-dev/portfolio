@@ -1,0 +1,15 @@
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.svg text eol=lf
+
+*.pdf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.cur binary
+*.ani binary
