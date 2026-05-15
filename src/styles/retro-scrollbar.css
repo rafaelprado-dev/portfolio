@@ -1,0 +1,52 @@
+:root {
+  --retro-scrollbar-size: 2.15rem;
+}
+
+.retro-scrollbar {
+  display: grid;
+  grid-template-rows: var(--retro-scrollbar-size) 1fr var(--retro-scrollbar-size);
+  border-left: 1px solid #ffffff;
+  background: #c0c0c0;
+}
+
+.retro-scrollbar button {
+  min-height: 0;
+  border: 2px solid #000000;
+  background: #c0c0c0;
+  color: #000000;
+  font-family: "W95FA", monospace;
+  font-size: 0.82rem;
+  line-height: 1;
+  padding: 0;
+  box-shadow:
+    inset 1px 1px #ffffff,
+    inset -1px -1px #404040;
+}
+
+.retro-scrollbar__track {
+  position: relative;
+  border-left: 1px solid #404040;
+  border-right: 1px solid #ffffff;
+  background:
+    linear-gradient(
+      45deg,
+      #808080 25%,
+      transparent 25% 50%,
+      #808080 50% 75%,
+      transparent 75%
+    ),
+    #b0b0b0;
+  background-size: 0.45rem 0.45rem;
+}
+
+.retro-scrollbar__thumb {
+  position: absolute;
+  left: 0.18rem;
+  right: 0.18rem;
+  min-height: 2rem;
+  border: 1px solid #000000;
+  background: #c0c0c0;
+  box-shadow:
+    inset 1px 1px #ffffff,
+    inset -1px -1px #404040;
+}

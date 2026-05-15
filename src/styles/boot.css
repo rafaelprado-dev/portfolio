@@ -1,0 +1,192 @@
+@font-face {
+  font-family: "W95FA";
+  src:
+    url("/fonts/w95fa/w95f.woff2") format("woff2"),
+    url("/fonts/w95fa/w95f.woff") format("woff");
+  font-display: swap;
+}
+
+.boot-screen {
+  display: grid;
+  min-height: 100svh;
+  place-items: stretch;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255, 255, 255, 0.1),
+      transparent 34rem
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.055) 0 1px,
+      transparent 1px 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.075) 0 1px,
+      transparent 1px 3px
+    ),
+    #0000aa;
+  color: #fff;
+  font-family: "W95FA", "Courier New", "Lucida Console", monospace;
+  text-shadow:
+    0 0 0.25rem #ffffff,
+    0.08rem 0 #ff00ff,
+    -0.08rem 0 #00ffff;
+}
+
+.boot-screen::before,
+.boot-screen::after {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+}
+
+.boot-screen::before {
+  z-index: 2;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.06) 50%, rgba(0, 0, 0, 0.08) 50%),
+    radial-gradient(circle at center, transparent 56%, rgba(0, 0, 0, 0.32));
+  background-size:
+    100% 4px,
+    auto;
+  mix-blend-mode: screen;
+}
+
+.boot-screen::after {
+  z-index: 3;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 4rem rgba(255, 255, 255, 0.32);
+}
+
+.boot-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  padding: clamp(1.5rem, 4vw, 3.2rem);
+}
+
+.boot-panel h1 {
+  max-width: 70rem;
+  font-size: clamp(2.4rem, 5.4vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  white-space: pre-line;
+}
+
+.boot-panel p {
+  max-width: 56rem;
+  margin-top: 1rem;
+  font-size: clamp(1.14rem, 1.9vw, 1.75rem);
+}
+
+.boot-panel__copy {
+  line-height: 1.45;
+}
+
+.loading-dots::after {
+  display: inline-block;
+  min-width: 3ch;
+  content: "";
+  animation: loading-dots 1.2s steps(4, end) infinite;
+}
+
+.boot-panel__status {
+  margin-top: 2rem;
+  font-size: clamp(1.12rem, 1.65vw, 1.5rem);
+}
+
+.boot-progress {
+  display: flex;
+  width: min(82vw, 66rem);
+  height: 1.75rem;
+  margin-top: 0.75rem;
+  border: 2px solid #fff;
+  background: #fff;
+  gap: 2px;
+  padding: 2px;
+}
+
+.boot-progress span {
+  flex: 1;
+  background: transparent;
+}
+
+.boot-progress span.is-loaded {
+  background: linear-gradient(90deg, #61f2c2, #38f8ad);
+}
+
+.boot-panel__status strong {
+  display: block;
+  margin-top: 0.7rem;
+  font-size: 1.6rem;
+}
+
+.boot-log {
+  display: grid;
+  grid-template-columns: 1fr var(--retro-scrollbar-size);
+  width: min(82vw, 66rem);
+  height: clamp(17rem, 39vh, 26rem);
+  margin-top: 1.4rem;
+  overflow: hidden;
+  border: 2px solid #fff;
+  background: rgba(0, 0, 170, 0.42);
+}
+
+.boot-log__content {
+  overflow-y: auto;
+  padding: 0.85rem 1rem;
+  scrollbar-width: none;
+}
+
+.boot-log__content::-webkit-scrollbar {
+  display: none;
+}
+
+.boot-log__line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 0.62rem;
+  font-size: clamp(1.38rem, 2.25vw, 2.05rem);
+  line-height: 1.1;
+}
+
+.boot-log__bullet {
+  width: 1.18rem;
+  height: 1.18rem;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 50%, #ffffff 0 35%, transparent 36%),
+    linear-gradient(#ffffff, #ffffff);
+  image-rendering: pixelated;
+  clip-path: polygon(
+    25% 0,
+    75% 0,
+    75% 12.5%,
+    87.5% 12.5%,
+    87.5% 25%,
+    100% 25%,
+    100% 75%,
+    87.5% 75%,
+    87.5% 87.5%,
+    75% 87.5%,
+    75% 100%,
+    25% 100%,
+    25% 87.5%,
+    12.5% 87.5%,
+    12.5% 75%,
+    0 75%,
+    0 25%,
+    12.5% 25%,
+    12.5% 12.5%,
+    25% 12.5%
+  );
+  box-shadow: 0 0 0.55rem rgba(97, 242, 194, 0.85);
+}

@@ -1,0 +1,54 @@
+﻿@keyframes desktop-glitch {
+  0%,
+  92%,
+  100% {
+    transform: translate(0);
+  }
+  94% {
+    transform: translate(2px, -1px);
+  }
+  96% {
+    transform: translate(-2px, 1px);
+  }
+}
+
+@keyframes alert-in {
+  from {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+@keyframes loading-dots {
+  0% {
+    content: "";
+  }
+
+  25% {
+    content: ".";
+  }
+
+  50% {
+    content: "..";
+  }
+
+  75%,
+  100% {
+    content: "...";
+  }
+}
+
+@media (max-width: 920px) {
+  .project-selector,
+  .desktop-icons-layer {
+    display: none;
+  }
+
+  .main-window {
+    width: calc(100vw - 2rem);
+  }
+
+  .cmd-window {
+    width: calc(100vw - 1rem);
+  }
+}

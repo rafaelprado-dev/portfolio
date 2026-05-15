@@ -1,0 +1,65 @@
+html,
+body,
+.boot-screen,
+.rafaelos-desktop,
+.window {
+  cursor: url("/assets/cursors/windows-7-live-green/default.cur"), auto;
+}
+
+button,
+a,
+summary,
+[role="button"],
+.desktop-icon,
+.title-bar-controls button,
+.retro-scrollbar button {
+  cursor: url("/assets/cursors/windows-7-live-green/pointer.cur"), pointer;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  cursor: url("/assets/cursors/windows-7-live-green/text.cur"), text;
+}
+
+.title-bar {
+  cursor: url("/assets/cursors/windows-7-live-green/move.cur"), move;
+}
+
+.desktop-icon,
+.desktop-icon:active {
+  cursor: url("/assets/cursors/windows-7-live-green/move.cur"), grab;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: url("/assets/cursors/windows-7-live-green/not-allowed.cur"), not-allowed;
+}
+
+.cursor-help {
+  cursor: url("/assets/cursors/windows-7-live-green/help.cur"), help;
+}
+
+.cursor-wait {
+  cursor: url("/assets/cursors/windows-7-live-green/busy.ani"), wait;
+}
+
+.cursor-progress {
+  cursor: url("/assets/cursors/windows-7-live-green/progress.ani"), progress;
+}
+
+.cursor-resize-ew {
+  cursor: url("/assets/cursors/windows-7-live-green/resize-ew.cur"), ew-resize;
+}
+
+.cursor-resize-ns {
+  cursor: url("/assets/cursors/windows-7-live-green/resize-ns.cur"), ns-resize;
+}
+
+.cursor-resize-nwse {
+  cursor: url("/assets/cursors/windows-7-live-green/resize-nwse.cur"), nwse-resize;
+}
+
+.cursor-resize-nesw {
+  cursor: url("/assets/cursors/windows-7-live-green/resize-nesw.cur"), nesw-resize;
+}
