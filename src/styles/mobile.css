@@ -1,0 +1,602 @@
+.rafadroid-boot-screen,
+.rafadroid-shell {
+  min-height: 100svh;
+  background:
+    linear-gradient(rgba(145, 255, 67, 0.032) 50%, rgba(0, 0, 0, 0.14) 50%),
+    radial-gradient(circle at 50% 14%, rgba(145, 255, 67, 0.14), transparent 15rem),
+    linear-gradient(180deg, #070d07, #020402 58%, #000);
+  background-size:
+    100% 3px,
+    auto,
+    auto;
+  color: #efffe8;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+  text-shadow: none;
+}
+
+.rafadroid-boot-screen {
+  display: grid;
+  place-items: stretch;
+  padding: 0;
+}
+
+.rafadroid-boot-screen::before {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(145, 255, 67, 0.14), transparent 11rem),
+    linear-gradient(rgba(145, 255, 67, 0.04) 50%, rgba(0, 0, 0, 0.12) 50%);
+  background-size:
+    auto,
+    100% 4px;
+  content: "";
+}
+
+.rafadroid-boot-panel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  width: 100%;
+  min-height: 100svh;
+  gap: 0.78rem;
+  padding: 1.1rem;
+}
+
+.rafadroid-boot-panel__top {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+}
+
+.rafadroid-mascot {
+  position: relative;
+  width: 5.8rem;
+  height: 5.4rem;
+  filter: drop-shadow(0 0 1.1rem rgba(145, 255, 67, 0.3));
+}
+
+.rafadroid-mascot__body {
+  position: absolute;
+  left: 0.82rem;
+  right: 0.82rem;
+  bottom: 0.45rem;
+  height: 3.9rem;
+  border: 2px solid #d6ffb8;
+  border-radius: 1.05rem 1.05rem 0.55rem 0.55rem;
+  background:
+    radial-gradient(circle at 28% 32%, #f7ffe2 0 0.2rem, transparent 0.24rem),
+    radial-gradient(circle at 72% 38%, #f7ffe2 0 0.32rem, transparent 0.36rem),
+    linear-gradient(180deg, #9dff39, #4c9f1d);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.38),
+    inset 0 -0.8rem rgba(0, 0, 0, 0.14);
+}
+
+.rafadroid-mascot__antenna {
+  position: absolute;
+  top: 0.2rem;
+  width: 2px;
+  height: 1.5rem;
+  background: #9dff39;
+  transform-origin: bottom;
+}
+
+.rafadroid-mascot__antenna--left {
+  left: 1.75rem;
+  transform: rotate(-28deg);
+}
+
+.rafadroid-mascot__antenna--right {
+  right: 1.6rem;
+  height: 1.72rem;
+  transform: rotate(34deg);
+}
+
+.rafadroid-mascot__antenna::before {
+  position: absolute;
+  left: 50%;
+  top: -0.28rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: #c4ff4d;
+  content: "";
+  transform: translateX(-50%);
+}
+
+.rafadroid-mascot__arm {
+  position: absolute;
+  bottom: 1.2rem;
+  width: 0.48rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  background: #7eea2f;
+}
+
+.rafadroid-mascot__arm--left {
+  left: 0.1rem;
+  transform: rotate(9deg);
+}
+
+.rafadroid-mascot__arm--right {
+  right: 0.1rem;
+  transform: rotate(-15deg);
+}
+
+.rafadroid-mascot__eye,
+.rafadroid-mascot__mouth {
+  position: absolute;
+  background: #071007;
+}
+
+.rafadroid-mascot__eye {
+  top: 1.25rem;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 999px;
+}
+
+.rafadroid-mascot__eye--left {
+  left: 1rem;
+}
+
+.rafadroid-mascot__eye--right {
+  right: 0.85rem;
+  width: 0.5rem;
+}
+
+.rafadroid-mascot__mouth {
+  left: 50%;
+  bottom: 1.02rem;
+  width: 1.3rem;
+  height: 0.18rem;
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+.rafadroid-boot-panel__eyebrow {
+  margin: 0;
+  color: #9dff39;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.rafadroid-boot-panel h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.05rem, 10vw, 3.1rem);
+  line-height: 1;
+}
+
+.rafadroid-boot-progress {
+  height: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(157, 255, 57, 0.42);
+  background:
+    repeating-linear-gradient(90deg, rgba(157, 255, 57, 0.1) 0 4px, transparent 4px 8px),
+    #020502;
+}
+
+.rafadroid-boot-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #63ff25, #c4ff4d);
+  box-shadow: 0 0 1rem rgba(145, 255, 67, 0.55);
+}
+
+.rafadroid-boot-progress-label {
+  color: #fff;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.rafadroid-boot-log {
+  display: grid;
+  gap: 0.38rem;
+  align-content: start;
+  height: clamp(9.5rem, 28vh, 12rem);
+  min-height: 0;
+  border: 1px solid rgba(157, 255, 57, 0.28);
+  background: rgba(0, 0, 0, 0.55);
+  color: #c9ffc0;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.75rem;
+  overflow-y: auto;
+  padding: 0.72rem;
+  scrollbar-color: #9dff39 rgba(0, 0, 0, 0.4);
+  scrollbar-width: thin;
+}
+
+.rafadroid-boot-log::-webkit-scrollbar {
+  width: 0.42rem;
+}
+
+.rafadroid-boot-log::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.rafadroid-boot-log::-webkit-scrollbar-thumb {
+  background: #9dff39;
+}
+
+.rafadroid-boot-log p {
+  margin: 0;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.rafadroid-boot-log span {
+  margin-right: 0.28rem;
+  color: #9dff39;
+  font-weight: 800;
+}
+
+.rafadroid-boot-log strong {
+  margin-right: 0.28rem;
+  color: #9dff39;
+  font-weight: 800;
+}
+
+.rafadroid-shell {
+  display: grid;
+  width: 100vw;
+  height: 100svh;
+  grid-template-rows: 1.45rem 4.2rem minmax(0, 1fr) 4.3rem 2.6rem;
+}
+
+.rafadroid-shell *,
+.rafadroid-shell *::before,
+.rafadroid-shell *::after,
+.rafadroid-boot-screen *,
+.rafadroid-boot-screen *::before,
+.rafadroid-boot-screen *::after {
+  box-sizing: border-box;
+}
+
+.rafadroid-shell button {
+  min-height: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+}
+
+.rafadroid-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(#070a07, #000);
+  color: #e8ffdc;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0 0.55rem;
+}
+
+.rafadroid-statusbar__carrier,
+.rafadroid-statusbar__icons {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  gap: 0.3rem;
+}
+
+.rafadroid-statusbar svg,
+.rafadroid-appbar svg,
+.rafadroid-dock svg,
+.rafadroid-softkeys svg {
+  flex: 0 0 auto;
+}
+
+.rafadroid-appbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid #101d10;
+  background:
+    linear-gradient(180deg, rgba(157, 255, 57, 0.12), transparent 44%),
+    linear-gradient(180deg, #151f12, #050805);
+  padding: 0.55rem 0.65rem;
+}
+
+.rafadroid-appbar small {
+  display: block;
+  color: #9dff39;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.rafadroid-appbar h1 {
+  margin: 0.1rem 0 0;
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.rafadroid-icon-button {
+  display: grid;
+  width: 2.55rem;
+  height: 2.55rem;
+  place-items: center;
+  border: 1px solid rgba(157, 255, 57, 0.34);
+  border-radius: 0.28rem;
+  background: linear-gradient(#182315, #030503);
+  color: #c4ff4d;
+}
+
+.rafadroid-screen {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.55rem;
+}
+
+.rafadroid-app-window,
+.rafadroid-launcher {
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  border: 1px solid rgba(157, 255, 57, 0.28);
+  border-radius: 0.28rem;
+  background:
+    linear-gradient(180deg, rgba(20, 32, 17, 0.7), rgba(2, 4, 2, 0.94)),
+    #050805;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.09),
+    0 0.85rem 2.2rem rgba(0, 0, 0, 0.32);
+  scrollbar-color: #9dff39 rgba(0, 0, 0, 0.34);
+  scrollbar-width: thin;
+}
+
+.rafadroid-app-window::-webkit-scrollbar,
+.rafadroid-launcher::-webkit-scrollbar {
+  width: 0.42rem;
+}
+
+.rafadroid-app-window::-webkit-scrollbar-thumb,
+.rafadroid-launcher::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #9dff39;
+}
+
+.rafadroid-shell .app-screen {
+  min-height: 100%;
+  padding: 0.95rem;
+}
+
+.rafadroid-shell .app-kicker {
+  color: #9dff39;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.76rem;
+}
+
+.rafadroid-shell .app-screen h1,
+.rafadroid-shell .app-screen h2,
+.rafadroid-shell .home-app__name,
+.rafadroid-shell .home-app__role {
+  color: #fff;
+  font-size: clamp(1.65rem, 8vw, 2.15rem);
+  line-height: 1.05;
+  text-shadow: 0 0 0.7rem rgba(157, 255, 57, 0.2);
+}
+
+.rafadroid-shell .home-app__notice,
+.rafadroid-shell .projects-explorer__list,
+.rafadroid-shell .skills-explorer__list,
+.rafadroid-shell .timeline-explorer__list,
+.rafadroid-shell .project-details,
+.rafadroid-shell .skill-details,
+.rafadroid-shell .experience-details,
+.rafadroid-shell .contact-app__terminal,
+.rafadroid-shell .recruiter-app__panel,
+.rafadroid-shell .missions-app__status,
+.rafadroid-shell .missions-app__list article {
+  border-color: rgba(157, 255, 57, 0.3);
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.rafadroid-shell .projects-explorer,
+.rafadroid-shell .skills-explorer,
+.rafadroid-shell .timeline-explorer {
+  gap: 0.75rem;
+}
+
+.rafadroid-shell .projects-explorer__list,
+.rafadroid-shell .skills-explorer__list,
+.rafadroid-shell .timeline-explorer__list {
+  max-height: 10.5rem;
+}
+
+.rafadroid-shell .projects-explorer__list button,
+.rafadroid-shell .skills-explorer__list button,
+.rafadroid-shell .timeline-explorer__list button {
+  border: 1px solid rgba(157, 255, 57, 0.18);
+  border-radius: 0.32rem;
+  background: linear-gradient(180deg, #f2f4e7, #cfd8c6);
+  box-shadow: inset 0 1px #fff;
+}
+
+.rafadroid-shell .projects-explorer__list button.is-active,
+.rafadroid-shell .skills-explorer__list button.is-active,
+.rafadroid-shell .timeline-explorer__list button.is-active {
+  background: linear-gradient(180deg, #d9ff9d, #8bc34a);
+}
+
+.rafadroid-launcher {
+  padding: 0.9rem;
+}
+
+.rafadroid-launcher__hint {
+  margin: 0 0 0.8rem;
+  color: #b9d9b1;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+}
+
+.rafadroid-launcher__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.rafadroid-launcher__grid button {
+  display: grid;
+  min-width: 0;
+  justify-items: center;
+  gap: 0.28rem;
+  border: 1px solid rgba(157, 255, 57, 0.22);
+  border-radius: 0.32rem;
+  background: linear-gradient(180deg, rgba(157, 255, 57, 0.08), rgba(0, 0, 0, 0.2));
+  padding: 0.65rem 0.35rem;
+  text-align: center;
+}
+
+.rafadroid-launcher__grid button.is-active {
+  border-color: rgba(196, 255, 77, 0.78);
+  box-shadow: 0 0 0 1px rgba(196, 255, 77, 0.2);
+}
+
+.rafadroid-launcher__grid button > span {
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  place-items: center;
+  border-radius: 0.42rem;
+  background: linear-gradient(135deg, #75e534, #15230f);
+  color: #f5ffe8;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.24),
+    0 0.45rem 0.9rem rgba(0, 0, 0, 0.26);
+}
+
+.rafadroid-launcher__grid strong,
+.rafadroid-launcher__grid small {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rafadroid-launcher__grid strong {
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.rafadroid-launcher__grid small {
+  color: #b9d9b1;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.62rem;
+}
+
+.rafadroid-dock {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 0.35rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(8, 13, 7, 0.98), #000);
+  padding: 0.45rem 0.45rem 0.35rem;
+}
+
+.rafadroid-dock button {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  gap: 0.18rem;
+  border-radius: 0.42rem;
+  color: #dfffd8;
+  font-size: 0.66rem;
+  line-height: 1;
+}
+
+.rafadroid-dock button.is-active {
+  background: rgba(157, 255, 57, 0.16);
+  color: #c4ff4d;
+}
+
+.rafadroid-dock span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rafadroid-softkeys {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #2b3329;
+  background: linear-gradient(#080c08, #000);
+}
+
+.rafadroid-softkeys button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28rem;
+  border-right: 1px solid #2b3329;
+  color: #f2f6ef;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.rafadroid-softkeys button:last-child {
+  border-right: 0;
+}
+
+.rafadroid-achievement {
+  position: fixed;
+  left: 0.65rem;
+  right: 0.65rem;
+  top: 2rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  border: 1px solid rgba(196, 255, 77, 0.68);
+  border-radius: 0.28rem;
+  background: linear-gradient(180deg, rgba(16, 24, 13, 0.98), rgba(0, 0, 0, 0.98));
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.48);
+  color: #fff;
+  padding: 0.7rem;
+  animation: rafadroid-notification 220ms ease-out;
+}
+
+.rafadroid-achievement > svg {
+  color: #c4ff4d;
+  flex: 0 0 auto;
+}
+
+.rafadroid-achievement small {
+  display: block;
+  color: #9dff39;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.66rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.rafadroid-achievement strong {
+  display: block;
+  margin-top: 0.12rem;
+  font-size: 0.94rem;
+  line-height: 1.15;
+}
+
+@keyframes rafadroid-notification {
+  from {
+    transform: translateY(-0.8rem);
+    opacity: 0;
+  }
+}

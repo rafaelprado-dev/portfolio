@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { BootScreen } from "@/components/os/BootScreen";
 import { Desktop } from "@/components/os/Desktop";
+import { MobileShell } from "@/components/os/MobileShell";
+import { RafaDroidBootScreen } from "@/components/os/RafaDroidBootScreen";
 import { profile } from "@/content/profile";
 
 export type AppId =
@@ -82,6 +84,7 @@ const bootModules = [
 
 export function RafaelOS() {
   const [booted, setBooted] = useState(false);
+  const [isRafaDroid, setIsRafaDroid] = useState<boolean | null>(null);
   const [activeApp, setActiveApp] = useState<AppId>("home");
   const [virusAlerts, setVirusAlerts] = useState<string[]>([]);
 
@@ -93,6 +96,16 @@ export function RafaelOS() {
     }),
     [],
   );
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 520px)");
+    const updateMode = () => setIsRafaDroid(mobileQuery.matches);
+
+    updateMode();
+    mobileQuery.addEventListener("change", updateMode);
+
+    return () => mobileQuery.removeEventListener("change", updateMode);
+  }, []);
 
   useEffect(() => {
     if (virusAlerts.length === 0) return;
@@ -111,9 +124,26 @@ export function RafaelOS() {
     ]);
   };
 
+  if (isRafaDroid === null) {
+    return <main className="rafadroid-boot-screen" aria-label="Carregando modo visual" />;
+  }
+
   if (!booted) {
+    if (isRafaDroid) {
+      return <RafaDroidBootScreen onComplete={() => setBooted(true)} />;
+    }
+
     return (
       <BootScreen config={bootConfig} onComplete={() => setBooted(true)} />
+    );
+  }
+
+  if (isRafaDroid) {
+    return (
+      <MobileShell
+        activeApp={activeApp}
+        onActivateApp={setActiveApp}
+      />
     );
   }
 

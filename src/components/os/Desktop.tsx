@@ -187,10 +187,44 @@ const getDefaultWindowPositions = (): Record<WindowId, DesktopIconPosition> => {
   }
 
   const navWidth = Math.min(512, window.innerWidth - 32);
-  const mainWidth = Math.min(768, window.innerWidth * 0.58);
+  const isCompactViewport = window.innerWidth <= 920;
+  const compactGutter = window.innerWidth <= 520 ? 8 : 16;
+  const compactMainTop = window.innerWidth <= 520 ? 114 : 128;
+  const mainWidth = isCompactViewport
+    ? window.innerWidth - compactGutter * 2
+    : Math.min(768, window.innerWidth * 0.58);
   const mainHeight = Math.min(window.innerHeight * 0.54, 496);
   const doomWidth = Math.min(688, window.innerWidth - 24);
   const doomHeight = Math.min(638, window.innerHeight - 72);
+
+  if (isCompactViewport) {
+    return {
+      navigation: {
+        x: compactGutter,
+        y: compactGutter,
+      },
+      selector: {
+        x: compactGutter,
+        y: compactGutter,
+      },
+      main: {
+        x: compactGutter,
+        y: compactMainTop,
+      },
+      terminal: {
+        x: compactGutter,
+        y: compactMainTop,
+      },
+      wallpapers: {
+        x: compactGutter,
+        y: compactMainTop,
+      },
+      doom: {
+        x: compactGutter,
+        y: compactMainTop,
+      },
+    };
+  }
 
   return {
     navigation: {
