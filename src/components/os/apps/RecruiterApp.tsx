@@ -1,15 +1,8 @@
 import { profile } from "@/content/profile";
 import { projects } from "@/content/projects";
+import { recruiterDiagnostic } from "@/content/recruiter";
 import { skillGroups } from "@/content/skills";
 import { socialLinks } from "@/content/socialLinks";
-
-const diagnosticChecks = [
-  "Front-end moderno",
-  "Arquitetura limpa",
-  "Design system e Atomic Design",
-  "Acessibilidade / WCAG",
-  "Projetos reais com produto",
-];
 
 const primarySkills = skillGroups.slice(0, 4).map((skill) => skill.title);
 
@@ -25,13 +18,13 @@ export function RecruiterApp() {
       <div className="recruiter-app__panel">
         <div className="recruiter-app__status">
           <strong>Resultado</strong>
-          <span>Compatível com Front-End, Produto e UI Engineering</span>
+          <span>{recruiterDiagnostic.result}</span>
         </div>
 
         <section aria-labelledby="recruiter-checks-title">
           <h3 id="recruiter-checks-title">Verificação rápida</h3>
           <ul className="recruiter-app__checks">
-            {diagnosticChecks.map((check) => (
+            {recruiterDiagnostic.checks.map((check) => (
               <li key={check}>
                 <span aria-hidden="true">OK</span>
                 {check}

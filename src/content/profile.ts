@@ -15,3 +15,11 @@ export const profile = {
   availability:
     "Aberto a oportunidades front-end, produtos digitais e projetos com alto cuidado de UI/UX."
 } as const;
+
+export const profileStrengths = [
+  "arquitetura limpa",
+  "acessibilidade",
+  "design systems",
+  "visão de produto",
+  "performance",
+] as const;

@@ -247,7 +247,7 @@
   display: grid;
   width: 100vw;
   height: 100svh;
-  grid-template-rows: 1.45rem 4.2rem minmax(0, 1fr) 4.3rem 2.6rem;
+  grid-template-rows: 1.45rem 4.2rem minmax(0, 1fr) 2.6rem;
 }
 
 .rafadroid-shell *,
@@ -291,7 +291,6 @@
 
 .rafadroid-statusbar svg,
 .rafadroid-appbar svg,
-.rafadroid-dock svg,
 .rafadroid-softkeys svg {
   flex: 0 0 auto;
 }
@@ -354,6 +353,7 @@
   box-shadow:
     inset 0 1px rgba(255, 255, 255, 0.09),
     0 0.85rem 2.2rem rgba(0, 0, 0, 0.32);
+  overscroll-behavior: contain;
   scrollbar-color: #9dff39 rgba(0, 0, 0, 0.34);
   scrollbar-width: thin;
 }
@@ -369,97 +369,62 @@
   background: #9dff39;
 }
 
-.rafadroid-shell .app-screen {
-  min-height: 100%;
-  padding: 0.95rem;
-}
-
-.rafadroid-shell .app-kicker {
-  color: #9dff39;
-  font-family: ui-monospace, Consolas, monospace;
-  font-size: 0.76rem;
-}
-
-.rafadroid-shell .app-screen h1,
-.rafadroid-shell .app-screen h2,
-.rafadroid-shell .home-app__name,
-.rafadroid-shell .home-app__role {
-  color: #fff;
-  font-size: clamp(1.65rem, 8vw, 2.15rem);
-  line-height: 1.05;
-  text-shadow: 0 0 0.7rem rgba(157, 255, 57, 0.2);
-}
-
-.rafadroid-shell .home-app__notice,
-.rafadroid-shell .projects-explorer__list,
-.rafadroid-shell .skills-explorer__list,
-.rafadroid-shell .timeline-explorer__list,
-.rafadroid-shell .project-details,
-.rafadroid-shell .skill-details,
-.rafadroid-shell .experience-details,
-.rafadroid-shell .contact-app__terminal,
-.rafadroid-shell .recruiter-app__panel,
-.rafadroid-shell .missions-app__status,
-.rafadroid-shell .missions-app__list article {
-  border-color: rgba(157, 255, 57, 0.3);
-  background: rgba(0, 0, 0, 0.32);
-}
-
-.rafadroid-shell .projects-explorer,
-.rafadroid-shell .skills-explorer,
-.rafadroid-shell .timeline-explorer {
-  gap: 0.75rem;
-}
-
-.rafadroid-shell .projects-explorer__list,
-.rafadroid-shell .skills-explorer__list,
-.rafadroid-shell .timeline-explorer__list {
-  max-height: 10.5rem;
-}
-
-.rafadroid-shell .projects-explorer__list button,
-.rafadroid-shell .skills-explorer__list button,
-.rafadroid-shell .timeline-explorer__list button {
-  border: 1px solid rgba(157, 255, 57, 0.18);
-  border-radius: 0.32rem;
-  background: linear-gradient(180deg, #f2f4e7, #cfd8c6);
-  box-shadow: inset 0 1px #fff;
-}
-
-.rafadroid-shell .projects-explorer__list button.is-active,
-.rafadroid-shell .skills-explorer__list button.is-active,
-.rafadroid-shell .timeline-explorer__list button.is-active {
-  background: linear-gradient(180deg, #d9ff9d, #8bc34a);
-}
-
 .rafadroid-launcher {
+  display: grid;
+  align-content: start;
+  gap: 0.95rem;
   padding: 0.9rem;
 }
 
-.rafadroid-launcher__hint {
-  margin: 0 0 0.8rem;
-  color: #b9d9b1;
+.rafadroid-launcher__header {
+  border: 1px solid rgba(157, 255, 57, 0.24);
+  background:
+    linear-gradient(180deg, rgba(157, 255, 57, 0.1), rgba(0, 0, 0, 0.22)),
+    rgba(0, 0, 0, 0.42);
+  padding: 0.85rem;
+}
+
+.rafadroid-launcher__header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 2.05rem;
+  line-height: 1;
+}
+
+.rafadroid-launcher__header p {
+  margin: 0.52rem 0 0;
+  color: #ddffd7;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.rafadroid-launcher__eyebrow {
+  margin: 0 0 0.3rem;
+  color: #9dff39;
   font-family: ui-monospace, Consolas, monospace;
   font-size: 0.74rem;
+  font-weight: 900;
   text-transform: uppercase;
 }
 
 .rafadroid-launcher__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.65rem;
 }
 
 .rafadroid-launcher__grid button {
   display: grid;
   min-width: 0;
-  justify-items: center;
-  gap: 0.28rem;
+  align-content: start;
+  justify-items: start;
+  gap: 0.34rem;
   border: 1px solid rgba(157, 255, 57, 0.22);
   border-radius: 0.32rem;
   background: linear-gradient(180deg, rgba(157, 255, 57, 0.08), rgba(0, 0, 0, 0.2));
-  padding: 0.65rem 0.35rem;
-  text-align: center;
+  min-height: 7.7rem;
+  padding: 0.65rem;
+  text-align: left;
 }
 
 .rafadroid-launcher__grid button.is-active {
@@ -469,8 +434,8 @@
 
 .rafadroid-launcher__grid button > span {
   display: grid;
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.65rem;
+  height: 2.65rem;
   place-items: center;
   border-radius: 0.42rem;
   background: linear-gradient(135deg, #75e534, #15230f);
@@ -481,55 +446,323 @@
 }
 
 .rafadroid-launcher__grid strong,
-.rafadroid-launcher__grid small {
+.rafadroid-launcher__grid small,
+.rafadroid-launcher__grid em {
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .rafadroid-launcher__grid strong {
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.88rem;
+  line-height: 1.05;
 }
 
 .rafadroid-launcher__grid small {
   color: #b9d9b1;
   font-family: ui-monospace, Consolas, monospace;
   font-size: 0.62rem;
-}
-
-.rafadroid-dock {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  align-items: stretch;
-  gap: 0.35rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg, rgba(8, 13, 7, 0.98), #000);
-  padding: 0.45rem 0.45rem 0.35rem;
-}
-
-.rafadroid-dock button {
-  display: grid;
-  min-width: 0;
-  place-items: center;
-  gap: 0.18rem;
-  border-radius: 0.42rem;
-  color: #dfffd8;
-  font-size: 0.66rem;
-  line-height: 1;
-}
-
-.rafadroid-dock button.is-active {
-  background: rgba(157, 255, 57, 0.16);
-  color: #c4ff4d;
-}
-
-.rafadroid-dock span {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.rafadroid-launcher__grid em {
+  display: -webkit-box;
+  color: #dfffd8;
+  font-size: 0.72rem;
+  font-style: normal;
+  line-height: 1.18;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.mobile-app {
+  display: grid;
+  align-content: start;
+  min-height: 100%;
+  gap: 0.72rem;
+  padding: 0.75rem;
+}
+
+.mobile-app a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mobile-app__hero,
+.mobile-app__section {
+  border: 1px solid rgba(157, 255, 57, 0.28);
+  background:
+    linear-gradient(180deg, rgba(157, 255, 57, 0.07), rgba(0, 0, 0, 0.22)),
+    rgba(0, 0, 0, 0.34);
+  padding: 0.82rem;
+}
+
+.mobile-app__hero {
+  display: grid;
+  gap: 0.48rem;
+}
+
+.mobile-app__hero--compact {
+  gap: 0.36rem;
+}
+
+.mobile-app__hero h2,
+.mobile-app__section h3 {
+  margin: 0;
+  color: #fff;
+  line-height: 1.08;
+}
+
+.mobile-app__hero h2 {
+  font-size: 1.75rem;
+}
+
+.mobile-app__section h3 {
+  font-size: 1.12rem;
+}
+
+.mobile-app__hero strong,
+.mobile-app__section > strong {
+  color: #f3fff0;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.mobile-app__hero p,
+.mobile-app__section p {
+  margin: 0;
+  color: #efffe8;
+  font-size: 0.95rem;
+  line-height: 1.48;
+}
+
+.mobile-app__kicker {
+  margin: 0;
+  color: #9dff39;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.mobile-app__actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.7rem, 1fr));
+  gap: 0.45rem;
+}
+
+.mobile-app__actions--stack {
+  grid-template-columns: 1fr;
+}
+
+.mobile-app__actions a,
+.mobile-app__actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.3rem;
+  border: 1px solid rgba(157, 255, 57, 0.42);
+  border-radius: 0.24rem;
+  background: linear-gradient(180deg, #20321a, #071007);
+  color: #f4ffe9;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mobile-app__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.mobile-app__chips span {
+  border: 1px solid rgba(157, 255, 57, 0.28);
+  background: rgba(157, 255, 57, 0.08);
+  color: #ddffd7;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  padding: 0.28rem 0.42rem;
+}
+
+.mobile-app__list,
+.mobile-app__timeline {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.mobile-app__list button {
+  display: grid;
+  gap: 0.22rem;
+  min-width: 0;
+  border: 1px solid rgba(157, 255, 57, 0.18);
+  background: rgba(0, 0, 0, 0.28);
+  padding: 0.62rem;
+  text-align: left;
+}
+
+.mobile-app__list button.is-active {
+  border-color: rgba(196, 255, 77, 0.82);
+  background:
+    linear-gradient(90deg, rgba(157, 255, 57, 0.16), transparent),
+    rgba(0, 0, 0, 0.42);
+}
+
+.mobile-app__list strong {
+  color: #fff;
+  font-size: 0.96rem;
+  line-height: 1.16;
+}
+
+.mobile-app__list span {
+  color: #efffe8;
+  font-size: 0.82rem;
+  line-height: 1.28;
+}
+
+.mobile-app__list small {
+  color: #9dff39;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.mobile-app__list--dense button {
+  padding: 0.58rem;
+}
+
+.mobile-app__detail {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.mobile-app__bullets,
+.mobile-app__checks,
+.mobile-app__mission-list {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mobile-app__bullets li {
+  position: relative;
+  color: #efffe8;
+  font-size: 0.88rem;
+  line-height: 1.42;
+  padding-left: 1rem;
+}
+
+.mobile-app__bullets li::before {
+  position: absolute;
+  left: 0;
+  color: #9dff39;
+  content: ">";
+  font-family: ui-monospace, Consolas, monospace;
+  font-weight: 900;
+}
+
+.mobile-app__checks li,
+.mobile-app__mission-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.5rem;
+  color: #efffe8;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.mobile-app__checks span,
+.mobile-app__mission-list > li > span {
+  color: #9dff39;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+
+.mobile-app__mission-list strong {
+  display: block;
+  color: #fff;
+  font-size: 0.92rem;
+}
+
+.mobile-app__mission-list p {
+  margin-top: 0.16rem;
+  color: #ccdfc8;
+  font-size: 0.78rem;
+  line-height: 1.34;
+}
+
+.mobile-app__mission-list li:not(.is-completed) {
+  opacity: 0.72;
+}
+
+.mobile-app__segmented {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid rgba(157, 255, 57, 0.28);
+  background: rgba(0, 0, 0, 0.34);
+}
+
+.mobile-app__segmented button {
+  min-height: 2.35rem;
+  border-right: 1px solid rgba(157, 255, 57, 0.18);
+  color: #dfffd8;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mobile-app__segmented button:last-child {
+  border-right: 0;
+}
+
+.mobile-app__segmented button.is-active {
+  background: rgba(157, 255, 57, 0.18);
+  color: #fff;
+}
+
+.mobile-app__progress {
+  height: 0.9rem;
+  overflow: hidden;
+  border: 1px solid rgba(157, 255, 57, 0.36);
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.mobile-app__progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #63ff25, #c4ff4d);
+}
+
+.mobile-app__definition-list {
+  display: grid;
+  gap: 0.62rem;
+  margin: 0;
+}
+
+.mobile-app__definition-list div {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.mobile-app__definition-list dt {
+  color: #9dff39;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.mobile-app__definition-list dd {
+  margin: 0;
+  color: #fff;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
 }
 
 .rafadroid-softkeys {

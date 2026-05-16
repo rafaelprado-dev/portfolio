@@ -17,17 +17,16 @@ import {
   Wrench,
 } from "lucide-react";
 import { useEffect, useMemo, useState, type ComponentType } from "react";
-import { ContactApp } from "@/components/os/apps/ContactApp";
-import { HomeApp } from "@/components/os/apps/HomeApp";
-import { MissionsApp } from "@/components/os/apps/MissionsApp";
-import { ProjectsApp } from "@/components/os/apps/ProjectsApp";
-import { RecruiterApp } from "@/components/os/apps/RecruiterApp";
-import { SkillsApp } from "@/components/os/apps/SkillsApp";
-import { TimelineApp } from "@/components/os/apps/TimelineApp";
+import { MobileContactApp } from "@/components/os/mobile-apps/MobileContactApp";
+import { MobileExperienceApp } from "@/components/os/mobile-apps/MobileExperienceApp";
+import { MobileMissionsApp } from "@/components/os/mobile-apps/MobileMissionsApp";
+import { MobileProfileApp } from "@/components/os/mobile-apps/MobileProfileApp";
+import { MobileProjectsApp } from "@/components/os/mobile-apps/MobileProjectsApp";
+import { MobileRecruiterApp } from "@/components/os/mobile-apps/MobileRecruiterApp";
+import { MobileSkillsApp } from "@/components/os/mobile-apps/MobileSkillsApp";
 import type { AppId } from "@/components/os/RafaelOS";
 import { missions, type MissionId } from "@/content/missions";
 import { projects } from "@/content/projects";
-import { cn } from "@/lib/utils";
 
 type MobileShellProps = {
   activeApp: AppId;
@@ -38,54 +37,58 @@ type MobileAppShortcut = {
   id: AppId;
   label: string;
   packageName: string;
+  description: string;
   icon: ComponentType<{ size?: number; strokeWidth?: number }>;
 };
 
-const primaryApps: MobileAppShortcut[] = [
+const mobileApps: MobileAppShortcut[] = [
   {
     id: "home",
     label: "Perfil",
     packageName: "perfil.apk",
+    description: "Cartão de contato do sistema",
     icon: Home,
   },
   {
     id: "projects",
     label: "Projetos",
     packageName: "projetos.apk",
+    description: "Gerenciador de pacotes",
     icon: FolderKanban,
   },
   {
     id: "skills",
     label: "Habilidades",
     packageName: "habilidades.apk",
+    description: "Monitor de módulos",
     icon: Wrench,
   },
   {
     id: "timeline",
-    label: "Trajeto",
-    packageName: "trajeto.apk",
+    label: "Experiência",
+    packageName: "experiencia.log",
+    description: "Registro profissional",
     icon: BriefcaseBusiness,
   },
   {
     id: "contact",
     label: "Contato",
     packageName: "contato.apk",
+    description: "Agenda e protocolos",
     icon: Mail,
   },
-];
-
-const drawerApps: MobileAppShortcut[] = [
-  ...primaryApps,
   {
     id: "recruiter",
     label: "Recrutador",
-    packageName: "recrutador.apk",
+    packageName: "recrutador.exe",
+    description: "Diagnóstico de perfil",
     icon: UserRound,
   },
   {
     id: "missions",
     label: "Missões",
-    packageName: "missions.apk",
+    packageName: "missoes.sys",
+    description: "Checklist do sistema",
     icon: Trophy,
   },
 ];
@@ -101,18 +104,20 @@ const appTitleById: Record<AppId, string> = {
 };
 
 export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [launcherOpen, setLauncherOpen] = useState(true);
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
   const [, setViewedProjectIndexes] = useState<Set<number>>(
     () => new Set(),
   );
   const [completedMissionIds, setCompletedMissionIds] = useState<Set<MissionId>>(
-    () => new Set(["about"]),
+    () => new Set(),
   );
   const [showAchievement, setShowAchievement] = useState(true);
   const [now, setNow] = useState(() => new Date());
 
   const missionProgress = Math.round((completedMissionIds.size / missions.length) * 100);
+  const activeShortcut =
+    mobileApps.find((app) => app.id === activeApp) ?? mobileApps[0];
   const activeAppTitle = appTitleById[activeApp];
 
   useEffect(() => {
@@ -161,7 +166,7 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
     }
 
     onActivateApp(app);
-    setDrawerOpen(false);
+    setLauncherOpen(false);
   };
 
   const handleProjectSelect = (projectIndex: number) => {
@@ -193,6 +198,54 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
     });
   };
 
+  const renderActiveApp = () => {
+    if (activeApp === "home") {
+      return (
+        <MobileProfileApp
+          onOpenContact={() => openApp("contact")}
+          onOpenProjects={() => openApp("projects")}
+        />
+      );
+    }
+
+    if (activeApp === "projects") {
+      return (
+        <MobileProjectsApp
+          selectedProjectIndex={selectedProjectIndex}
+          onProjectSelect={handleProjectSelect}
+        />
+      );
+    }
+
+    if (activeApp === "skills") {
+      return <MobileSkillsApp />;
+    }
+
+    if (activeApp === "timeline") {
+      return <MobileExperienceApp />;
+    }
+
+    if (activeApp === "contact") {
+      return <MobileContactApp />;
+    }
+
+    if (activeApp === "recruiter") {
+      return (
+        <MobileRecruiterApp
+          onOpenContact={() => openApp("contact")}
+          onOpenProjects={() => openApp("projects")}
+        />
+      );
+    }
+
+    return (
+      <MobileMissionsApp
+        completedMissionIds={completedMissionIds}
+        completionPercent={missionProgress}
+      />
+    );
+  };
+
   return (
     <main className="rafadroid-shell" aria-label="Portfólio mobile RafaDroid 1.7">
       <div className="rafadroid-statusbar" aria-label="Status do RafaDroid">
@@ -209,27 +262,32 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
 
       <header className="rafadroid-appbar">
         <div>
-          <small>RafaDroid 1.7</small>
-          <h1>{drawerOpen ? "Apps" : activeAppTitle}</h1>
+          <small>{launcherOpen ? "RafaDroid 1.7" : activeShortcut.packageName}</small>
+          <h1>{launcherOpen ? "Launcher" : activeAppTitle}</h1>
         </div>
         <button
-          aria-label={drawerOpen ? "Fechar launcher" : "Abrir launcher"}
+          aria-label={launcherOpen ? "Voltar ao aplicativo" : "Abrir launcher"}
           className="rafadroid-icon-button"
           type="button"
-          onClick={() => setDrawerOpen((current) => !current)}
+          onClick={() => setLauncherOpen((current) => !current)}
         >
-          {drawerOpen ? <ArrowLeft size={18} /> : <Grid3X3 size={18} />}
+          {launcherOpen ? <ArrowLeft size={18} /> : <Grid3X3 size={18} />}
         </button>
       </header>
 
-      <section className="rafadroid-screen" aria-label={drawerOpen ? "Gaveta de aplicativos" : activeAppTitle}>
-        {drawerOpen ? (
+      <section
+        className="rafadroid-screen"
+        aria-label={launcherOpen ? "Launcher de aplicativos" : activeAppTitle}
+      >
+        {launcherOpen ? (
           <div className="rafadroid-launcher">
-            <p className="rafadroid-launcher__hint">
-              gaveta de aplicativos instalada para tela pequena
-            </p>
+            <header className="rafadroid-launcher__header">
+              <p className="rafadroid-launcher__eyebrow">Pocket Edition</p>
+              <h2>RafaDroid 1.7</h2>
+              <p>Apps profissionais renderizados em modo telefone antigo.</p>
+            </header>
             <div className="rafadroid-launcher__grid">
-              {drawerApps.map((app) => {
+              {mobileApps.map((app) => {
                 const Icon = app.icon;
 
                 return (
@@ -244,63 +302,27 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
                     </span>
                     <strong>{app.label}</strong>
                     <small>{app.packageName}</small>
+                    <em>{app.description}</em>
                   </button>
                 );
               })}
             </div>
           </div>
         ) : (
-          <div className="rafadroid-app-window">
-            {activeApp === "home" ? <HomeApp /> : null}
-            {activeApp === "projects" ? (
-              <ProjectsApp
-                initialProjectIndex={selectedProjectIndex}
-                onProjectSelect={handleProjectSelect}
-              />
-            ) : null}
-            {activeApp === "skills" ? <SkillsApp /> : null}
-            {activeApp === "timeline" ? <TimelineApp /> : null}
-            {activeApp === "contact" ? <ContactApp /> : null}
-            {activeApp === "recruiter" ? <RecruiterApp /> : null}
-            {activeApp === "missions" ? (
-              <MissionsApp
-                completedMissionIds={completedMissionIds}
-                completionPercent={missionProgress}
-              />
-            ) : null}
-          </div>
+          <div className="rafadroid-app-window">{renderActiveApp()}</div>
         )}
       </section>
 
-      <nav className="rafadroid-dock" aria-label="Aplicativos principais">
-        {primaryApps.map((app) => {
-          const Icon = app.icon;
-
-          return (
-            <button
-              aria-label={app.label}
-              className={cn(activeApp === app.id && !drawerOpen && "is-active")}
-              key={app.id}
-              type="button"
-              onClick={() => openApp(app.id)}
-            >
-              <Icon size={19} strokeWidth={2.3} />
-              <span>{app.label}</span>
-            </button>
-          );
-        })}
-      </nav>
-
       <footer className="rafadroid-softkeys" aria-label="Teclas do RafaDroid">
-        <button type="button" onClick={() => setDrawerOpen((current) => !current)}>
+        <button type="button" onClick={() => setLauncherOpen((current) => !current)}>
           <Menu size={15} strokeWidth={2.4} />
           Menu
         </button>
-        <button type="button" onClick={() => openApp("home")}>
+        <button type="button" onClick={() => setLauncherOpen(true)}>
           <Home size={15} strokeWidth={2.4} />
           Início
         </button>
-        <button type="button" onClick={() => setDrawerOpen(false)}>
+        <button type="button" onClick={() => setLauncherOpen(true)}>
           <ArrowLeft size={15} strokeWidth={2.4} />
           Voltar
         </button>
