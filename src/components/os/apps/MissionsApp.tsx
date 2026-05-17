@@ -27,7 +27,7 @@ export function MissionsApp({
         />
       </section>
 
-      <div className="missions-app__list" aria-label="Checklist de exploração">
+      <div className="missions-app__list" aria-label="Roteiro de análise">
         {missions.map((mission) => {
           const isComplete = completedMissionIds.has(mission.id);
 

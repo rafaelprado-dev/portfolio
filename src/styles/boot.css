@@ -190,3 +190,64 @@
   );
   box-shadow: 0 0 0.55rem rgba(97, 242, 194, 0.85);
 }
+
+@media (max-width: 760px) {
+  .boot-panel {
+    padding: 1.15rem;
+  }
+
+  .boot-panel h1 {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+    line-height: 0.94;
+  }
+
+  .boot-panel p {
+    margin-top: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .boot-panel__status {
+    min-width: 0;
+    margin-top: 1.2rem;
+    font-size: 0.96rem;
+  }
+
+  .boot-panel__status > span {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .boot-progress,
+  .boot-log {
+    width: 100%;
+  }
+
+  .boot-progress {
+    height: 1.55rem;
+  }
+
+  .boot-panel__status strong {
+    font-size: 1.35rem;
+  }
+
+  .boot-log {
+    height: min(32vh, 14rem);
+    margin-top: 1rem;
+  }
+
+  .boot-log__content {
+    padding: 0.7rem 0.75rem;
+  }
+
+  .boot-log__line {
+    gap: 0.65rem;
+    font-size: 1rem;
+    overflow-wrap: anywhere;
+  }
+
+  .boot-log__bullet {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+}

@@ -1,4 +1,4 @@
-import { profile } from "@/content/profile";
+import { profile, profileStrengths } from "@/content/profile";
 
 export function HomeApp() {
   return (
@@ -9,10 +9,7 @@ export function HomeApp() {
       <p>{profile.headline}</p>
       <div className="home-app__notice">
         <strong>Pontos fortes</strong>
-        <span>
-          arquitetura limpa · acessibilidade · design systems · visão de produto
-          · performance
-        </span>
+        <span>{profileStrengths.join(" · ")}</span>
       </div>
     </div>
   );

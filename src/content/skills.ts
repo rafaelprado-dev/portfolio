@@ -21,11 +21,11 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "UI/UX e Acessibilidade",
+    title: "UX/UI e Acessibilidade",
     description:
       "Design com legibilidade, consistência visual e navegação inclusiva.",
     level: 4,
-    levelLabel: "Base forte",
+    levelLabel: "Domínio sólido",
     note: "Construção de interfaces intuitivas, acessíveis e visualmente consistentes.",
     skills: [
       { label: "Tailwind CSS" },
@@ -42,7 +42,7 @@ export const skillGroups: SkillGroup[] = [
     description:
       "Organização de código, manutenção e performance pensadas para produtos reais.",
     level: 4,
-    levelLabel: "Base sólida",
+    levelLabel: "Domínio sólido",
     note: "Estruturo soluções com foco em evolução técnica, estabilidade e clareza.",
     skills: [
       { label: "Arquitetura limpa" },
@@ -60,7 +60,7 @@ export const skillGroups: SkillGroup[] = [
     description:
       "Integração entre interface, regras de negócio e serviços externos.",
     level: 4,
-    levelLabel: "Base sólida",
+    levelLabel: "Domínio sólido",
     note:
       "Construção de fluxos reais com autenticação, integração com backend e dados orientados ao produto.",
     skills: [
@@ -79,7 +79,7 @@ export const skillGroups: SkillGroup[] = [
     description:
       "Experiências pensadas para uso real, com atenção a fluxo, contexto e recorrência.",
     level: 3,
-    levelLabel: "Base prática",
+    levelLabel: "Experiência prática",
     note: "Extensão prática do meu trabalho com interfaces para experiências além da web.",
     skills: [
       { label: "React Native" },

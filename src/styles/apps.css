@@ -394,16 +394,32 @@
 }
 
 @media (max-width: 760px) {
+  .app-screen {
+    padding: 0.9rem;
+  }
+
+  .app-screen h1,
+  .app-screen h2,
+  .home-app__name,
+  .home-app__role {
+    font-size: clamp(1.55rem, 8vw, 2.2rem);
+    line-height: 1;
+    overflow-wrap: anywhere;
+  }
+
   .projects-explorer,
   .skills-explorer,
   .timeline-explorer {
     grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: hidden;
   }
 
   .projects-explorer__list,
   .skills-explorer__list,
   .timeline-explorer__list {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    max-height: 11.5rem;
   }
 
   .projects-explorer__list > strong,
@@ -873,6 +889,12 @@
 @media (max-width: 760px) {
   .contact-app address {
     flex-wrap: wrap;
+  }
+
+  .contact-app__contact-line {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 }
 
