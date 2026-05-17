@@ -17,7 +17,7 @@ export function MobileProfileApp({
   return (
     <div className="mobile-app mobile-profile-app">
       <header className="mobile-app__hero">
-        <p className="mobile-app__kicker">PERFIL CARREGADO</p>
+        <p className="mobile-app__kicker">Perfil carregado</p>
         <h2>{profile.name}</h2>
         <strong>{profile.role}</strong>
         <p>{profile.headline}</p>

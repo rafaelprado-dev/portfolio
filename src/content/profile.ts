@@ -13,7 +13,7 @@ export const profile = {
   about:
     "Tenho cuidado especial com organização de código, componentes bem divididos, Atomic Design, WCAG/A11Y, performance e interfaces que parecem produto real. Gosto de transformar requisitos complexos em experiências claras, responsivas e fáceis de manter.",
   availability:
-    "Aberto a oportunidades front-end, produtos digitais e projetos com alto cuidado de UI/UX."
+    "Aberto a oportunidades front-end, produtos digitais e projetos com alto cuidado de UX/UI."
 } as const;
 
 export const profileStrengths = [

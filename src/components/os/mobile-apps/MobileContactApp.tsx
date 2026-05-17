@@ -5,7 +5,7 @@ export function MobileContactApp() {
   return (
     <div className="mobile-app mobile-contact-app">
       <header className="mobile-app__hero mobile-app__hero--compact">
-        <p className="mobile-app__kicker">/contato.apk</p>
+        <p className="mobile-app__kicker">Canal aberto</p>
         <h2>Canal aberto</h2>
         <p>{profile.availability}</p>
       </header>

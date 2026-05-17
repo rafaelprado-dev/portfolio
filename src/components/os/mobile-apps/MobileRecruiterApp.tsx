@@ -19,13 +19,16 @@ export function MobileRecruiterApp({
   return (
     <div className="mobile-app mobile-recruiter-app">
       <header className="mobile-app__hero">
-        <p className="mobile-app__kicker">/recrutador.exe</p>
+        <p className="mobile-app__kicker">Diagnóstico pronto</p>
         <h2>Diagnóstico de perfil</h2>
         <strong>RESULTADO</strong>
         <p>{recruiterDiagnostic.result}</p>
       </header>
 
-      <section className="mobile-app__section" aria-labelledby="recruiter-checks">
+      <section
+        className="mobile-app__section"
+        aria-labelledby="recruiter-checks"
+      >
         <h3 id="recruiter-checks">Verificação rápida</h3>
         <ul className="mobile-app__checks">
           {recruiterDiagnostic.checks.map((check) => (
@@ -37,7 +40,10 @@ export function MobileRecruiterApp({
         </ul>
       </section>
 
-      <section className="mobile-app__section" aria-labelledby="recruiter-summary">
+      <section
+        className="mobile-app__section"
+        aria-labelledby="recruiter-summary"
+      >
         <h3 id="recruiter-summary">Resumo operacional</h3>
         <p>{profile.headline}</p>
         <div className="mobile-app__chips">
@@ -47,7 +53,10 @@ export function MobileRecruiterApp({
         </div>
       </section>
 
-      <section className="mobile-app__section" aria-labelledby="recruiter-projects">
+      <section
+        className="mobile-app__section"
+        aria-labelledby="recruiter-projects"
+      >
         <h3 id="recruiter-projects">Projetos-chave</h3>
         <div className="mobile-app__chips">
           {projects.slice(0, 4).map((project) => (
@@ -58,7 +67,7 @@ export function MobileRecruiterApp({
 
       <div className="mobile-app__actions">
         <button type="button" onClick={onOpenProjects}>
-          Ver projetos
+          projetos
         </button>
         {resumeLink ? (
           <a href={resumeLink.href} rel="noreferrer noopener" target="_blank">

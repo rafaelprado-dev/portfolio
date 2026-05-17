@@ -20,7 +20,11 @@ import { Taskbar, type TaskbarItem } from "@/components/os/Taskbar";
 import { useWindowManager, type WindowId } from "@/components/os/useWindowManager";
 import { WindowFrame } from "@/components/os/WindowFrame";
 import type { AppId } from "@/components/os/RafaelOS";
-import { missions, type MissionId } from "@/content/missions";
+import {
+  getMissionCompletion,
+  missions,
+  type MissionId,
+} from "@/content/missions";
 import { projects } from "@/content/projects";
 import { wallpapers } from "@/content/wallpapers";
 
@@ -347,7 +351,8 @@ export function Desktop({
 
   const title = appTitleById[activeApp];
   const mainWindowSize = mainWindowSizeByApp[activeApp];
-  const missionProgress = Math.round((completedMissionIds.size / missions.length) * 100);
+  const missionCompletion = getMissionCompletion(completedMissionIds);
+  const missionProgress = missionCompletion.percent;
 
   useEffect(() => {
     if (!visibleAchievement) return;
@@ -381,7 +386,7 @@ export function Desktop({
     next.add(missionId);
     setCompletedMissionIds(next);
 
-    if (next.size >= missions.length) {
+    if (getMissionCompletion(next).completedCount >= missions.length) {
       unlockAchievement("missionComplete");
     }
   };
