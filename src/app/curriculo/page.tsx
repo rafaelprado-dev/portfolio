@@ -10,6 +10,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${siteUrl}/curriculo`,
   },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
   openGraph: {
     title: "Currículo | Rafael Prado",
     url: `${siteUrl}/curriculo`,
@@ -19,6 +27,7 @@ export const metadata: Metadata = {
 export default function CurriculoPage() {
   return (
     <SeoRoutePage
+      initialApp="contact"
       kicker="/curriculo.pdf"
       title="Currículo"
       description="Versão pública do currículo profissional de Rafael Prado para recrutadores, ATS e avaliadores técnicos."

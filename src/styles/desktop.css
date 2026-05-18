@@ -28,9 +28,15 @@
     0 0,
     0 0,
     0 0;
+  background-repeat:
+    no-repeat,
+    no-repeat,
+    repeat,
+    repeat,
+    repeat;
   background-size:
     cover,
-    cover,
+    100% 100%,
     110px 110px,
     170px 170px,
     230px 230px;

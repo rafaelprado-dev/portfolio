@@ -15,9 +15,9 @@ export function SkillsApp() {
   }, [selectedGroupIndex]);
 
   return (
-    <div className="app-screen skills-app">
+    <section className="app-screen skills-app" aria-labelledby="skills-title">
       <p className="app-kicker">/skills.tree</p>
-      <h2>Árvore de Habilidades</h2>
+      <h2 id="skills-title">Árvore de Habilidades</h2>
 
       <div className="skills-explorer" aria-label="Árvore de habilidades">
         <nav className="skills-explorer__list" aria-label="Categorias de habilidade">
@@ -36,7 +36,12 @@ export function SkillsApp() {
           ))}
         </nav>
 
-        <article className="skill-details" ref={detailsRef} aria-live="polite">
+        <article
+          className="skill-details"
+          ref={detailsRef}
+          aria-labelledby="skill-details-title"
+          aria-live="polite"
+        >
           <div className="skill-details__rating" aria-label={`${selectedGroup.level} de ${maxStars} estrelas: ${selectedGroup.levelLabel}`}>
             {Array.from({ length: maxStars }, (_, index) => (
               <span
@@ -50,7 +55,7 @@ export function SkillsApp() {
             <strong>{selectedGroup.levelLabel}</strong>
           </div>
 
-          <h3>{selectedGroup.title}</h3>
+          <h3 id="skill-details-title">{selectedGroup.title}</h3>
           <p>{selectedGroup.description}</p>
           <p className="skill-details__note">{selectedGroup.note}</p>
 
@@ -67,6 +72,6 @@ export function SkillsApp() {
           </section>
         </article>
       </div>
-    </div>
+    </section>
   );
 }

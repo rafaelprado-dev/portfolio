@@ -876,6 +876,7 @@
   letter-spacing: 0;
 }
 
+.mobile-app h1,
 .mobile-app h2,
 .mobile-app h3 {
   margin: 0;
@@ -884,6 +885,7 @@
   line-height: 1.12;
 }
 
+.mobile-app h1,
 .mobile-app h2 {
   font-size: 1.55rem;
 }

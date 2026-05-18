@@ -6,7 +6,7 @@ export const siteTitle =
   "Rafael Prado | Desenvolvedor Front-End React, Next.js e TypeScript";
 
 export const siteDescription =
-  "Portfólio de Rafael Prado, desenvolvedor Front-End especializado em React.js, Next.js, TypeScript, Tailwind CSS, Firebase, acessibilidade, performance e aplicações web modernas.";
+  "Portfólio de Rafael Prado, Desenvolvedor Front-End em Uberlândia, MG, com projetos em React.js, Next.js, TypeScript, Firebase, Tailwind CSS, acessibilidade, performance e UX/UI.";
 
 export const siteName = "Rafael Prado Portfolio";
 export const siteLocale = "pt_BR";
@@ -27,14 +27,22 @@ export const seoKeywords = [
   "Rafael Prado Desenvolvedor",
   "Rafael Prado Front-End",
   "Rafael Prado Portfolio",
+  "Rafael Prado Portfólio",
   "portfolio desenvolvedor",
   "portfólio desenvolvedor",
   "portfolio desenvolvedor front end",
   "portfólio desenvolvedor front-end",
   "desenvolvedor front-end",
   "desenvolvedor frontend",
+  "desenvolvedor front-end Uberlândia",
+  "desenvolvedor React Uberlândia",
+  "desenvolvedor Next.js Uberlândia",
+  "desenvolvedor TypeScript Uberlândia",
+  "desenvolvedor front-end freelancer",
   "desenvolvedor React",
   "desenvolvedor Next.js",
+  "portfólio front-end React",
+  "portfólio React Next.js TypeScript",
   "React.js",
   "Next.js",
   "TypeScript",
@@ -72,6 +80,6 @@ export const linkedInUrl = "https://www.linkedin.com/in/rafaelpradodev/";
 export const githubUrl = "https://github.com/rafaelprado-dev";
 
 export const profileIntro =
-  "Sou Rafael Prado, Desenvolvedor Front-End com experiência em React.js, Next.js, TypeScript, Tailwind CSS, Firebase, acessibilidade, performance e construção de interfaces modernas para produtos web.";
+  "Sou Rafael Prado, Desenvolvedor Front-End em Uberlândia, MG, com experiência em React.js, Next.js, TypeScript, Tailwind CSS, Firebase, acessibilidade, performance e construção de interfaces modernas para produtos web.";
 
 export const professionalTitle = `${profile.name} — Desenvolvedor Front-End React, Next.js e TypeScript`;

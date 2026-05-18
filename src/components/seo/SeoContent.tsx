@@ -1,14 +1,30 @@
+import Link from "next/link";
 import { education } from "@/content/education";
 import { experiences } from "@/content/experience";
-import { profile } from "@/content/profile";
+import { profile, profileStrengths } from "@/content/profile";
 import { projects } from "@/content/projects";
 import { skillGroups } from "@/content/skills";
 import { socialLinks } from "@/content/socialLinks";
 import { professionalTitle, profileIntro } from "@/lib/seo";
 
+const publicRouteLinks = [
+  { href: "/projetos", label: "Ver projetos front-end de Rafael Prado" },
+  {
+    href: "/habilidades",
+    label: "Ver habilidades em React, Next.js e TypeScript",
+  },
+  { href: "/experiencia", label: "Ver experiência profissional" },
+  { href: "/contato", label: "Entrar em contato com Rafael Prado" },
+  { href: "/curriculo", label: "Abrir currículo de Rafael Prado" },
+];
+
 export function SeoContent() {
   return (
-    <section className="seo-content" aria-label="Resumo profissional de Rafael Prado">
+    <section
+      className="seo-content"
+      aria-hidden="true"
+      inert
+    >
       <h1>{professionalTitle}</h1>
       <p>
         {profileIntro} Desenvolvedor em Uberlândia, MG, Brasil, com foco em
@@ -16,9 +32,26 @@ export function SeoContent() {
         componentização, design system, Git e GitHub.
       </p>
 
+      <nav aria-label="Páginas públicas do portfólio">
+        <ul>
+          {publicRouteLinks.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href}>{link.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
       <section aria-labelledby="seo-sobre">
         <h2 id="seo-sobre">Sobre mim</h2>
+        <p>{profile.summary}</p>
         <p>{profile.about}</p>
+        <p>{profile.availability}</p>
+        <ul>
+          {profileStrengths.map((strength) => (
+            <li key={strength}>{strength}</li>
+          ))}
+        </ul>
       </section>
 
       <section aria-labelledby="seo-experiencia">
@@ -30,6 +63,12 @@ export function SeoContent() {
             </h3>
             <p>{experience.period}</p>
             <p>{experience.description}</p>
+            <ul>
+              {experience.highlights.map((highlight) => (
+                <li key={highlight}>{highlight}</li>
+              ))}
+            </ul>
+            <p>Tecnologias: {experience.technologies.join(", ")}.</p>
           </article>
         ))}
       </section>
@@ -40,9 +79,14 @@ export function SeoContent() {
           <article key={project.name}>
             <h3>{project.name}</h3>
             <p>
-              {project.type}. {project.description}
+              {project.type}. {project.status}. {project.description}
             </p>
             <p>Tecnologias: {project.stack.join(", ")}.</p>
+            <ul>
+              {project.highlights.map((highlight) => (
+                <li key={highlight}>{highlight}</li>
+              ))}
+            </ul>
           </article>
         ))}
       </section>
@@ -52,7 +96,10 @@ export function SeoContent() {
         {skillGroups.map((group) => (
           <article key={group.title}>
             <h3>{group.title}</h3>
-            <p>{group.description}</p>
+            <p>
+              {group.levelLabel}. {group.description}
+            </p>
+            <p>{group.note}</p>
             <p>{group.skills.map((skill) => skill.label).join(", ")}.</p>
           </article>
         ))}
@@ -72,6 +119,9 @@ export function SeoContent() {
 
       <section aria-labelledby="seo-contato">
         <h2 id="seo-contato">Contato</h2>
+        <p>
+          Rafael Prado, Desenvolvedor Front-End em {profile.location}, Brasil.
+        </p>
         <p>
           E-mail: <a href={`mailto:${profile.email}`}>{profile.email}</a>.
         </p>

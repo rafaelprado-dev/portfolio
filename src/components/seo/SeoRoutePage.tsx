@@ -1,8 +1,10 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { RafaelOS, type AppId } from "@/components/os/RafaelOS";
 import { siteUrl } from "@/lib/seo";
 
 type SeoRoutePageProps = {
+  initialApp: AppId;
   kicker: string;
   title: string;
   description: string;
@@ -19,38 +21,43 @@ const routeLinks = [
 ];
 
 export function SeoRoutePage({
+  initialApp,
   kicker,
   title,
   description,
   children,
 }: SeoRoutePageProps) {
   return (
-    <main className="seo-route-page">
-      <header>
-        <Link href="/" aria-label="Voltar para RafaelOS em rafaelprado.dev">
-          rafaelprado.dev
-        </Link>
-        <nav aria-label="Navegação pública do portfólio">
-          {routeLinks.map((link) => (
-            <Link href={link.href} key={link.href}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      </header>
+    <>
+      <section className="seo-content" aria-hidden="true" inert>
+        <header>
+          <Link href="/" aria-label="Voltar para RafaelOS em rafaelprado.dev">
+            rafaelprado.dev
+          </Link>
+          <nav aria-label="Navegação pública do portfólio">
+            {routeLinks.map((link) => (
+              <Link href={link.href} key={link.href}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </header>
 
-      <section className="seo-route-page__hero">
-        <p>{kicker}</p>
-        <h1>{title}</h1>
-        <span>{description}</span>
+        <section aria-labelledby="seo-route-title">
+          <p>{kicker}</p>
+          <h1 id="seo-route-title">{title}</h1>
+          <p>{description}</p>
+        </section>
+
+        <div>{children}</div>
+
+        <footer>
+          <span>Domínio: {siteUrl}</span>
+          <Link href="/">Abrir experiência RafaelOS</Link>
+        </footer>
       </section>
 
-      <div className="seo-route-page__content">{children}</div>
-
-      <footer>
-        <span>Canonical: {siteUrl}</span>
-        <Link href="/">Abrir experiência RafaelOS</Link>
-      </footer>
-    </main>
+      <RafaelOS initialApp={initialApp} />
+    </>
   );
 }

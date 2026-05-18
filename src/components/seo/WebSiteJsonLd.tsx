@@ -11,6 +11,11 @@ export function WebSiteJsonLd() {
         url: siteUrl,
         inLanguage: siteLanguage,
         description: siteDescription,
+        publisher: {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          name: "Rafael Prado",
+        },
       }}
     />
   );

@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${siteUrl}/experiencia`,
   },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
   openGraph: {
     title: "Experiência Profissional | Rafael Prado",
     url: `${siteUrl}/experiencia`,
@@ -20,6 +28,7 @@ export const metadata: Metadata = {
 export default function ExperienciaPage() {
   return (
     <SeoRoutePage
+      initialApp="timeline"
       kicker="/experiencia.log"
       title="Experiência Profissional"
       description="Histórico profissional, formação e tecnologias aplicadas em interfaces web, mobile e experiências digitais."

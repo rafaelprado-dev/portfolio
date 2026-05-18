@@ -25,9 +25,9 @@ export function ProjectsApp({
   };
 
   return (
-    <div className="app-screen projects-app">
+    <section className="app-screen projects-app" aria-labelledby="projects-title">
       <p className="app-kicker">/projetos</p>
-      <h2>Meus Projetos</h2>
+      <h2 id="projects-title">Meus Projetos</h2>
 
       <div className="projects-explorer" aria-label="Explorador de projetos">
         <nav className="projects-explorer__list" aria-label="Lista de projetos">
@@ -46,12 +46,17 @@ export function ProjectsApp({
           ))}
         </nav>
 
-        <article className="project-details" aria-live="polite" ref={detailsRef}>
+        <article
+          className="project-details"
+          aria-labelledby="project-details-title"
+          aria-live="polite"
+          ref={detailsRef}
+        >
           <div className="project-details__meta">
             <span>{selectedProject.status}</span>
           </div>
 
-          <h3>{selectedProject.name}</h3>
+          <h3 id="project-details-title">{selectedProject.name}</h3>
           <p>{selectedProject.description}</p>
 
           <section aria-labelledby="project-stack-title">
@@ -73,6 +78,6 @@ export function ProjectsApp({
           </section>
         </article>
       </div>
-    </div>
+    </section>
   );
 }

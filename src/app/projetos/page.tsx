@@ -10,6 +10,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${siteUrl}/projetos`,
   },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
   openGraph: {
     title: "Projetos Front-End | Rafael Prado",
     description: siteDescription,
@@ -20,6 +28,7 @@ export const metadata: Metadata = {
 export default function ProjetosPage() {
   return (
     <SeoRoutePage
+      initialApp="projects"
       kicker="/projetos"
       title="Projetos Front-End"
       description="Cases autorais e profissionais com foco em produto, arquitetura, interface, performance e experiência de uso."

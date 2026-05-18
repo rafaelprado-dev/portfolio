@@ -10,6 +10,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${siteUrl}/habilidades`,
   },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
   openGraph: {
     title: "Habilidades Técnicas | Rafael Prado",
     url: `${siteUrl}/habilidades`,
@@ -19,6 +27,7 @@ export const metadata: Metadata = {
 export default function HabilidadesPage() {
   return (
     <SeoRoutePage
+      initialApp="skills"
       kicker="/skills.tree"
       title="Habilidades Técnicas"
       description="Stack, competências e áreas de evolução em front-end moderno, arquitetura de interface, design systems e integrações."

@@ -32,9 +32,9 @@ export function ContactApp() {
   };
 
   return (
-    <div className="app-screen contact-app">
+    <section className="app-screen contact-app" aria-labelledby="contact-title">
       <p className="app-kicker">/contato.terminal</p>
-      <h2>Contato</h2>
+      <h2 id="contact-title">Contato</h2>
 
       <div className="contact-app__terminal">
         <div className="contact-app__status">
@@ -103,6 +103,6 @@ export function ContactApp() {
           </span>
         </address>
       </div>
-    </div>
+    </section>
   );
 }

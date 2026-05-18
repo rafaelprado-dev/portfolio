@@ -13,11 +13,14 @@ export function PersonJsonLd() {
       data={{
         "@context": "https://schema.org",
         "@type": "Person",
-        name: "Rafael Prado",
-        alternateName: "Rafael Prado Dev",
-        jobTitle: "Desenvolvedor Front-End",
+        "@id": `${siteUrl}/#person`,
+        name: profile.name,
+        alternateName: ["Rafael Prado Dev"],
+        jobTitle: profile.role,
         url: siteUrl,
-        email: profile.email,
+        image: profile.avatarUrl,
+        email: `mailto:${profile.email}`,
+        description: profile.summary,
         address: {
           "@type": "PostalAddress",
           addressLocality: "Uberlândia",
@@ -25,7 +28,7 @@ export function PersonJsonLd() {
           addressCountry: "BR",
         },
         knowsAbout,
-        sameAs: [linkedInUrl, githubUrl, siteUrl],
+        sameAs: [linkedInUrl, githubUrl],
       }}
     />
   );

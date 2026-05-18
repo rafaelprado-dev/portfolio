@@ -263,7 +263,7 @@ const normalizeSearchText = (value: string) =>
 export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
   const appWindowRef = useRef<HTMLDivElement | null>(null);
   const launcherRef = useRef<HTMLDivElement | null>(null);
-  const [launcherOpen, setLauncherOpen] = useState(true);
+  const [launcherOpen, setLauncherOpen] = useState(activeApp === "home");
   const [quickSettingsOpen, setQuickSettingsOpen] = useState(false);
   const [settingsLoaded, setSettingsLoaded] = useState(false);
   const [settings, setSettings] = useState<RafaDroidSettings>(

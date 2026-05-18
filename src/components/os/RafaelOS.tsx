@@ -82,10 +82,14 @@ const bootModules = [
   },
 ];
 
-export function RafaelOS() {
+type RafaelOSProps = {
+  initialApp?: AppId;
+};
+
+export function RafaelOS({ initialApp = "home" }: RafaelOSProps) {
   const [booted, setBooted] = useState(false);
   const [isRafaDroid, setIsRafaDroid] = useState<boolean | null>(null);
-  const [activeApp, setActiveApp] = useState<AppId>("home");
+  const [activeApp, setActiveApp] = useState<AppId>(initialApp);
   const [virusAlerts, setVirusAlerts] = useState<string[]>([]);
 
   const bootConfig = useMemo(

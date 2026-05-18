@@ -15,11 +15,13 @@ export function MobileProfileApp({
   const primarySkillGroups = skillGroups.slice(0, 4);
 
   return (
-    <div className="mobile-app mobile-profile-app">
+    <section className="mobile-app mobile-profile-app" aria-labelledby="mobile-profile-title">
       <header className="mobile-app__hero">
         <p className="mobile-app__kicker">Perfil carregado</p>
-        <h2>{profile.name}</h2>
-        <strong>{profile.role}</strong>
+        <h1 id="mobile-profile-title">{profile.name}</h1>
+        <p>
+          <strong>{profile.role}</strong>
+        </p>
         <p>{profile.headline}</p>
       </header>
 
@@ -57,6 +59,6 @@ export function MobileProfileApp({
           ))}
         </div>
       </section>
-    </div>
+    </section>
   );
 }

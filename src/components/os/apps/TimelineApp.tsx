@@ -27,10 +27,12 @@ export function TimelineApp() {
   };
 
   return (
-    <div className="app-screen timeline-app">
+    <section className="app-screen timeline-app" aria-labelledby="timeline-title">
       <p className="app-kicker">/experiência.log</p>
       <div className="timeline-app__header">
-        <h2>{isProfessionalMode ? "Experiência Profissional" : "Formação"}</h2>
+        <h2 id="timeline-title">
+          {isProfessionalMode ? "Experiência Profissional" : "Formação"}
+        </h2>
         <div
           className="timeline-mode"
           aria-label="Alternar categoria do histórico"
@@ -103,6 +105,7 @@ export function TimelineApp() {
         <article
           className="experience-details"
           ref={detailsRef}
+          aria-labelledby="experience-details-title"
           aria-live="polite"
         >
           {isProfessionalMode ? (
@@ -112,7 +115,7 @@ export function TimelineApp() {
                 <span>{selectedExperience.period}</span>
               </div>
 
-              <h3>{selectedExperience.role}</h3>
+              <h3 id="experience-details-title">{selectedExperience.role}</h3>
               <p>{selectedExperience.description}</p>
 
               <section aria-labelledby="experience-highlights-title">
@@ -149,7 +152,7 @@ export function TimelineApp() {
                 <span>{selectedEducation.location}</span>
               </div>
 
-              <h3>{selectedEducation.title}</h3>
+              <h3 id="experience-details-title">{selectedEducation.title}</h3>
               <p>{selectedEducation.institution}</p>
 
               <section aria-labelledby="education-record-title">
@@ -164,6 +167,6 @@ export function TimelineApp() {
           )}
         </article>
       </div>
-    </div>
+    </section>
   );
 }

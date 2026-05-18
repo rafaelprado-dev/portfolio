@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${siteUrl}/contato`,
   },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
   openGraph: {
     title: "Contato | Rafael Prado",
     url: `${siteUrl}/contato`,
@@ -20,6 +28,7 @@ export const metadata: Metadata = {
 export default function ContatoPage() {
   return (
     <SeoRoutePage
+      initialApp="contact"
       kicker="/contato.terminal"
       title="Contato"
       description="Vamos conversar sobre interfaces modernas, produtos digitais, acessibilidade, performance e oportunidades front-end."

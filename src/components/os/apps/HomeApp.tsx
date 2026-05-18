@@ -2,15 +2,19 @@ import { profile, profileStrengths } from "@/content/profile";
 
 export function HomeApp() {
   return (
-    <div className="app-screen home-app">
+    <section className="app-screen home-app" aria-labelledby="home-profile-title">
       <p className="app-kicker">PERFIL CARREGADO</p>
-      <p className="home-app__name">{profile.name}</p>
+      <h1 className="home-app__name" id="home-profile-title">{profile.name}</h1>
       <p className="home-app__role">{profile.role}</p>
       <p>{profile.headline}</p>
-      <div className="home-app__notice">
-        <strong>Pontos fortes</strong>
-        <span>{profileStrengths.join(" · ")}</span>
-      </div>
-    </div>
+      <section className="home-app__notice" aria-labelledby="home-strengths-title">
+        <h2 id="home-strengths-title">Pontos fortes</h2>
+        <ul>
+          {profileStrengths.map((strength) => (
+            <li key={strength}>{strength}</li>
+          ))}
+        </ul>
+      </section>
+    </section>
   );
 }
