@@ -753,6 +753,7 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
 
   return (
     <main
+      id="conteudo"
       className={shellClassName}
       aria-label="Portfólio mobile RafaDroid 1.7"
     >
