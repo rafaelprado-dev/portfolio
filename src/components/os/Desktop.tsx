@@ -30,9 +30,13 @@ import { wallpapers } from "@/content/wallpapers";
 
 const projectSelectorLabels: Record<string, string> = {
   Arcadium: "GCDP",
+  ASUM: "ASUM",
   Luna: "Luna",
+  ROM: "ROM",
+  Market: "Market",
   Bordo: "Bordo",
   RDNS: "RDNS",
+  EVA: "EVA",
 };
 
 type AchievementId =
@@ -91,7 +95,7 @@ type DesktopShortcutId =
   | "rdns"
   | "skills"
   | "timeline"
-  | "resume"
+  | "contact"
   | "cmd"
   | "doom"
   | "missions"
@@ -140,7 +144,7 @@ const referenceViewport = {
   height: 963,
 };
 
-const desktopIconStorageKey = "rafaelos.desktop.icons.v1";
+const desktopIconStorageKey = "rafaelos.desktop.icons.v3";
 const wallpaperStorageKey = "rafaelos.wallpaper";
 
 const scalePosition = (x: number, y: number): DesktopIconPosition => {
@@ -162,20 +166,20 @@ const clampPosition = (position: DesktopIconPosition): DesktopIconPosition => {
 };
 
 const getDefaultIconPositions = (): Record<DesktopShortcutId, DesktopIconPosition> => ({
-  about: clampPosition(scalePosition(728, 724)),
-  gcdp: clampPosition(scalePosition(398, 538)),
-  luna: clampPosition(scalePosition(112, 664)),
-  bordo: clampPosition(scalePosition(156, 246)),
-  rdns: clampPosition(scalePosition(586, 294)),
-  skills: clampPosition(scalePosition(862, 140)),
-  timeline: clampPosition(scalePosition(1018, 410)),
-  resume: clampPosition(scalePosition(1188, 724)),
-  cmd: clampPosition(scalePosition(1410, 278)),
-  doom: clampPosition(scalePosition(1502, 654)),
-  missions: clampPosition(scalePosition(1320, 566)),
-  recruiter: clampPosition(scalePosition(1240, 142)),
-  virus: clampPosition(scalePosition(1586, 466)),
-  wallpaper: clampPosition(scalePosition(1580, 98)),
+  about: clampPosition(scalePosition(699, 786)),
+  gcdp: clampPosition(scalePosition(111, 300)),
+  luna: clampPosition(scalePosition(72, 571)),
+  bordo: clampPosition(scalePosition(348, 419)),
+  rdns: clampPosition(scalePosition(345, 645)),
+  skills: clampPosition(scalePosition(865, 673)),
+  timeline: clampPosition(scalePosition(1025, 791)),
+  contact: clampPosition(scalePosition(1191, 701)),
+  cmd: clampPosition(scalePosition(1499, 372)),
+  doom: clampPosition(scalePosition(1721, 686)),
+  missions: clampPosition(scalePosition(1501, 592)),
+  recruiter: clampPosition(scalePosition(1711, 249)),
+  virus: clampPosition(scalePosition(1725, 477)),
+  wallpaper: clampPosition(scalePosition(1484, 117)),
 });
 
 const getDefaultWindowPositions = (): Record<WindowId, DesktopIconPosition> => {
@@ -198,6 +202,8 @@ const getDefaultWindowPositions = (): Record<WindowId, DesktopIconPosition> => {
     ? window.innerWidth - compactGutter * 2
     : Math.min(768, window.innerWidth * 0.58);
   const mainHeight = Math.min(window.innerHeight * 0.54, 496);
+  const terminalWidth = Math.min(832, window.innerWidth * 0.84);
+  const terminalHeight = Math.min(window.innerHeight * 0.58, 448);
   const doomWidth = Math.min(688, window.innerWidth - 24);
   const doomHeight = Math.min(638, window.innerHeight - 72);
 
@@ -240,7 +246,10 @@ const getDefaultWindowPositions = (): Record<WindowId, DesktopIconPosition> => {
       x: Math.round((window.innerWidth - mainWidth) / 2),
       y: Math.max(128, Math.round((window.innerHeight - mainHeight - 44) / 2)),
     },
-    terminal: clampPosition(scalePosition(578, 420)),
+    terminal: {
+      x: Math.round((window.innerWidth - terminalWidth) / 2),
+      y: Math.max(72, Math.round((window.innerHeight - terminalHeight - 44) / 2)),
+    },
     wallpapers: {
       x: Math.round((window.innerWidth - Math.min(704, window.innerWidth - 32)) / 2),
       y: Math.max(68, Math.round((window.innerHeight - Math.min(window.innerHeight * 0.62, 496) - 44) / 2)),
@@ -439,6 +448,11 @@ export function Desktop({
     activateApp("projects");
   };
 
+  const activateProjectByName = (projectName: string) => {
+    const projectIndex = projects.findIndex((project) => project.name === projectName);
+    activateProject(projectIndex >= 0 ? projectIndex : 0);
+  };
+
   const selectWallpaper = (wallpaperId: string) => {
     setSelectedWallpaperId(wallpaperId);
     window.localStorage.setItem(wallpaperStorageKey, wallpaperId);
@@ -489,28 +503,28 @@ export function Desktop({
       label: "gcdp.case",
       kind: "case",
       position: iconPositions.gcdp,
-      onOpen: () => activateProject(0),
+      onOpen: () => activateProjectByName("Arcadium / GCDP"),
     },
     {
       id: "luna",
       label: "luna.ai",
       kind: "case",
       position: iconPositions.luna,
-      onOpen: () => activateProject(1),
+      onOpen: () => activateProjectByName("Luna — Your AI Companion"),
     },
     {
       id: "bordo",
       label: "bordo.guild",
       kind: "case",
       position: iconPositions.bordo,
-      onOpen: () => activateProject(2),
+      onOpen: () => activateProjectByName("Bordo Hub"),
     },
     {
       id: "rdns",
       label: "rdns.net",
       kind: "case",
       position: iconPositions.rdns,
-      onOpen: () => activateProject(3),
+      onOpen: () => activateProjectByName("RDNS — Rafa DNS"),
     },
     {
       id: "skills",
@@ -527,10 +541,10 @@ export function Desktop({
       onOpen: () => activateApp("timeline"),
     },
     {
-      id: "resume",
-      label: "contato.pdf",
-      kind: "pdf",
-      position: iconPositions.resume,
+      id: "contact",
+      label: "contato.exe",
+      kind: "contact",
+      position: iconPositions.contact,
       onOpen: () => {
         activateApp("contact");
         unlockAchievement("contact");
@@ -744,7 +758,7 @@ export function Desktop({
           bodyClassName="system-window__body cmd-window__body"
           className="cmd-window"
           defaultPosition={windowPositions.terminal}
-          storageKey="rafaelos.window.terminal.v1"
+          storageKey="rafaelos.window.terminal.v2"
           title="cmd.exe"
           zIndex={windows.terminal.zIndex}
           onClose={() => closeWindow("terminal")}

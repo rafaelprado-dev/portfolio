@@ -1,9 +1,10 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Pin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { projects } from "@/content/projects";
+import { getFilteredProjectEntries, projectFilters, projects } from "@/content/projects";
 import { cn } from "@/lib/utils";
+import type { ProjectFilterId } from "@/types/portfolio";
 
 type MobileProjectsAppProps = {
   backSignal: number;
@@ -22,10 +23,17 @@ export function MobileProjectsApp({
   selectedProjectIndex,
   onProjectSelect,
 }: MobileProjectsAppProps) {
+  const [activeFilterId, setActiveFilterId] = useState<ProjectFilterId>("all");
   const [detailProjectIndex, setDetailProjectIndex] = useState<number | null>(
     initialDetailProjectIndex,
   );
   const previousBackSignal = useRef(backSignal);
+  const selectedListProject = projects[selectedProjectIndex] ?? projects[0];
+  const effectiveFilterId =
+    activeFilterId === "all" || selectedListProject.category === activeFilterId
+      ? activeFilterId
+      : "all";
+  const filteredProjectEntries = getFilteredProjectEntries(effectiveFilterId);
   const selectedProject =
     projects[detailProjectIndex ?? selectedProjectIndex] ?? projects[0];
 
@@ -58,6 +66,20 @@ export function MobileProjectsApp({
     onScreenChange();
   };
 
+  const selectFilter = (filterId: ProjectFilterId) => {
+    const nextProjectEntries = getFilteredProjectEntries(filterId);
+    const hasSelectedProject = nextProjectEntries.some(
+      (entry) => entry.index === selectedProjectIndex,
+    );
+
+    setActiveFilterId(filterId);
+    onScreenChange();
+
+    if (!hasSelectedProject && nextProjectEntries[0]) {
+      onProjectSelect(nextProjectEntries[0].index);
+    }
+  };
+
   if (detailProjectIndex !== null) {
     return (
       <div className="mobile-app mobile-projects-app">
@@ -76,7 +98,11 @@ export function MobileProjectsApp({
         >
           <p className="mobile-app__kicker">Detalhes do pacote</p>
           <h2 id="project-detail">{selectedProject.name}</h2>
-          <span className="mobile-app__meta">{selectedProject.status}</span>
+          <div className="mobile-app__status-list" aria-label="Status do projeto">
+            {selectedProject.status.map((status) => (
+              <span key={status}>{status}</span>
+            ))}
+          </div>
           <p>{selectedProject.description}</p>
 
           <div className="mobile-app__chips">
@@ -117,21 +143,56 @@ export function MobileProjectsApp({
         <h2>Gerenciador de projetos</h2>
       </header>
 
+      <div
+        className="mobile-app__filter-strip"
+        role="toolbar"
+        aria-label="Filtrar projetos por foco"
+      >
+        {projectFilters.map((filter) => (
+          <button
+            aria-pressed={effectiveFilterId === filter.id}
+            className={cn(effectiveFilterId === filter.id && "is-active")}
+            key={filter.id}
+            type="button"
+            onClick={() => selectFilter(filter.id)}
+          >
+            {filter.shortLabel}
+          </button>
+        ))}
+      </div>
+
       <section
         className="mobile-app__section"
         aria-labelledby="project-packages"
       >
         <div className="mobile-app__list" role="list">
-          {projects.map((project, index) => (
+          {filteredProjectEntries.map(({ project, index }) => (
             <button
-              className={cn(index === selectedProjectIndex && "is-active")}
+              className={cn(
+                index === selectedProjectIndex && "is-active",
+                project.featured && "is-featured",
+              )}
               key={project.name}
               type="button"
               onClick={() => openProject(index)}
             >
               <strong>{project.name}</strong>
               <span>{project.type}</span>
-              <small>{project.status}</small>
+              <span className="mobile-app__status-list">
+                {project.status.map((status) => (
+                  <small key={status}>{status}</small>
+                ))}
+              </span>
+              {project.featured ? (
+                <span className="mobile-app__featured-rail" aria-label="Projeto principal">
+                  <Pin
+                    aria-hidden="true"
+                    className="mobile-app__featured-pin"
+                    size={18}
+                    strokeWidth={2.4}
+                  />
+                </span>
+              ) : null}
             </button>
           ))}
         </div>

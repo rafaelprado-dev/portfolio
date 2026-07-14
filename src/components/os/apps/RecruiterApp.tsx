@@ -1,5 +1,5 @@
 import { profile } from "@/content/profile";
-import { projects } from "@/content/projects";
+import { featuredProjects } from "@/content/projects";
 import { recruiterDiagnostic } from "@/content/recruiter";
 import { skillGroups } from "@/content/skills";
 import { socialLinks } from "@/content/socialLinks";
@@ -8,7 +8,7 @@ const primarySkills = skillGroups.slice(0, 4).map((skill) => skill.title);
 
 export function RecruiterApp() {
   const githubLink = socialLinks.find((link) => link.kind === "github");
-  const resumeLink = socialLinks.find((link) => link.kind === "resume");
+  const linkedInLink = socialLinks.find((link) => link.kind === "linkedin");
 
   return (
     <div className="app-screen recruiter-app">
@@ -46,7 +46,7 @@ export function RecruiterApp() {
         <section aria-labelledby="recruiter-projects-title">
           <h3 id="recruiter-projects-title">Projetos-chave</h3>
           <div className="recruiter-app__projects">
-            {projects.slice(0, 4).map((project) => (
+            {featuredProjects.map((project) => (
               <span key={project.name}>{project.name}</span>
             ))}
           </div>
@@ -63,19 +63,16 @@ export function RecruiterApp() {
               GitHub
             </a>
           ) : null}
-          {resumeLink ? (
+          {linkedInLink ? (
             <a
-              href={resumeLink.href}
+              href={linkedInLink.href}
               rel="noreferrer noopener"
               target="_blank"
-              title={resumeLink.href}
+              title={linkedInLink.href}
             >
-              Currículo
+              LinkedIn
             </a>
           ) : null}
-          <a href={`mailto:${profile.email}`} title={profile.email}>
-            E-mail
-          </a>
         </div>
       </div>
     </div>

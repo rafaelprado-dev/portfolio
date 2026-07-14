@@ -2,12 +2,9 @@ export const profile = {
   name: "Rafael Prado",
   role: "Desenvolvedor Front-End",
   location: "Uberlândia, MG",
-  email: "redacted",
-  phone: "redacted",
   avatarUrl: "https://github.com/rafaelprado-dev.png",
-  resumeUrl: "/rafael-prado-curriculo.pdf",
   headline:
-    "Crio interfaces modernas, produtos web escaláveis e experiências digitais com foco em arquitetura limpa, performance, acessibilidade e boa experiência de uso.",
+    "Construo interfaces para produtos web e mobile com foco em dashboards, painéis administrativos, fluxos internos, telas configuráveis, grids, calendários, Kanban e produtos SaaS.",
   summary:
     "Sou desenvolvedor front-end com foco em React, Next.js e TypeScript, atuando na construção de aplicações web modernas, escaláveis e orientadas à experiência do usuário.",
   about:
@@ -16,10 +13,16 @@ export const profile = {
     "Aberto a oportunidades front-end, produtos digitais e projetos com alto cuidado de UX/UI."
 } as const;
 
-export const profileStrengths = [
-  "arquitetura limpa",
-  "acessibilidade",
-  "design systems",
-  "visão de produto",
-  "performance",
+export const profileSpecialties = [
+  "Next.js",
+  "React",
+  "React Native",
+  "TypeScript",
+  "Firebase",
+  "APIs REST",
+  "UX/UI",
+  "Acessibilidade",
+  "Performance",
+  "Componentização",
+  "Design Systems",
 ] as const;

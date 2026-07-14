@@ -15,15 +15,20 @@ export function MissionsApp({
       <p className="app-kicker">/missões.sys</p>
       <h2>Central de Missões</h2>
 
-      <section className="missions-app__status" aria-label="Progresso do portfólio">
+      <section
+        className="missions-app__status"
+        aria-label="Progresso do portfólio"
+      >
         <div>
-          <strong>Perfil analisado</strong>
+          <strong>Perfil explorado</strong>
           <span>{completionPercent}%</span>
         </div>
         <div
           aria-hidden="true"
           className="missions-app__progress"
-          style={{ "--mission-progress": `${completionPercent}%` } as CSSProperties}
+          style={
+            { "--mission-progress": `${completionPercent}%` } as CSSProperties
+          }
         />
       </section>
 

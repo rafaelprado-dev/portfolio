@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { education } from "@/content/education";
 import { experiences } from "@/content/experience";
-import { profile, profileStrengths } from "@/content/profile";
+import { profile, profileSpecialties } from "@/content/profile";
 import { projects } from "@/content/projects";
 import { skillGroups } from "@/content/skills";
 import { socialLinks } from "@/content/socialLinks";
@@ -15,7 +15,6 @@ const publicRouteLinks = [
   },
   { href: "/experiencia", label: "Ver experiência profissional" },
   { href: "/contato", label: "Entrar em contato com Rafael Prado" },
-  { href: "/curriculo", label: "Abrir currículo de Rafael Prado" },
 ];
 
 export function SeoContent() {
@@ -48,8 +47,8 @@ export function SeoContent() {
         <p>{profile.about}</p>
         <p>{profile.availability}</p>
         <ul>
-          {profileStrengths.map((strength) => (
-            <li key={strength}>{strength}</li>
+          {profileSpecialties.map((specialty) => (
+            <li key={specialty}>{specialty}</li>
           ))}
         </ul>
       </section>
@@ -79,8 +78,13 @@ export function SeoContent() {
           <article key={project.name}>
             <h3>{project.name}</h3>
             <p>
-              {project.type}. {project.status}. {project.description}
+              {project.type}. {project.description}
             </p>
+            <ul aria-label={`Status de ${project.name}`}>
+              {project.status.map((status) => (
+                <li key={status}>{status}</li>
+              ))}
+            </ul>
             <p>Tecnologias: {project.stack.join(", ")}.</p>
             <ul>
               {project.highlights.map((highlight) => (
@@ -121,9 +125,6 @@ export function SeoContent() {
         <h2 id="seo-contato">Contato</h2>
         <p>
           Rafael Prado, Desenvolvedor Front-End em {profile.location}, Brasil.
-        </p>
-        <p>
-          E-mail: <a href={`mailto:${profile.email}`}>{profile.email}</a>.
         </p>
         <ul>
           {socialLinks.map((link) => (

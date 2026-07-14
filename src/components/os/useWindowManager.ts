@@ -20,7 +20,7 @@ type WindowRegistry = Record<WindowId, WindowState>;
 
 const initialWindows: WindowRegistry = {
   navigation: { status: "open", zIndex: 8 },
-  selector: { status: "open", zIndex: 5 },
+  selector: { status: "closed", zIndex: 5 },
   main: { status: "open", zIndex: 9 },
   terminal: { status: "closed", zIndex: 6 },
   wallpapers: { status: "closed", zIndex: 6 },

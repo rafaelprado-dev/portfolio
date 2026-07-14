@@ -44,7 +44,7 @@ import {
   missions,
   type MissionId,
 } from "@/content/missions";
-import { profile, profileStrengths } from "@/content/profile";
+import { profile, profileSpecialties } from "@/content/profile";
 import { projects } from "@/content/projects";
 import { skillGroups } from "@/content/skills";
 import { socialLinks } from "@/content/socialLinks";
@@ -306,12 +306,12 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
         profile.headline,
         profile.summary,
         profile.about,
-        ...profileStrengths,
+        ...profileSpecialties,
       ],
       projects: projects.flatMap((project) => [
         project.name,
         project.type,
-        project.status,
+        ...project.status,
         project.description,
         ...project.stack,
         ...project.highlights,
@@ -340,8 +340,6 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
         ]),
       ],
       contact: [
-        profile.email,
-        profile.phone,
         profile.location,
         profile.availability,
         ...socialLinks.map((link) => `${link.label} ${link.href} ${link.kind}`),
@@ -349,7 +347,7 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
       recruiter: [
         profile.headline,
         profile.summary,
-        ...profileStrengths,
+        ...profileSpecialties,
         ...skillGroups.map((group) => group.title),
         ...projects.map((project) => project.name),
       ],
@@ -390,7 +388,7 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
       keywords: [
         project.name,
         project.type,
-        project.status,
+        ...project.status,
         project.description,
         ...project.stack,
         ...project.highlights,
@@ -593,11 +591,6 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
     setQuickSettingsOpen(false);
 
     if (result.type === "link") {
-      if (result.href.startsWith("mailto:") || result.href.startsWith("tel:")) {
-        window.location.href = result.href;
-        return;
-      }
-
       window.open(result.href, "_blank", "noreferrer,noopener");
       return;
     }

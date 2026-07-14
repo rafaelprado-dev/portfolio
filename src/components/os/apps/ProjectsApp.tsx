@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { projects } from "@/content/projects";
+import { useEffect, useRef, useState } from "react";
+import { getFilteredProjectEntries, projectFilters, projects } from "@/content/projects";
+import { cn } from "@/lib/utils";
+import type { ProjectFilterId } from "@/types/portfolio";
 
 type ProjectsAppProps = {
   initialProjectIndex?: number;
@@ -12,16 +14,39 @@ export function ProjectsApp({
   initialProjectIndex = 0,
   onProjectSelect,
 }: ProjectsAppProps) {
+  const [activeFilterId, setActiveFilterId] = useState<ProjectFilterId>("all");
   const detailsRef = useRef<HTMLElement>(null);
   const selectedProjectIndex = projects[initialProjectIndex] ? initialProjectIndex : 0;
   const selectedProject = projects[selectedProjectIndex] ?? projects[0];
+  const effectiveFilterId =
+    activeFilterId === "all" || selectedProject.category === activeFilterId
+      ? activeFilterId
+      : "all";
+  const filteredProjectEntries = getFilteredProjectEntries(effectiveFilterId);
+  const selectedProjectEntry =
+    filteredProjectEntries.find((entry) => entry.index === selectedProjectIndex) ??
+    filteredProjectEntries[0];
+  const selectedProjectIndexInFilter = selectedProjectEntry?.index ?? 0;
 
   useEffect(() => {
     detailsRef.current?.scrollTo({ top: 0 });
-  }, [selectedProjectIndex]);
+  }, [effectiveFilterId, selectedProjectIndexInFilter]);
 
   const handleProjectSelect = (projectIndex: number) => {
     onProjectSelect?.(projectIndex);
+  };
+
+  const handleFilterSelect = (filterId: ProjectFilterId) => {
+    const nextProjectEntries = getFilteredProjectEntries(filterId);
+    const hasSelectedProject = nextProjectEntries.some(
+      (entry) => entry.index === selectedProjectIndex,
+    );
+
+    setActiveFilterId(filterId);
+
+    if (!hasSelectedProject && nextProjectEntries[0]) {
+      handleProjectSelect(nextProjectEntries[0].index);
+    }
   };
 
   return (
@@ -29,19 +54,51 @@ export function ProjectsApp({
       <p className="app-kicker">/projetos</p>
       <h2 id="projects-title">Meus Projetos</h2>
 
+      <div
+        className="projects-filter-bar"
+        role="toolbar"
+        aria-label="Filtrar projetos por foco"
+      >
+        <span>Filtro:</span>
+        {projectFilters.map((filter) => {
+          const projectCount = getFilteredProjectEntries(filter.id).length;
+
+          return (
+            <button
+              aria-pressed={effectiveFilterId === filter.id}
+              className={effectiveFilterId === filter.id ? "is-active" : undefined}
+              key={filter.id}
+              type="button"
+              onClick={() => handleFilterSelect(filter.id)}
+            >
+              {filter.label}
+              <small>{projectCount}</small>
+            </button>
+          );
+        })}
+      </div>
+
       <div className="projects-explorer" aria-label="Explorador de projetos">
         <nav className="projects-explorer__list" aria-label="Lista de projetos">
           <strong>Arquivos</strong>
-          {projects.map((project, index) => (
+          {filteredProjectEntries.map(({ project, index }) => (
             <button
-              aria-pressed={selectedProjectIndex === index}
-              className={selectedProjectIndex === index ? "is-active" : undefined}
+              aria-pressed={selectedProjectIndexInFilter === index}
+              className={cn(
+                selectedProjectIndexInFilter === index && "is-active",
+                project.featured && "is-featured",
+              )}
               key={project.name}
               type="button"
               onClick={() => handleProjectSelect(index)}
             >
               <span>{project.name}</span>
               <small>{project.type}</small>
+              {project.featured ? (
+                <span className="project-featured-star" aria-label="Projeto principal">
+                  ★
+                </span>
+              ) : null}
             </button>
           ))}
         </nav>
@@ -53,7 +110,9 @@ export function ProjectsApp({
           ref={detailsRef}
         >
           <div className="project-details__meta">
-            <span>{selectedProject.status}</span>
+            {selectedProject.status.map((status) => (
+              <span key={status}>{status}</span>
+            ))}
           </div>
 
           <h3 id="project-details-title">{selectedProject.name}</h3>

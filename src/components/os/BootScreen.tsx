@@ -67,7 +67,7 @@ export function BootScreen({ config, onComplete }: BootScreenProps) {
       <section className="boot-panel" aria-live="polite">
         <h1>{config.title}</h1>
         <p>{config.subtitle}</p>
-        <p className="boot-panel__copy">Instalando Rafael Prado<span className="loading-dots" aria-hidden="true" /></p>
+        <p className="boot-panel__copy">Inicializando Rafael Prado<span className="loading-dots" aria-hidden="true" /></p>
 
         <div className="boot-panel__status">
           <span>Copiando arquivos para C:\RAFAELOS\PROFILE\RAFAEL_PRADO\</span>

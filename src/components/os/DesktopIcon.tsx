@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils";
 export type DesktopIconKind =
   | "case"
   | "cmd"
+  | "contact"
   | "diagnostic"
   | "doom"
   | "folder"
   | "mission"
-  | "pdf"
   | "shield"
   | "tree"
   | "wallpaper";

@@ -37,8 +37,13 @@ export default function ProjetosPage() {
         <article key={project.name}>
           <h2>{project.name}</h2>
           <p>
-            <strong>{project.type}</strong> · {project.status}
+            <strong>{project.type}</strong>
           </p>
+          <div className="project-details__meta" aria-label="Status do projeto">
+            {project.status.map((status) => (
+              <span key={status}>{status}</span>
+            ))}
+          </div>
           <p>{project.description}</p>
           <h3>Tecnologias</h3>
           <p>{project.stack.join(", ")}</p>

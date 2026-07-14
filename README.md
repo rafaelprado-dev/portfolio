@@ -1,6 +1,6 @@
 # RafaelOS Portfolio
 
-Portfólio profissional, construído como uma experiência web interativa inspirada em sistemas operacionais retrô. O projeto apresenta perfil, projetos, habilidades, experiência, currículo e canais de contato em uma interface desktop simulada.
+Portfólio profissional, construído como uma experiência web interativa inspirada em sistemas operacionais retrô. O projeto apresenta perfil, projetos, habilidades, experiência e canais profissionais em uma interface desktop simulada.
 
 ## Visão Geral
 
@@ -18,7 +18,7 @@ O RafaelOS foi pensado para funcionar como portfólio e demonstração técnica 
 ## Funcionalidades
 
 - Desktop interativo com janelas, atalhos, barra de tarefas e boot screen.
-- Seções profissionais para projetos, experiência, habilidades, currículo e contato.
+- Seções profissionais para projetos, experiência, habilidades e contato.
 - Metadados de SEO, sitemap, robots, Open Graph, Twitter image e JSON-LD.
 - Assets locais com registro de créditos e permissões.
 - Build estático otimizado para deploy na Vercel.

@@ -48,7 +48,11 @@ export function Taskbar({
 
   return (
     <footer className="taskbar" aria-label="RafaelOS taskbar">
-      <button className="taskbar__start" type="button" onClick={() => onActivateApp("home")}>
+      <button
+        className="taskbar__start"
+        type="button"
+        onClick={() => onActivateApp("home")}
+      >
         RafaelOS
       </button>
       <div className="taskbar__apps" aria-label="Janelas abertas">
@@ -73,7 +77,7 @@ export function Taskbar({
         type="button"
         onClick={() => onActivateApp("missions")}
       >
-        <span>Perfil analisado</span>
+        <span>Perfil explorado</span>
         <strong>{missionProgress}%</strong>
       </button>
       <time className="taskbar__clock" dateTime={now.toISOString()}>

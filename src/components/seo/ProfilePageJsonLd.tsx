@@ -29,7 +29,6 @@ export function ProfilePageJsonLd() {
           alternateName: ["Rafael Prado Dev"],
           jobTitle: profile.role,
           url: siteUrl,
-          email: `mailto:${profile.email}`,
           address: {
             "@type": "PostalAddress",
             addressLocality: "Uberlândia",

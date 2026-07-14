@@ -19,7 +19,7 @@ export function MobileContactApp() {
               href={link.href}
               key={link.href}
               rel="noreferrer noopener"
-              target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+              target="_blank"
             >
               {link.label}
             </a>
@@ -27,23 +27,11 @@ export function MobileContactApp() {
         </div>
       </section>
 
-      <section className="mobile-app__section" aria-labelledby="contact-direct">
-        <h3 id="contact-direct">Contato direto</h3>
+      <section className="mobile-app__section" aria-labelledby="contact-location">
+        <h3 id="contact-location">Localização</h3>
         <dl className="mobile-app__definition-list">
           <div>
-            <dt>E-mail</dt>
-            <dd>
-              <a href={`mailto:${profile.email}`}>{profile.email}</a>
-            </dd>
-          </div>
-          <div>
-            <dt>Telefone</dt>
-            <dd>
-              <a href={`tel:${profile.phone.replace(/\D/g, "")}`}>{profile.phone}</a>
-            </dd>
-          </div>
-          <div>
-            <dt>Localização</dt>
+            <dt>Base profissional</dt>
             <dd>{profile.location}</dd>
           </div>
         </dl>

@@ -17,7 +17,6 @@ const routeLinks = [
   { href: "/habilidades", label: "Habilidades" },
   { href: "/experiencia", label: "Experiência" },
   { href: "/contato", label: "Contato" },
-  { href: "/curriculo", label: "Currículo" },
 ];
 
 export function SeoRoutePage({

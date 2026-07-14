@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { SeoRoutePage } from "@/components/seo/SeoRoutePage";
-import { profile } from "@/content/profile";
 import { socialLinks } from "@/content/socialLinks";
 import { siteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contato",
   description:
-    "Contato profissional de Rafael Prado, Desenvolvedor Front-End em Uberlândia, MG. GitHub, LinkedIn, currículo e e-mail.",
+    "Canais profissionais de Rafael Prado, Desenvolvedor Front-End em Uberlândia, MG. GitHub e LinkedIn.",
   alternates: {
     canonical: `${siteUrl}/contato`,
   },
@@ -37,9 +36,6 @@ export default function ContatoPage() {
         <h2>Canais profissionais</h2>
         <p>
           Rafael Prado, Desenvolvedor Front-End em Uberlândia, MG, Brasil.
-        </p>
-        <p>
-          E-mail: <a href={`mailto:${profile.email}`}>{profile.email}</a>
         </p>
         <ul>
           {socialLinks.map((link) => (

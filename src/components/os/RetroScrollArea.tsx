@@ -45,9 +45,16 @@ export function RetroScrollArea({ children, ariaLabel }: RetroScrollAreaProps) {
 
   const thumbHeight = Math.max(18, scrollState.ratio * 100);
   const thumbTop = scrollState.top * (100 - thumbHeight);
+  const hasOverflow = scrollState.ratio < 0.995;
 
   return (
-    <div className="retro-scroll-area">
+    <div
+      className={
+        hasOverflow
+          ? "retro-scroll-area retro-scroll-area--has-overflow"
+          : "retro-scroll-area"
+      }
+    >
       <div
         aria-label={ariaLabel}
         className="retro-scroll-area__content"

@@ -19,7 +19,7 @@ export const missions: PortfolioMission[] = [
   {
     id: "about",
     title: "Visualizar perfil",
-    description: "Entenda quem é Rafael Prado, cargo, resumo profissional e pontos fortes.",
+    description: "Entenda quem é Rafael Prado, cargo, resumo profissional e especialidades.",
   },
   {
     id: "project",
@@ -39,7 +39,7 @@ export const missions: PortfolioMission[] = [
   {
     id: "contact",
     title: "Consultar contato",
-    description: "Localize canais profissionais, currículo e informações de contato.",
+    description: "Localize os canais profissionais disponíveis para contato.",
   },
   {
     id: "recruiter",

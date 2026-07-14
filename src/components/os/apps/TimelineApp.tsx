@@ -30,9 +30,7 @@ export function TimelineApp() {
     <section className="app-screen timeline-app" aria-labelledby="timeline-title">
       <p className="app-kicker">/experiência.log</p>
       <div className="timeline-app__header">
-        <h2 id="timeline-title">
-          {isProfessionalMode ? "Experiência Profissional" : "Formação"}
-        </h2>
+        <h2 id="timeline-title">Experiência</h2>
         <div
           className="timeline-mode"
           aria-label="Alternar categoria do histórico"
@@ -68,7 +66,7 @@ export function TimelineApp() {
               : "Registros de formação"
           }
         >
-          <strong>{isProfessionalMode ? "Registros" : "Arquivos"}</strong>
+          <strong>Registros</strong>
           {isProfessionalMode
             ? experiences.map((experience, index) => (
                 <button

@@ -1,8 +1,7 @@
 import { profile } from "@/content/profile";
-import { projects } from "@/content/projects";
+import { featuredProjects } from "@/content/projects";
 import { recruiterDiagnostic } from "@/content/recruiter";
 import { skillGroups } from "@/content/skills";
-import { socialLinks } from "@/content/socialLinks";
 
 type MobileRecruiterAppProps = {
   onOpenContact: () => void;
@@ -13,7 +12,6 @@ export function MobileRecruiterApp({
   onOpenContact,
   onOpenProjects,
 }: MobileRecruiterAppProps) {
-  const resumeLink = socialLinks.find((link) => link.kind === "resume");
   const primarySkills = skillGroups.slice(0, 4).map((skill) => skill.title);
 
   return (
@@ -59,7 +57,7 @@ export function MobileRecruiterApp({
       >
         <h3 id="recruiter-projects">Projetos-chave</h3>
         <div className="mobile-app__chips">
-          {projects.slice(0, 4).map((project) => (
+          {featuredProjects.map((project) => (
             <span key={project.name}>{project.name}</span>
           ))}
         </div>
@@ -69,11 +67,6 @@ export function MobileRecruiterApp({
         <button type="button" onClick={onOpenProjects}>
           projetos
         </button>
-        {resumeLink ? (
-          <a href={resumeLink.href} rel="noreferrer noopener" target="_blank">
-            Currículo
-          </a>
-        ) : null}
         <button type="button" onClick={onOpenContact}>
           Contato
         </button>

@@ -16,10 +16,13 @@ export function MobileMissionsApp({
       <header className="mobile-app__hero mobile-app__hero--compact">
         <p className="mobile-app__kicker">Roteiro de análise</p>
         <h2>Central de missões</h2>
-        <p>Perfil analisado {completionPercent}%</p>
+        <p>Perfil explorado {completionPercent}%</p>
       </header>
 
-      <div className="mobile-app__progress" aria-label={`Perfil analisado ${completionPercent}%`}>
+      <div
+        className="mobile-app__progress"
+        aria-label={`Perfil explorado ${completionPercent}%`}
+      >
         <span style={{ width: `${completionPercent}%` }} />
       </div>
 
@@ -30,7 +33,10 @@ export function MobileMissionsApp({
             const isCompleted = completedMissionIds.has(mission.id);
 
             return (
-              <li className={isCompleted ? "is-completed" : undefined} key={mission.id}>
+              <li
+                className={isCompleted ? "is-completed" : undefined}
+                key={mission.id}
+              >
                 <button type="button" onClick={() => onOpenMission(mission.id)}>
                   <span aria-hidden="true">{isCompleted ? "OK" : "--"}</span>
                   <div>

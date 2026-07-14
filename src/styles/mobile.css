@@ -876,6 +876,64 @@
   letter-spacing: 0;
 }
 
+.mobile-app__status-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.mobile-app__status-list span,
+.mobile-app__status-list small {
+  justify-self: start;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  margin-top: 0.08rem;
+  padding: 0.16rem 0.32rem;
+  text-transform: uppercase;
+}
+
+.mobile-app__filter-strip {
+  display: flex;
+  gap: 0.38rem;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 0.05rem 0 0.16rem;
+  scrollbar-width: none;
+}
+
+.mobile-app__filter-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-app__filter-strip button {
+  flex: 0 0 auto;
+  min-height: 2rem;
+  border: 1px solid var(--line);
+  border-radius: 0.12rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 45%),
+    rgba(8, 17, 19, 0.88);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0 0.7rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mobile-app__filter-strip button.is-active {
+  border-color: rgba(84, 209, 234, 0.58);
+  background:
+    linear-gradient(180deg, rgba(84, 209, 234, 0.18), transparent 48%),
+    rgba(9, 31, 37, 0.92);
+  box-shadow:
+    inset 0 -2px var(--holo-cyan),
+    0 0 0 1px rgba(0, 0, 0, 0.45);
+  color: var(--text-primary);
+}
+
 .mobile-app h1,
 .mobile-app h2,
 .mobile-app h3 {
@@ -963,6 +1021,7 @@
 
 .mobile-app__list button,
 .mobile-app__timeline-row {
+  position: relative;
   display: grid;
   min-width: 0;
   gap: 0.16rem;
@@ -970,6 +1029,30 @@
   background: transparent;
   padding: 0.68rem 0.12rem;
   text-align: left;
+}
+
+.mobile-projects-app .mobile-app__list button.is-featured {
+  padding-right: 2rem;
+}
+
+.mobile-app__featured-rail {
+  position: absolute;
+  top: 50%;
+  right: 0.18rem;
+  display: grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  place-items: center;
+  color: color-mix(in srgb, var(--holo-cyan), white 10%);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.mobile-app__featured-pin {
+  filter:
+    drop-shadow(0 1px rgba(0, 0, 0, 0.65))
+    drop-shadow(0 0 0.28rem color-mix(in srgb, var(--holo-cyan), transparent 68%));
+  transform: rotate(-18deg);
 }
 
 .mobile-app__list button:first-child,
@@ -980,6 +1063,11 @@
 .mobile-app__list button.is-active {
   box-shadow: inset 3px 0 var(--holo-cyan);
   padding-left: 0.62rem;
+}
+
+.mobile-projects-app .mobile-app__list button.is-active {
+  box-shadow: none;
+  padding-left: 0;
 }
 
 .mobile-app__list strong,
@@ -994,17 +1082,6 @@
   color: var(--text-secondary);
   font-size: 0.82rem;
   line-height: 1.32;
-}
-
-.mobile-app__list small {
-  justify-self: start;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--text-muted);
-  font-size: 0.62rem;
-  font-weight: 800;
-  margin-top: 0.08rem;
-  padding: 0.16rem 0.32rem;
-  text-transform: uppercase;
 }
 
 .mobile-app__detail-screen {
@@ -1400,6 +1477,11 @@
   touch-action: none;
 }
 
+.snake-app__board:focus-visible {
+  outline: 2px solid var(--holo-cyan);
+  outline-offset: 0.22rem;
+}
+
 .snake-app__cell {
   position: relative;
   min-width: 0;
@@ -1501,12 +1583,13 @@
 
 .snake-app__cell.is-food::before {
   position: absolute;
-  inset: 18%;
-  border-radius: 999px 999px 74% 74%;
-  background:
-    radial-gradient(circle at 34% 30%, rgba(255, 255, 255, 0.55), transparent 0.18rem),
-    #d33a3a;
-  box-shadow: 0 0 0.32rem rgba(211, 58, 58, 0.42);
+  inset: 20%;
+  border-radius: 999px;
+  background: #d93a3f;
+  box-shadow:
+    inset 0 0.08rem rgba(255, 255, 255, 0.34),
+    inset 0 -0.12rem rgba(0, 0, 0, 0.18),
+    0 0 0.28rem rgba(217, 58, 63, 0.38);
   content: "";
 }
 
@@ -1519,6 +1602,7 @@
   border-radius: 0.58rem;
   background: rgba(5, 8, 8, 0.62);
   color: #f7fbff;
+  pointer-events: none;
   text-align: center;
 }
 
@@ -1531,32 +1615,6 @@
 .snake-app__overlay span {
   color: var(--text-secondary);
   font-size: 0.76rem;
-}
-
-.snake-app__controls {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.42rem;
-}
-
-.snake-app__controls button {
-  display: grid;
-  min-height: 2.55rem;
-  place-items: center;
-  border-radius: 0.24rem;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 44%),
-    rgba(6, 9, 14, 0.82);
-  box-shadow:
-    inset 0 0 0 1px rgba(51, 181, 229, 0.22),
-    inset 0 -2px rgba(51, 181, 229, 0.38);
-  color: #f7fbff;
-  font-size: 1.08rem;
-  font-weight: 900;
-}
-
-.snake-app__control-action {
-  color: var(--holo-cyan);
 }
 
 .rafadroid-softkeys {

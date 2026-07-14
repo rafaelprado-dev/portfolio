@@ -22,10 +22,10 @@ const bootModules = [
     total: 100,
     entries: [
       "CARISMA.SYS",
-      "IRONIA.DLL",
-      "EXIGÊNCIA.EXE",
+      "HUMOR_LEVE.DLL",
+      "CRITERIO.EXE",
       "CRIATIVIDADE.VXD",
-      "PACIÊNCIA_COM_LAYOUT_QUEBRADO.INI",
+      "ATENÇÃO_A_DETALHES.INI",
     ],
   },
   {
@@ -33,8 +33,9 @@ const bootModules = [
     total: 80,
     entries: [
       "DOAL_SOLUÇÕES.OLD.WORK",
-      "FRONT_END_AUTÔNOMO.LOG",
-      "JOGOS_INDEPENDENTES.BUILD",
+      "FRONT_END.LOG",
+      "UX_UI.DESIGN",
+      "JOGOS_CONFIDENCIAIS.BUILD",
       "WEB_DESIGNER.CERT",
     ],
   },
@@ -46,6 +47,7 @@ const bootModules = [
       "LUNA_AI.COMPANION",
       "BORDO_HUB.GUILD",
       "RDNS.NETWORK",
+      "ROM_TRANSLATION.STUDIO",
     ],
   },
   {
@@ -74,10 +76,10 @@ const bootModules = [
     label: "Executando Antivírus",
     total: 64,
     entries: [
-      "SPAGHETTI_CODE.EXE QUARENTENADO",
+      "NYAN_CAT_CODE.EXE QUARENTENADO",
       "LANDING_GENÉRICA.DLL REMOVIDA",
       "COMPONENTE_1000_LINHAS.SYS BLOQUEADO",
-      "PREGUIÇA.CSS NÃO PASSOU NO SCAN",
+      "CANSAÇO NÃO PASSOU NO SCAN",
     ],
   },
 ];
@@ -95,7 +97,7 @@ export function RafaelOS({ initialApp = "home" }: RafaelOSProps) {
   const bootConfig = useMemo(
     () => ({
       title: "RafaelOS 2000\nProfessional Edition",
-      subtitle: `Por favor, aguarde enquanto o sistema inicializa ${profile.name} sem quebrar o layout.`,
+      subtitle: `Por favor, aguarde enquanto o sistema inicializa ${profile.name} sem pegar fogo.`,
       modules: bootModules,
     }),
     [],
@@ -129,7 +131,12 @@ export function RafaelOS({ initialApp = "home" }: RafaelOSProps) {
   };
 
   if (isRafaDroid === null) {
-    return <main className="rafadroid-boot-screen" aria-label="Carregando modo visual" />;
+    return (
+      <main
+        className="rafadroid-boot-screen"
+        aria-label="Carregando modo visual"
+      />
+    );
   }
 
   if (!booted) {
@@ -143,12 +150,7 @@ export function RafaelOS({ initialApp = "home" }: RafaelOSProps) {
   }
 
   if (isRafaDroid) {
-    return (
-      <MobileShell
-        activeApp={activeApp}
-        onActivateApp={setActiveApp}
-      />
-    );
+    return <MobileShell activeApp={activeApp} onActivateApp={setActiveApp} />;
   }
 
   return (

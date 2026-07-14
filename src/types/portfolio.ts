@@ -1,9 +1,6 @@
 export type LinkKind =
   | "github"
   | "linkedin"
-  | "email"
-  | "phone"
-  | "resume"
   | "external";
 
 export type SocialLink = {
@@ -18,12 +15,30 @@ export type ProjectStatus =
   | "Privado"
   | "Em evolução"
   | "Concluído"
+  | "Descontinuado"
   | "Experimental";
+
+export type ProjectFilterId =
+  | "all"
+  | "produto-web"
+  | "ia-local"
+  | "mobile"
+  | "ferramentas";
+
+export type ProjectCategory = Exclude<ProjectFilterId, "all">;
+
+export type ProjectFilter = {
+  id: ProjectFilterId;
+  label: string;
+  shortLabel: string;
+};
 
 export type Project = {
   name: string;
   type: string;
-  status: ProjectStatus;
+  status: ProjectStatus[];
+  category: ProjectCategory;
+  featured?: boolean;
   description: string;
   stack: string[];
   highlights: string[];
