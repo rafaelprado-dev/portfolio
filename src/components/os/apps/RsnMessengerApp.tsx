@@ -202,7 +202,7 @@ export function RsnMessengerApp() {
               ? status.message
               : "A mensagem fica visível somente neste navegador até ser aprovada."}
           </p>
-          <span>{visitorCount.toLocaleString("pt-BR")} visitas</span>
+          <span>{visitorCount.toLocaleString("pt-BR")} visitantes</span>
         </footer>
       </form>
     </div>

@@ -940,7 +940,7 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
                   </span>
                   <span className="rafadroid-community-widget__count">
                     {visitorCount.toLocaleString("pt-BR")}
-                    <small>visitas</small>
+                    <small>visitantes</small>
                   </span>
                 </button>
               </div>
