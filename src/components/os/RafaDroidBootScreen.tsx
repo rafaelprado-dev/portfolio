@@ -45,7 +45,10 @@ export function RafaDroidBootScreen({ onComplete }: RafaDroidBootScreenProps) {
   const [progress, setProgress] = useState(0);
   const logRef = useRef<HTMLDivElement>(null);
   const visibleLines = useMemo(() => {
-    const lineCount = Math.max(1, Math.ceil((progress / 100) * bootLines.length));
+    const lineCount = Math.max(
+      1,
+      Math.ceil((progress / 100) * bootLines.length),
+    );
 
     return bootLines.slice(0, lineCount);
   }, [progress]);
@@ -75,7 +78,10 @@ export function RafaDroidBootScreen({ onComplete }: RafaDroidBootScreenProps) {
   }, [onComplete, progress]);
 
   return (
-    <main className="rafadroid-boot-screen" aria-label="Tela de carregamento RafaDroid">
+    <main
+      className="rafadroid-boot-screen"
+      aria-label="Tela de carregamento RafaDroid"
+    >
       <section className="rafadroid-boot-panel" aria-live="polite">
         <div className="rafadroid-boot-panel__top">
           <div className="rafadroid-mascot" aria-label="Mascote do RafaDroid">

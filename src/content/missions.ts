@@ -19,12 +19,14 @@ export const missions: PortfolioMission[] = [
   {
     id: "about",
     title: "Visualizar perfil",
-    description: "Entenda quem é Rafael Prado, cargo, resumo profissional e especialidades.",
+    description:
+      "Entenda quem é Rafael Prado, cargo, resumo profissional e especialidades.",
   },
   {
     id: "project",
     title: "Analisar projetos",
-    description: "Veja projetos principais, stack, contexto e decisões técnicas.",
+    description:
+      "Veja projetos principais, stack, contexto e decisões técnicas.",
   },
   {
     id: "skills",
@@ -44,7 +46,8 @@ export const missions: PortfolioMission[] = [
   {
     id: "recruiter",
     title: "Executar diagnóstico",
-    description: "Abra o resumo rápido para avaliar aderência ao perfil front-end.",
+    description:
+      "Abra o resumo rápido para avaliar aderência ao perfil front-end.",
   },
 ];
 

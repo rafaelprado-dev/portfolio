@@ -1,7 +1,4 @@
-export type LinkKind =
-  | "github"
-  | "linkedin"
-  | "external";
+export type LinkKind = "github" | "linkedin" | "external";
 
 export type SocialLink = {
   label: string;
@@ -12,18 +9,10 @@ export type SocialLink = {
 };
 
 export type ProjectStatus =
-  | "Privado"
-  | "Em evolução"
-  | "Concluído"
-  | "Descontinuado"
-  | "Experimental";
+  "Privado" | "Em evolução" | "Concluído" | "Descontinuado" | "Experimental";
 
 export type ProjectFilterId =
-  | "all"
-  | "produto-web"
-  | "ia-local"
-  | "mobile"
-  | "ferramentas";
+  "all" | "produto-web" | "ia-local" | "mobile" | "ferramentas";
 
 export type ProjectCategory = Exclude<ProjectFilterId, "all">;
 

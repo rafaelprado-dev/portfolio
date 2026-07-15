@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { getFilteredProjectEntries, projectFilters, projects } from "@/content/projects";
+import {
+  getFilteredProjectEntries,
+  projectFilters,
+  projects,
+} from "@/content/projects";
 import { cn } from "@/lib/utils";
 import type { ProjectFilterId } from "@/types/portfolio";
 
@@ -16,7 +20,9 @@ export function ProjectsApp({
 }: ProjectsAppProps) {
   const [activeFilterId, setActiveFilterId] = useState<ProjectFilterId>("all");
   const detailsRef = useRef<HTMLElement>(null);
-  const selectedProjectIndex = projects[initialProjectIndex] ? initialProjectIndex : 0;
+  const selectedProjectIndex = projects[initialProjectIndex]
+    ? initialProjectIndex
+    : 0;
   const selectedProject = projects[selectedProjectIndex] ?? projects[0];
   const effectiveFilterId =
     activeFilterId === "all" || selectedProject.category === activeFilterId
@@ -24,8 +30,9 @@ export function ProjectsApp({
       : "all";
   const filteredProjectEntries = getFilteredProjectEntries(effectiveFilterId);
   const selectedProjectEntry =
-    filteredProjectEntries.find((entry) => entry.index === selectedProjectIndex) ??
-    filteredProjectEntries[0];
+    filteredProjectEntries.find(
+      (entry) => entry.index === selectedProjectIndex,
+    ) ?? filteredProjectEntries[0];
   const selectedProjectIndexInFilter = selectedProjectEntry?.index ?? 0;
 
   useEffect(() => {
@@ -50,7 +57,10 @@ export function ProjectsApp({
   };
 
   return (
-    <section className="app-screen projects-app" aria-labelledby="projects-title">
+    <section
+      className="app-screen projects-app"
+      aria-labelledby="projects-title"
+    >
       <p className="app-kicker">/projetos</p>
       <h2 id="projects-title">Meus Projetos</h2>
 
@@ -66,7 +76,9 @@ export function ProjectsApp({
           return (
             <button
               aria-pressed={effectiveFilterId === filter.id}
-              className={effectiveFilterId === filter.id ? "is-active" : undefined}
+              className={
+                effectiveFilterId === filter.id ? "is-active" : undefined
+              }
               key={filter.id}
               type="button"
               onClick={() => handleFilterSelect(filter.id)}
@@ -95,7 +107,10 @@ export function ProjectsApp({
               <span>{project.name}</span>
               <small>{project.type}</small>
               {project.featured ? (
-                <span className="project-featured-star" aria-label="Projeto principal">
+                <span
+                  className="project-featured-star"
+                  aria-label="Projeto principal"
+                >
                   ★
                 </span>
               ) : null}

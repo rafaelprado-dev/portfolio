@@ -20,7 +20,10 @@ export function SkillsApp() {
       <h2 id="skills-title">Árvore de Habilidades</h2>
 
       <div className="skills-explorer" aria-label="Árvore de habilidades">
-        <nav className="skills-explorer__list" aria-label="Categorias de habilidade">
+        <nav
+          className="skills-explorer__list"
+          aria-label="Categorias de habilidade"
+        >
           <strong>Módulos</strong>
           {skillGroups.map((group, index) => (
             <button
@@ -42,11 +45,16 @@ export function SkillsApp() {
           aria-labelledby="skill-details-title"
           aria-live="polite"
         >
-          <div className="skill-details__rating" aria-label={`${selectedGroup.level} de ${maxStars} estrelas: ${selectedGroup.levelLabel}`}>
+          <div
+            className="skill-details__rating"
+            aria-label={`${selectedGroup.level} de ${maxStars} estrelas: ${selectedGroup.levelLabel}`}
+          >
             {Array.from({ length: maxStars }, (_, index) => (
               <span
                 aria-hidden="true"
-                className={index < selectedGroup.level ? "is-filled" : undefined}
+                className={
+                  index < selectedGroup.level ? "is-filled" : undefined
+                }
                 key={index}
               >
                 ★

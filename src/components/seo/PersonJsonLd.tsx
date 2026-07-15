@@ -1,10 +1,5 @@
 import { profile } from "@/content/profile";
-import {
-  githubUrl,
-  knowsAbout,
-  linkedInUrl,
-  siteUrl,
-} from "@/lib/seo";
+import { githubUrl, knowsAbout, linkedInUrl, siteUrl } from "@/lib/seo";
 import { JsonLd } from "./JsonLd";
 
 export function PersonJsonLd() {

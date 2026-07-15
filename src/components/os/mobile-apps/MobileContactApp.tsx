@@ -10,7 +10,10 @@ export function MobileContactApp() {
         <p>{profile.availability}</p>
       </header>
 
-      <section className="mobile-app__section" aria-labelledby="contact-protocols">
+      <section
+        className="mobile-app__section"
+        aria-labelledby="contact-protocols"
+      >
         <h3 id="contact-protocols">Protocolos</h3>
         <div className="mobile-app__actions mobile-app__actions--stack">
           {socialLinks.map((link) => (
@@ -27,7 +30,10 @@ export function MobileContactApp() {
         </div>
       </section>
 
-      <section className="mobile-app__section" aria-labelledby="contact-location">
+      <section
+        className="mobile-app__section"
+        aria-labelledby="contact-location"
+      >
         <h3 id="contact-location">Localização</h3>
         <dl className="mobile-app__definition-list">
           <div>

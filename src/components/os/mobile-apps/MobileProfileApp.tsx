@@ -13,7 +13,10 @@ export function MobileProfileApp({
   const primarySkillGroups = skillGroups.slice(0, 4);
 
   return (
-    <section className="mobile-app mobile-profile-app" aria-labelledby="mobile-profile-title">
+    <section
+      className="mobile-app mobile-profile-app"
+      aria-labelledby="mobile-profile-title"
+    >
       <header className="mobile-app__hero">
         <p className="mobile-app__kicker">Perfil carregado</p>
         <h1 id="mobile-profile-title">{profile.name}</h1>
@@ -23,7 +26,10 @@ export function MobileProfileApp({
         <p>{profile.headline}</p>
       </header>
 
-      <section className="mobile-app__section" aria-labelledby="profile-actions">
+      <section
+        className="mobile-app__section"
+        aria-labelledby="profile-actions"
+      >
         <h3 id="profile-actions">Ações rápidas</h3>
         <div className="mobile-app__actions">
           <button type="button" onClick={onOpenProjects}>
@@ -35,7 +41,10 @@ export function MobileProfileApp({
         </div>
       </section>
 
-      <section className="mobile-app__section" aria-labelledby="profile-specialties">
+      <section
+        className="mobile-app__section"
+        aria-labelledby="profile-specialties"
+      >
         <h3 id="profile-specialties">Especialidades</h3>
         <div className="mobile-app__chips">
           {profileSpecialties.map((specialty) => (

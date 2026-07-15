@@ -37,7 +37,9 @@ const readStoredPosition = (storageKey: string) => {
   if (typeof window === "undefined") return null;
 
   try {
-    const parsed = JSON.parse(window.localStorage.getItem(storageKey) ?? "null") as Partial<WindowPosition> | null;
+    const parsed = JSON.parse(
+      window.localStorage.getItem(storageKey) ?? "null",
+    ) as Partial<WindowPosition> | null;
 
     if (typeof parsed?.x !== "number" || typeof parsed.y !== "number") {
       return null;
@@ -62,7 +64,9 @@ export function WindowFrame({
   onFocus,
   onMinimize,
 }: WindowFrameProps) {
-  const [position, setPosition] = useState(() => readStoredPosition(storageKey) ?? defaultPosition);
+  const [position, setPosition] = useState(
+    () => readStoredPosition(storageKey) ?? defaultPosition,
+  );
   const dragRef = useRef<{
     pointerId: number;
     startX: number;
@@ -103,8 +107,16 @@ export function WindowFrame({
 
     if (drag?.pointerId === event.pointerId) {
       const finalPosition = {
-        x: clamp(drag.originX + event.clientX - drag.startX, 0, window.innerWidth - 220),
-        y: clamp(drag.originY + event.clientY - drag.startY, 0, window.innerHeight - 80),
+        x: clamp(
+          drag.originX + event.clientX - drag.startX,
+          0,
+          window.innerWidth - 220,
+        ),
+        y: clamp(
+          drag.originY + event.clientY - drag.startY,
+          0,
+          window.innerHeight - 80,
+        ),
       };
 
       setPosition(finalPosition);
@@ -157,7 +169,9 @@ export function WindowFrame({
         )}
       >
         {scrollable ? (
-          <RetroScrollArea ariaLabel={`${title} conteúdo`}>{children}</RetroScrollArea>
+          <RetroScrollArea ariaLabel={`${title} conteúdo`}>
+            {children}
+          </RetroScrollArea>
         ) : (
           children
         )}

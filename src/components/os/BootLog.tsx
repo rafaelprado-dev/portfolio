@@ -17,7 +17,10 @@ export function BootLog({ logs }: BootLogProps) {
     const maxScroll = Math.max(1, element.scrollHeight - element.clientHeight);
     setScrollState({
       top: element.scrollTop / maxScroll,
-      ratio: Math.min(1, element.clientHeight / Math.max(1, element.scrollHeight))
+      ratio: Math.min(
+        1,
+        element.clientHeight / Math.max(1, element.scrollHeight),
+      ),
     });
   };
 
@@ -55,7 +58,11 @@ export function BootLog({ logs }: BootLogProps) {
       </div>
 
       <div className="retro-scrollbar" aria-label="Controles de rolagem do log">
-        <button aria-label="Subir log" type="button" onClick={() => scrollBy(-100)}>
+        <button
+          aria-label="Subir log"
+          type="button"
+          onClick={() => scrollBy(-100)}
+        >
           ▲
         </button>
         <div className="retro-scrollbar__track">
@@ -63,11 +70,15 @@ export function BootLog({ logs }: BootLogProps) {
             className="retro-scrollbar__thumb"
             style={{
               height: `${thumbHeight}%`,
-              top: `${thumbTop}%`
+              top: `${thumbTop}%`,
             }}
           />
         </div>
-        <button aria-label="Descer log" type="button" onClick={() => scrollBy(100)}>
+        <button
+          aria-label="Descer log"
+          type="button"
+          onClick={() => scrollBy(100)}
+        >
           ▼
         </button>
       </div>

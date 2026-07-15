@@ -135,7 +135,9 @@ export function MobileSnakeApp() {
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
-      const storedBest = Number(window.localStorage.getItem("rafadroid.snake.best") ?? "0");
+      const storedBest = Number(
+        window.localStorage.getItem("rafadroid.snake.best") ?? "0",
+      );
 
       if (Number.isFinite(storedBest)) {
         bestScoreRef.current = storedBest;
@@ -171,26 +173,29 @@ export function MobileSnakeApp() {
     foodRef.current = initialFood;
   }, []);
 
-  const startGame = useCallback((nextDirection?: Direction) => {
-    if (statusRef.current === "lost") return;
+  const startGame = useCallback(
+    (nextDirection?: Direction) => {
+      if (statusRef.current === "lost") return;
 
-    if (statusRef.current === "ready" && nextDirection) {
-      const orientedSnake = createInitialSnake(nextDirection);
+      if (statusRef.current === "ready" && nextDirection) {
+        const orientedSnake = createInitialSnake(nextDirection);
 
-      setSnake(orientedSnake);
-      setDirection(nextDirection);
-      snakeRef.current = orientedSnake;
-      directionRef.current = nextDirection;
-      queuedDirectionRef.current = nextDirection;
-    } else if (nextDirection) {
-      queueDirection(nextDirection);
-    }
+        setSnake(orientedSnake);
+        setDirection(nextDirection);
+        snakeRef.current = orientedSnake;
+        directionRef.current = nextDirection;
+        queuedDirectionRef.current = nextDirection;
+      } else if (nextDirection) {
+        queueDirection(nextDirection);
+      }
 
-    if (statusRef.current === "ready") {
-      statusRef.current = "running";
-      setStatus("running");
-    }
-  }, [queueDirection]);
+      if (statusRef.current === "ready") {
+        statusRef.current = "running";
+        setStatus("running");
+      }
+    },
+    [queueDirection],
+  );
 
   const finishGame = useCallback(() => {
     if (resetTimerRef.current) {
@@ -214,8 +219,10 @@ export function MobileSnakeApp() {
     const handleKeyDown = (event: globalThis.KeyboardEvent) => {
       const target = event.target;
       const isBoardTarget =
-        target instanceof HTMLElement && Boolean(target.closest(".snake-app__board"));
-      const isPageTarget = target === document.body || target === document.documentElement;
+        target instanceof HTMLElement &&
+        Boolean(target.closest(".snake-app__board"));
+      const isPageTarget =
+        target === document.body || target === document.documentElement;
 
       if (!isBoardTarget && !isPageTarget) return;
 
@@ -288,7 +295,10 @@ export function MobileSnakeApp() {
         if (nextScore > bestScoreRef.current) {
           bestScoreRef.current = nextScore;
           setBestScore(nextScore);
-          window.localStorage.setItem("rafadroid.snake.best", String(nextScore));
+          window.localStorage.setItem(
+            "rafadroid.snake.best",
+            String(nextScore),
+          );
         }
       }
 
@@ -299,29 +309,34 @@ export function MobileSnakeApp() {
     return () => window.clearInterval(interval);
   }, [finishGame, status]);
 
-  const handleBoardPointer = useCallback((event: PointerEvent<HTMLDivElement>) => {
-    const boardRect = event.currentTarget.getBoundingClientRect();
-    const currentHead = snakeRef.current[0];
-    const headCenterX = boardRect.left + ((currentHead.x + 0.5) / boardSize) * boardRect.width;
-    const headCenterY = boardRect.top + ((currentHead.y + 0.5) / boardSize) * boardRect.height;
-    const deltaX = event.clientX - headCenterX;
-    const deltaY = event.clientY - headCenterY;
+  const handleBoardPointer = useCallback(
+    (event: PointerEvent<HTMLDivElement>) => {
+      const boardRect = event.currentTarget.getBoundingClientRect();
+      const currentHead = snakeRef.current[0];
+      const headCenterX =
+        boardRect.left + ((currentHead.x + 0.5) / boardSize) * boardRect.width;
+      const headCenterY =
+        boardRect.top + ((currentHead.y + 0.5) / boardSize) * boardRect.height;
+      const deltaX = event.clientX - headCenterX;
+      const deltaY = event.clientY - headCenterY;
 
-    event.currentTarget.focus();
+      event.currentTarget.focus();
 
-    const nextDirection =
-      Math.max(Math.abs(deltaX), Math.abs(deltaY)) >= 2
-        ? Math.abs(deltaX) > Math.abs(deltaY)
-          ? deltaX > 0
-            ? "right"
-            : "left"
-          : deltaY > 0
-            ? "down"
-            : "up"
-        : undefined;
+      const nextDirection =
+        Math.max(Math.abs(deltaX), Math.abs(deltaY)) >= 2
+          ? Math.abs(deltaX) > Math.abs(deltaY)
+            ? deltaX > 0
+              ? "right"
+              : "left"
+            : deltaY > 0
+              ? "down"
+              : "up"
+          : undefined;
 
-    startGame(nextDirection);
-  }, [startGame]);
+      startGame(nextDirection);
+    },
+    [startGame],
+  );
 
   return (
     <div className="mobile-app mobile-snake-app">
@@ -383,9 +398,7 @@ export function MobileSnakeApp() {
         {status === "ready" || status === "lost" ? (
           <div className="snake-app__overlay" aria-live="polite">
             <strong>
-              {status === "lost"
-                ? "game over"
-                : "toque para iniciar"}
+              {status === "lost" ? "game over" : "toque para iniciar"}
             </strong>
             <span>toque na direção ou use as setas</span>
           </div>

@@ -3,12 +3,7 @@
 import { useCallback, useState } from "react";
 
 export type WindowId =
-  | "navigation"
-  | "selector"
-  | "main"
-  | "terminal"
-  | "wallpapers"
-  | "doom";
+  "navigation" | "selector" | "main" | "terminal" | "wallpapers" | "doom";
 export type WindowStatus = "open" | "minimized" | "closed";
 
 export type WindowState = {

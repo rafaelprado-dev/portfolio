@@ -51,7 +51,10 @@ export default function ExperienciaPage() {
         </article>
       ))}
 
-      <section className="seo-route-page__panel" aria-labelledby="formacao-title">
+      <section
+        className="seo-route-page__panel"
+        aria-labelledby="formacao-title"
+      >
         <h2 id="formacao-title">Formação</h2>
         {education.map((item) => (
           <article key={`${item.title}-${item.period}`}>

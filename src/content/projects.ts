@@ -1,4 +1,8 @@
-import type { Project, ProjectFilter, ProjectFilterId } from "@/types/portfolio";
+import type {
+  Project,
+  ProjectFilter,
+  ProjectFilterId,
+} from "@/types/portfolio";
 
 export const projectFilters: ProjectFilter[] = [
   { id: "all", label: "Todos", shortLabel: "Todos" },
@@ -25,8 +29,9 @@ export const getFilteredProjectEntries = (filterId: ProjectFilterId) => {
 
   return projects
     .map((project, index) => ({ project, index }))
-    .filter(({ project }) =>
-      activeFilter?.id === "all" || project.category === activeFilter?.id,
+    .filter(
+      ({ project }) =>
+        activeFilter?.id === "all" || project.category === activeFilter?.id,
     );
 };
 
@@ -43,8 +48,8 @@ export const projects: Project[] = [
     highlights: [
       "Dashboard gamificado com XP, níveis e conquistas.",
       "Controle de acesso por perfis como colaborador, RH e admin.",
-      "Extensão Chrome para acompanhar progresso real em cursos externos."
-    ]
+      "Extensão Chrome para acompanhar progresso real em cursos externos.",
+    ],
   },
   {
     name: "ASUM — All-in-one System for Unified Management",
@@ -58,8 +63,8 @@ export const projects: Project[] = [
     highlights: [
       "Dashboards dinâmicos, relatórios inteligentes e módulos configuráveis para áreas como financeiro, RH, operações e vendas.",
       "Arquitetura multi-tenant com controle de acesso por perfis e foco em escalabilidade.",
-      "Hub central pensado para integrar módulos especializados, como desenvolvimento corporativo e gamificação."
-    ]
+      "Hub central pensado para integrar módulos especializados, como desenvolvimento corporativo e gamificação.",
+    ],
   },
   {
     name: "Luna — Your AI Companion",
@@ -72,8 +77,8 @@ export const projects: Project[] = [
     highlights: [
       "Arquitetura local-first com fallback de IA.",
       "Fluxos pensados para reduzir atrito em tarefas recorrentes.",
-      "Experiência conversacional com voz e contexto como núcleo do produto."
-    ]
+      "Experiência conversacional com voz e contexto como núcleo do produto.",
+    ],
   },
   {
     name: "ROM Translation Studio",
@@ -83,12 +88,19 @@ export const projects: Project[] = [
     featured: true,
     description:
       "Toolkit local para apoiar a tradução de jogos entre diferentes idiomas, com extração, tradução assistida por IA local, revisão manual, validação estrutural e reconstrução de arquivos.",
-    stack: ["Python", "PySide6", "Ollama/Qwen", "JSONL", "Dolphin", "PyInstaller"],
+    stack: [
+      "Python",
+      "PySide6",
+      "Ollama/Qwen",
+      "JSONL",
+      "Dolphin",
+      "PyInstaller",
+    ],
     highlights: [
       "Pipeline local para extração, conversão, tradução, revisão e reconstrução de textos.",
       "Validações para preservar tokens internos, placeholders e estruturas sensíveis do jogo.",
-      "Interface desktop com revisão manual, filtros de status e memória de tradução."
-    ]
+      "Interface desktop com revisão manual, filtros de status e memória de tradução.",
+    ],
   },
   {
     name: "Market Seeker",
@@ -101,8 +113,8 @@ export const projects: Project[] = [
     highlights: [
       "Organização de dados locais de mercado para consulta e comparação de preços.",
       "Planejamento de builds com custo estimado, orçamento e itens necessários.",
-      "Mapeamento de nomes e aliases em português e inglês para facilitar buscas."
-    ]
+      "Mapeamento de nomes e aliases em português e inglês para facilitar buscas.",
+    ],
   },
   {
     name: "Bordo Hub",
@@ -115,8 +127,8 @@ export const projects: Project[] = [
     highlights: [
       "Home com painel rápido para anúncios oficiais, avisos e atualizações da comunidade.",
       "Persistência no Firestore com cache local e atualização inteligente quando há mudanças.",
-      "Integração com automação via Cloud Run para sincronização e controle de dados."
-    ]
+      "Integração com automação via Cloud Run para sincronização e controle de dados.",
+    ],
   },
   {
     name: "RDNS — Rafa DNS",
@@ -129,8 +141,8 @@ export const projects: Project[] = [
     highlights: [
       "Resolver local com controle do tráfego DNS.",
       "Ambiente previsível com containers.",
-      "Foco em privacidade e desempenho de rede."
-    ]
+      "Foco em privacidade e desempenho de rede.",
+    ],
   },
   {
     name: "EVA Agent",
@@ -143,9 +155,9 @@ export const projects: Project[] = [
     highlights: [
       "Ciclo automatizado de decisão, pesquisa, leitura e registro de aprendizado.",
       "Integração com modelo local via Ollama para reduzir dependência de APIs externas.",
-      "Memória local em JSON para armazenar interesses, histórico e anotações do agente."
-    ]
-  }
+      "Memória local em JSON para armazenar interesses, histórico e anotações do agente.",
+    ],
+  },
 ];
 
 export const featuredProjects = projects.filter((project) => project.featured);

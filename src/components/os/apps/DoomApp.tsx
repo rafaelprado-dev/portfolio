@@ -8,7 +8,10 @@ export function DoomApp() {
           <p className="app-kicker">/games/doom.exe</p>
           <h2>DOOM Shareware</h2>
         </div>
-        <div className="doom-controls" aria-label="Controles principais do DOOM">
+        <div
+          className="doom-controls"
+          aria-label="Controles principais do DOOM"
+        >
           <div className="doom-control doom-control--arrows">
             <div className="doom-keypad" aria-hidden="true">
               <span className="doom-key doom-key--arrow doom-key--up">↑</span>

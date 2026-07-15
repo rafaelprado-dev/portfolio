@@ -78,9 +78,14 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${spaceGrotesk.variable} ${cormorant.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${spaceGrotesk.variable} ${cormorant.variable}`}
+    >
       <body>
         <a className="skip-link" href="#conteudo">
           Pular para o conteúdo

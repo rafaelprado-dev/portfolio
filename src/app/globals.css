@@ -82,7 +82,11 @@ a {
   height: 100svh;
   overflow-y: auto;
   background:
-    radial-gradient(circle at 80% 10%, rgba(97, 242, 194, 0.16), transparent 18rem),
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(97, 242, 194, 0.16),
+      transparent 18rem
+    ),
     linear-gradient(135deg, #05010f, #160926 55%, #05010f);
   color: #fffbd1;
   padding: clamp(1rem, 4vw, 4rem);

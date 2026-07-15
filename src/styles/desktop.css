@@ -28,12 +28,7 @@
     0 0,
     0 0,
     0 0;
-  background-repeat:
-    no-repeat,
-    no-repeat,
-    repeat,
-    repeat,
-    repeat;
+  background-repeat: no-repeat, no-repeat, repeat, repeat, repeat;
   background-size:
     cover,
     100% 100%,
@@ -211,8 +206,7 @@
 .desktop-icon--diagnostic span {
   background:
     linear-gradient(#111 0 24%, transparent 24%),
-    repeating-linear-gradient(#61f2c2 0 3px, #14352b 3px 6px),
-    #111;
+    repeating-linear-gradient(#61f2c2 0 3px, #14352b 3px 6px), #111;
 }
 
 .desktop-icon--diagnostic span::before {
@@ -374,7 +368,8 @@
   grid-template-columns: 1fr var(--retro-scrollbar-size);
 }
 
-.retro-scroll-area:not(.retro-scroll-area--has-overflow) .retro-scroll-area__bar {
+.retro-scroll-area:not(.retro-scroll-area--has-overflow)
+  .retro-scroll-area__bar {
   display: none;
 }
 
@@ -659,7 +654,13 @@
 
 .taskbar__app.is-active {
   background:
-    linear-gradient(45deg, rgba(0, 0, 0, 0.08) 25%, transparent 25% 50%, rgba(0, 0, 0, 0.08) 50% 75%, transparent 75%),
+    linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.08) 25%,
+      transparent 25% 50%,
+      rgba(0, 0, 0, 0.08) 50% 75%,
+      transparent 75%
+    ),
     #d8d4c5;
   background-size: 0.35rem 0.35rem;
   box-shadow:
@@ -697,7 +698,11 @@
   inset: 0;
   width: var(--mission-progress);
   background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0 4px, transparent 4px 8px),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.22) 0 4px,
+      transparent 4px 8px
+    ),
     linear-gradient(90deg, rgba(97, 242, 194, 0.7), rgba(255, 242, 122, 0.76));
   content: "";
 }

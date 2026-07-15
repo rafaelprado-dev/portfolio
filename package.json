@@ -9,9 +9,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "validate": "npm run typecheck && npm run lint && npm run build",
+    "validate": "npm run format:check && npm run typecheck && npm run lint && npm run build",
     "prepare": "husky"
   },
   "dependencies": {
@@ -36,10 +38,15 @@
     "eslint-config-next": "^16.2.6",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
+    "prettier": "3.9.5",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,mjs,cjs}": "eslint --max-warnings=0"
+    "*.{js,jsx,ts,tsx,mjs,cjs}": [
+      "prettier --write",
+      "eslint --max-warnings=0"
+    ],
+    "*.{css,json,jsonc,yml,yaml}": "prettier --write"
   }
 }

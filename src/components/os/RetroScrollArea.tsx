@@ -19,7 +19,10 @@ export function RetroScrollArea({ children, ariaLabel }: RetroScrollAreaProps) {
 
     setScrollState({
       top: element.scrollTop / maxScroll,
-      ratio: Math.min(1, element.clientHeight / Math.max(1, element.scrollHeight)),
+      ratio: Math.min(
+        1,
+        element.clientHeight / Math.max(1, element.scrollHeight),
+      ),
     });
   };
 
@@ -65,8 +68,15 @@ export function RetroScrollArea({ children, ariaLabel }: RetroScrollAreaProps) {
         {children}
       </div>
 
-      <div className="retro-scrollbar retro-scroll-area__bar" aria-label={`Rolagem de ${ariaLabel}`}>
-        <button aria-label={`Subir ${ariaLabel}`} type="button" onClick={() => scrollBy(-120)}>
+      <div
+        className="retro-scrollbar retro-scroll-area__bar"
+        aria-label={`Rolagem de ${ariaLabel}`}
+      >
+        <button
+          aria-label={`Subir ${ariaLabel}`}
+          type="button"
+          onClick={() => scrollBy(-120)}
+        >
           ▲
         </button>
         <div className="retro-scrollbar__track">
@@ -78,7 +88,11 @@ export function RetroScrollArea({ children, ariaLabel }: RetroScrollAreaProps) {
             }}
           />
         </div>
-        <button aria-label={`Descer ${ariaLabel}`} type="button" onClick={() => scrollBy(120)}>
+        <button
+          aria-label={`Descer ${ariaLabel}`}
+          type="button"
+          onClick={() => scrollBy(120)}
+        >
           ▼
         </button>
       </div>

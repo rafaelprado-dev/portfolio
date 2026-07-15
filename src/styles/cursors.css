@@ -33,7 +33,8 @@ textarea,
 
 button:disabled,
 [aria-disabled="true"] {
-  cursor: url("/assets/cursors/windows-7-live-green/not-allowed.cur"), not-allowed;
+  cursor:
+    url("/assets/cursors/windows-7-live-green/not-allowed.cur"), not-allowed;
 }
 
 .cursor-help {
@@ -57,9 +58,11 @@ button:disabled,
 }
 
 .cursor-resize-nwse {
-  cursor: url("/assets/cursors/windows-7-live-green/resize-nwse.cur"), nwse-resize;
+  cursor:
+    url("/assets/cursors/windows-7-live-green/resize-nwse.cur"), nwse-resize;
 }
 
 .cursor-resize-nesw {
-  cursor: url("/assets/cursors/windows-7-live-green/resize-nesw.cur"), nesw-resize;
+  cursor:
+    url("/assets/cursors/windows-7-live-green/resize-nesw.cur"), nesw-resize;
 }

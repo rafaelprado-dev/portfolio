@@ -17,7 +17,10 @@ import {
   type DesktopIconPosition,
 } from "@/components/os/DesktopIcon";
 import { Taskbar, type TaskbarItem } from "@/components/os/Taskbar";
-import { useWindowManager, type WindowId } from "@/components/os/useWindowManager";
+import {
+  useWindowManager,
+  type WindowId,
+} from "@/components/os/useWindowManager";
 import { WindowFrame } from "@/components/os/WindowFrame";
 import type { AppId } from "@/components/os/RafaelOS";
 import {
@@ -48,7 +51,10 @@ type AchievementId =
   | "projectExplorer"
   | "missionComplete";
 
-const achievements: Record<AchievementId, { title: string; description: string }> = {
+const achievements: Record<
+  AchievementId,
+  { title: string; description: string }
+> = {
   organized: {
     title: "Mania de organização",
     description: "Você alinhou a bagunça do desktop.",
@@ -129,7 +135,10 @@ const appTitleById: Record<AppId, string> = {
   missions: "Missões",
 };
 
-const mainWindowSizeByApp: Record<AppId, "mini" | "compact" | "standard" | "large"> = {
+const mainWindowSizeByApp: Record<
+  AppId,
+  "mini" | "compact" | "standard" | "large"
+> = {
   home: "compact",
   projects: "large",
   skills: "large",
@@ -165,7 +174,10 @@ const clampPosition = (position: DesktopIconPosition): DesktopIconPosition => {
   };
 };
 
-const getDefaultIconPositions = (): Record<DesktopShortcutId, DesktopIconPosition> => ({
+const getDefaultIconPositions = (): Record<
+  DesktopShortcutId,
+  DesktopIconPosition
+> => ({
   about: clampPosition(scalePosition(699, 786)),
   gcdp: clampPosition(scalePosition(111, 300)),
   luna: clampPosition(scalePosition(72, 571)),
@@ -248,18 +260,26 @@ const getDefaultWindowPositions = (): Record<WindowId, DesktopIconPosition> => {
     },
     terminal: {
       x: Math.round((window.innerWidth - terminalWidth) / 2),
-      y: Math.max(72, Math.round((window.innerHeight - terminalHeight - 44) / 2)),
+      y: Math.max(
+        72,
+        Math.round((window.innerHeight - terminalHeight - 44) / 2),
+      ),
     },
     wallpapers: {
-      x: Math.round((window.innerWidth - Math.min(704, window.innerWidth - 32)) / 2),
-      y: Math.max(68, Math.round((window.innerHeight - Math.min(window.innerHeight * 0.62, 496) - 44) / 2)),
+      x: Math.round(
+        (window.innerWidth - Math.min(704, window.innerWidth - 32)) / 2,
+      ),
+      y: Math.max(
+        68,
+        Math.round(
+          (window.innerHeight - Math.min(window.innerHeight * 0.62, 496) - 44) /
+            2,
+        ),
+      ),
     },
     doom: {
       x: Math.round((window.innerWidth - doomWidth) / 2),
-      y: Math.max(
-        44,
-        Math.round((window.innerHeight - doomHeight - 44) / 2),
-      ),
+      y: Math.max(44, Math.round((window.innerHeight - doomHeight - 44) / 2)),
     },
   };
 };
@@ -270,9 +290,9 @@ const readStoredIconPositions = () => {
   if (typeof window === "undefined") return defaults;
 
   try {
-    const parsed = JSON.parse(window.localStorage.getItem(desktopIconStorageKey) ?? "null") as
-      | Partial<Record<DesktopShortcutId, DesktopIconPosition>>
-      | null;
+    const parsed = JSON.parse(
+      window.localStorage.getItem(desktopIconStorageKey) ?? "null",
+    ) as Partial<Record<DesktopShortcutId, DesktopIconPosition>> | null;
 
     if (!parsed) return defaults;
 
@@ -293,7 +313,9 @@ const readStoredIconPositions = () => {
   }
 };
 
-const isOrganizedCluster = (positions: Record<DesktopShortcutId, DesktopIconPosition>) => {
+const isOrganizedCluster = (
+  positions: Record<DesktopShortcutId, DesktopIconPosition>,
+) => {
   const points = Object.values(positions);
   const minX = Math.min(...points.map((point) => point.x));
   const minY = Math.min(...points.map((point) => point.y));
@@ -327,15 +349,14 @@ export function Desktop({
   const [viewedProjectIndexes, setViewedProjectIndexes] = useState<Set<number>>(
     () => new Set(),
   );
-  const [completedMissionIds, setCompletedMissionIds] = useState<Set<MissionId>>(
-    () => new Set(["about"]),
-  );
+  const [completedMissionIds, setCompletedMissionIds] = useState<
+    Set<MissionId>
+  >(() => new Set(["about"]));
   const [, setUnlockedAchievements] = useState<Set<AchievementId>>(
     () => new Set(),
   );
-  const [visibleAchievement, setVisibleAchievement] = useState<AchievementId | null>(
-    null,
-  );
+  const [visibleAchievement, setVisibleAchievement] =
+    useState<AchievementId | null>(null);
   const [selectedWallpaperId, setSelectedWallpaperId] = useState(() => {
     const fallback = wallpapers[0]?.id ?? "";
 
@@ -345,17 +366,13 @@ export function Desktop({
 
     const savedWallpaperId = window.localStorage.getItem(wallpaperStorageKey);
 
-    return savedWallpaperId && wallpapers.some((wallpaper) => wallpaper.id === savedWallpaperId)
+    return savedWallpaperId &&
+      wallpapers.some((wallpaper) => wallpaper.id === savedWallpaperId)
       ? savedWallpaperId
       : fallback;
   });
-  const {
-    windows,
-    openWindow,
-    focusWindow,
-    minimizeWindow,
-    closeWindow,
-  } = useWindowManager();
+  const { windows, openWindow, focusWindow, minimizeWindow, closeWindow } =
+    useWindowManager();
   const windowPositions = useMemo(() => getDefaultWindowPositions(), []);
 
   const title = appTitleById[activeApp];
@@ -371,9 +388,13 @@ export function Desktop({
     return () => window.clearTimeout(timer);
   }, [visibleAchievement]);
 
-  const selectedWallpaper = wallpapers.find((wallpaper) => wallpaper.id === selectedWallpaperId);
+  const selectedWallpaper = wallpapers.find(
+    (wallpaper) => wallpaper.id === selectedWallpaperId,
+  );
   const desktopStyle = {
-    "--desktop-wallpaper": selectedWallpaper ? `url(${selectedWallpaper.src})` : "none",
+    "--desktop-wallpaper": selectedWallpaper
+      ? `url(${selectedWallpaper.src})`
+      : "none",
   } as CSSProperties;
 
   const unlockAchievement = (achievementId: AchievementId) => {
@@ -449,7 +470,9 @@ export function Desktop({
   };
 
   const activateProjectByName = (projectName: string) => {
-    const projectIndex = projects.findIndex((project) => project.name === projectName);
+    const projectIndex = projects.findIndex(
+      (project) => project.name === projectName,
+    );
     activateProject(projectIndex >= 0 ? projectIndex : 0);
   };
 
@@ -470,20 +493,29 @@ export function Desktop({
     completeMission("virus");
   };
 
-  const updateIconPosition = (id: DesktopShortcutId, position: DesktopIconPosition) => {
+  const updateIconPosition = (
+    id: DesktopShortcutId,
+    position: DesktopIconPosition,
+  ) => {
     setIconPositions((current) => ({
       ...current,
       [id]: position,
     }));
   };
 
-  const finishIconMove = (id: DesktopShortcutId, position: DesktopIconPosition) => {
+  const finishIconMove = (
+    id: DesktopShortcutId,
+    position: DesktopIconPosition,
+  ) => {
     const nextPositions = {
       ...iconPositions,
       [id]: position,
     };
 
-    window.localStorage.setItem(desktopIconStorageKey, JSON.stringify(nextPositions));
+    window.localStorage.setItem(
+      desktopIconStorageKey,
+      JSON.stringify(nextPositions),
+    );
 
     if (!isOrganizedCluster(nextPositions)) return;
 
@@ -598,7 +630,9 @@ export function Desktop({
   ];
 
   const topWindowId = useMemo(() => {
-    return (Object.entries(windows) as Array<[WindowId, (typeof windows)[WindowId]]>)
+    return (
+      Object.entries(windows) as Array<[WindowId, (typeof windows)[WindowId]]>
+    )
       .filter(([, window]) => window.status === "open")
       .sort((a, b) => b[1].zIndex - a[1].zIndex)[0]?.[0];
   }, [windows]);
@@ -613,7 +647,9 @@ export function Desktop({
       doom: "doom.exe",
     };
 
-    return (Object.entries(windows) as Array<[WindowId, (typeof windows)[WindowId]]>)
+    return (
+      Object.entries(windows) as Array<[WindowId, (typeof windows)[WindowId]]>
+    )
       .filter(([, window]) => window.status !== "closed")
       .map(([id, window]) => ({
         id,
@@ -692,8 +728,13 @@ export function Desktop({
           </button>
           <div className="project-selector__grid">
             {projects.map((project, index) => (
-              <button key={project.name} type="button" onClick={() => activateProject(index)}>
-                {projectSelectorLabels[project.name.split(" ")[0]] ?? project.name.split(" ")[0]}
+              <button
+                key={project.name}
+                type="button"
+                onClick={() => activateProject(index)}
+              >
+                {projectSelectorLabels[project.name.split(" ")[0]] ??
+                  project.name.split(" ")[0]}
               </button>
             ))}
           </div>
@@ -765,7 +806,10 @@ export function Desktop({
           onFocus={() => focusWindow("terminal")}
           onMinimize={() => minimizeWindow("terminal")}
         >
-          <CommandTerminal onActivateApp={activateApp} onTriggerVirus={triggerVirusScan} />
+          <CommandTerminal
+            onActivateApp={activateApp}
+            onTriggerVirus={triggerVirusScan}
+          />
         </WindowFrame>
       ) : null}
 

@@ -26,16 +26,27 @@ export function BootScreen({ config, onComplete }: BootScreenProps) {
 
     config.modules.forEach((module, moduleIndex) => {
       const start = moduleIndex * moduleSpan;
-      const localProgress = Math.max(0, Math.min(1, (progress - start) / moduleSpan));
+      const localProgress = Math.max(
+        0,
+        Math.min(1, (progress - start) / moduleSpan),
+      );
 
       if (localProgress <= 0 && moduleIndex > 0) return;
 
-      const current = Math.max(1, Math.min(module.total, Math.round(localProgress * module.total)));
+      const current = Math.max(
+        1,
+        Math.min(module.total, Math.round(localProgress * module.total)),
+      );
       logs.push(`${module.label}: ${current} / ${module.total}`);
 
-      const entryCount = Math.min(module.entries.length, Math.ceil(localProgress * module.entries.length));
+      const entryCount = Math.min(
+        module.entries.length,
+        Math.ceil(localProgress * module.entries.length),
+      );
       module.entries.slice(0, entryCount).forEach((entry) => {
-        logs.push(`${entry} ${Math.min(100, Math.max(8, Math.round(localProgress * 100)))}% [OK]`);
+        logs.push(
+          `${entry} ${Math.min(100, Math.max(8, Math.round(localProgress * 100)))}% [OK]`,
+        );
       });
     });
 
@@ -67,13 +78,29 @@ export function BootScreen({ config, onComplete }: BootScreenProps) {
       <section className="boot-panel" aria-live="polite">
         <h1>{config.title}</h1>
         <p>{config.subtitle}</p>
-        <p className="boot-panel__copy">Inicializando Rafael Prado<span className="loading-dots" aria-hidden="true" /></p>
+        <p className="boot-panel__copy">
+          Inicializando Rafael Prado
+          <span className="loading-dots" aria-hidden="true" />
+        </p>
 
         <div className="boot-panel__status">
           <span>Copiando arquivos para C:\RAFAELOS\PROFILE\RAFAEL_PRADO\</span>
-          <div className="boot-progress" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress}>
+          <div
+            className="boot-progress"
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={progress}
+          >
             {blocks.map((_, index) => (
-              <span className={index < Math.round((progress / 100) * blocks.length) ? "is-loaded" : undefined} key={index} />
+              <span
+                className={
+                  index < Math.round((progress / 100) * blocks.length)
+                    ? "is-loaded"
+                    : undefined
+                }
+                key={index}
+              />
             ))}
           </div>
           <strong>{progress}% concluído</strong>

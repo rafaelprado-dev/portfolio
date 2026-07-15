@@ -34,9 +34,7 @@ export default function ContatoPage() {
     >
       <section className="seo-route-page__panel">
         <h2>Canais profissionais</h2>
-        <p>
-          Rafael Prado, Desenvolvedor Front-End em Uberlândia, MG, Brasil.
-        </p>
+        <p>Rafael Prado, Desenvolvedor Front-End em Uberlândia, MG, Brasil.</p>
         <ul>
           {socialLinks.map((link) => (
             <li key={link.href}>

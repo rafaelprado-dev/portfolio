@@ -163,7 +163,9 @@ const normalizeRafaDroidSettings = (value: unknown): RafaDroidSettings => {
   const theme = themeOptions.some((option) => option.id === value.theme)
     ? (value.theme as RafaDroidTheme)
     : defaultRafaDroidSettings.theme;
-  const wallpaper = wallpaperOptions.some((option) => option.id === value.wallpaper)
+  const wallpaper = wallpaperOptions.some(
+    (option) => option.id === value.wallpaper,
+  )
     ? (value.wallpaper as RafaDroidWallpaper)
     : defaultRafaDroidSettings.wallpaper;
 
@@ -270,16 +272,20 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
     defaultRafaDroidSettings,
   );
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
-  const [requestedProjectIndex, setRequestedProjectIndex] = useState<number | null>(null);
+  const [requestedProjectIndex, setRequestedProjectIndex] = useState<
+    number | null
+  >(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [mobileOnlyApp, setMobileOnlyApp] = useState<MobileOnlyAppId | null>(null);
+  const [mobileOnlyApp, setMobileOnlyApp] = useState<MobileOnlyAppId | null>(
+    null,
+  );
   const [appCanGoBack, setAppCanGoBack] = useState(false);
   const [appBackSignal, setAppBackSignal] = useState(0);
   const [appScreenSignal, setAppScreenSignal] = useState(0);
   const [navigationStack, setNavigationStack] = useState<AppId[]>([]);
-  const [completedMissionIds, setCompletedMissionIds] = useState<Set<MissionId>>(
-    () => new Set(),
-  );
+  const [completedMissionIds, setCompletedMissionIds] = useState<
+    Set<MissionId>
+  >(() => new Set());
   const [showAchievement, setShowAchievement] = useState(true);
   const [now, setNow] = useState(() => new Date());
 
@@ -380,20 +386,22 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
       ],
     }));
 
-    const projectResults: MobileSearchResult[] = projects.map((project, projectIndex) => ({
-      type: "project",
-      projectIndex,
-      title: project.name,
-      description: project.type,
-      keywords: [
-        project.name,
-        project.type,
-        ...project.status,
-        project.description,
-        ...project.stack,
-        ...project.highlights,
-      ],
-    }));
+    const projectResults: MobileSearchResult[] = projects.map(
+      (project, projectIndex) => ({
+        type: "project",
+        projectIndex,
+        title: project.name,
+        description: project.type,
+        keywords: [
+          project.name,
+          project.type,
+          ...project.status,
+          project.description,
+          ...project.stack,
+          ...project.highlights,
+        ],
+      }),
+    );
 
     const linkResults: MobileSearchResult[] = socialLinks.map((link) => ({
       type: "link",
@@ -414,12 +422,12 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
     return searchIndex
       .map((result, order) => {
         const titleText = normalizeSearchText(result.title);
-        const primaryText = normalizeSearchText(`${result.title} ${result.description}`);
-        const matchText = normalizeSearchText([
-          result.title,
-          result.description,
-          ...result.keywords,
-        ].join(" "));
+        const primaryText = normalizeSearchText(
+          `${result.title} ${result.description}`,
+        );
+        const matchText = normalizeSearchText(
+          [result.title, result.description, ...result.keywords].join(" "),
+        );
         let score: number | null = null;
 
         if (terms.every((term) => titleText.includes(term))) {
@@ -441,10 +449,16 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
       .filter(
         (
           item,
-        ): item is { order: number; result: MobileSearchResult; score: number } =>
-          item !== null,
+        ): item is {
+          order: number;
+          result: MobileSearchResult;
+          score: number;
+        } => item !== null,
       )
-      .sort((first, second) => first.score - second.score || first.order - second.order)
+      .sort(
+        (first, second) =>
+          first.score - second.score || first.order - second.order,
+      )
       .map(({ result }) => result)
       .slice(0, 6);
   }, [normalizedSearchQuery, searchIndex]);
@@ -481,7 +495,9 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
-      const scrollTarget = launcherOpen ? launcherRef.current : appWindowRef.current;
+      const scrollTarget = launcherOpen
+        ? launcherRef.current
+        : appWindowRef.current;
 
       scrollTarget?.scrollTo({ top: 0, left: 0, behavior: "instant" });
     });
@@ -530,7 +546,12 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
       setNavigationStack([]);
     }
 
-    if (historyMode === "push" && !launcherOpen && !mobileOnlyApp && activeApp !== app) {
+    if (
+      historyMode === "push" &&
+      !launcherOpen &&
+      !mobileOnlyApp &&
+      activeApp !== app
+    ) {
       setNavigationStack((current) => {
         if (current[current.length - 1] === activeApp) return current;
 
@@ -855,24 +876,32 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
                 ) : null}
               </div>
               <div className="rafadroid-widget-tray">
-              <button
-                className="rafadroid-recruiter-widget"
-                type="button"
-                onClick={() => openApp("missions")}
-                style={{ "--mission-progress": `${missionProgress}%` } as CSSProperties}
-                aria-label={`Abrir progresso do recrutador: ${missionProgress}% analisado`}
-              >
-                <span className="rafadroid-recruiter-widget__dial" aria-hidden="true">
-                  <span>{missionProgress}%</span>
-                </span>
-                <span className="rafadroid-recruiter-widget__readout">
-                  <strong>Recrutador</strong>
-                  <em>scan ativo</em>
-                  <small>
-                    {missionCompletion.completedCount}/{missionCompletion.total} módulos
-                  </small>
-                </span>
-              </button>
+                <button
+                  className="rafadroid-recruiter-widget"
+                  type="button"
+                  onClick={() => openApp("missions")}
+                  style={
+                    {
+                      "--mission-progress": `${missionProgress}%`,
+                    } as CSSProperties
+                  }
+                  aria-label={`Abrir progresso do recrutador: ${missionProgress}% analisado`}
+                >
+                  <span
+                    className="rafadroid-recruiter-widget__dial"
+                    aria-hidden="true"
+                  >
+                    <span>{missionProgress}%</span>
+                  </span>
+                  <span className="rafadroid-recruiter-widget__readout">
+                    <strong>Recrutador</strong>
+                    <em>scan ativo</em>
+                    <small>
+                      {missionCompletion.completedCount}/
+                      {missionCompletion.total} módulos
+                    </small>
+                  </span>
+                </button>
               </div>
             </header>
             <div className="rafadroid-launcher__grid" role="list">
@@ -881,7 +910,9 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
 
                 return (
                   <button
-                    className={activeMobileApp === app.id ? "is-active" : undefined}
+                    className={
+                      activeMobileApp === app.id ? "is-active" : undefined
+                    }
                     key={app.id}
                     role="listitem"
                     style={{ "--app-accent": app.accent } as CSSProperties}
@@ -908,7 +939,9 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
             </div>
           </div>
         ) : (
-          <div className="rafadroid-app-window" ref={appWindowRef}>{renderActiveApp()}</div>
+          <div className="rafadroid-app-window" ref={appWindowRef}>
+            {renderActiveApp()}
+          </div>
         )}
       </section>
 
@@ -940,69 +973,73 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
           role="presentation"
           onClick={() => setQuickSettingsOpen(false)}
         >
-        <section
-          aria-label="Opções de personalização do RafaDroid"
-          className="rafadroid-quick-settings"
-          role="dialog"
-          onClick={(event) => event.stopPropagation()}
-        >
-          <header className="rafadroid-quick-settings__header">
-            <div>
-              <small>Menu</small>
-              <h2>Personalização</h2>
-            </div>
-            <button
-              aria-label="Fechar menu"
-              className="rafadroid-icon-button"
-              type="button"
-              onClick={() => setQuickSettingsOpen(false)}
-            >
-              <X size={17} strokeWidth={2.4} />
-            </button>
-          </header>
-
-          <div className="rafadroid-quick-settings__group">
-            <h3>Tema</h3>
-            <div className="rafadroid-quick-settings__options">
-              {themeOptions.map((option) => (
-                <button
-                  aria-pressed={settings.theme === option.id}
-                  className={settings.theme === option.id ? "is-active" : undefined}
-                  key={option.id}
-                  type="button"
-                  onClick={() => updateTheme(option.id)}
-                >
-                  <strong>{option.label}</strong>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="rafadroid-quick-settings__group">
-            <h3>Wallpaper</h3>
-            <div className="rafadroid-quick-settings__options">
-              {wallpaperOptions.map((option) => (
-                <button
-                  aria-pressed={settings.wallpaper === option.id}
-                  className={settings.wallpaper === option.id ? "is-active" : undefined}
-                  key={option.id}
-                  type="button"
-                  onClick={() => updateWallpaper(option.id)}
-                >
-                  <strong>{option.label}</strong>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <button
-            className="rafadroid-quick-settings__reset"
-            type="button"
-            onClick={resetSettings}
+          <section
+            aria-label="Opções de personalização do RafaDroid"
+            className="rafadroid-quick-settings"
+            role="dialog"
+            onClick={(event) => event.stopPropagation()}
           >
-            Restaurar padrão
-          </button>
-        </section>
+            <header className="rafadroid-quick-settings__header">
+              <div>
+                <small>Menu</small>
+                <h2>Personalização</h2>
+              </div>
+              <button
+                aria-label="Fechar menu"
+                className="rafadroid-icon-button"
+                type="button"
+                onClick={() => setQuickSettingsOpen(false)}
+              >
+                <X size={17} strokeWidth={2.4} />
+              </button>
+            </header>
+
+            <div className="rafadroid-quick-settings__group">
+              <h3>Tema</h3>
+              <div className="rafadroid-quick-settings__options">
+                {themeOptions.map((option) => (
+                  <button
+                    aria-pressed={settings.theme === option.id}
+                    className={
+                      settings.theme === option.id ? "is-active" : undefined
+                    }
+                    key={option.id}
+                    type="button"
+                    onClick={() => updateTheme(option.id)}
+                  >
+                    <strong>{option.label}</strong>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="rafadroid-quick-settings__group">
+              <h3>Wallpaper</h3>
+              <div className="rafadroid-quick-settings__options">
+                {wallpaperOptions.map((option) => (
+                  <button
+                    aria-pressed={settings.wallpaper === option.id}
+                    className={
+                      settings.wallpaper === option.id ? "is-active" : undefined
+                    }
+                    key={option.id}
+                    type="button"
+                    onClick={() => updateWallpaper(option.id)}
+                  >
+                    <strong>{option.label}</strong>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <button
+              className="rafadroid-quick-settings__reset"
+              type="button"
+              onClick={resetSettings}
+            >
+              Restaurar padrão
+            </button>
+          </section>
         </div>
       ) : null}
 

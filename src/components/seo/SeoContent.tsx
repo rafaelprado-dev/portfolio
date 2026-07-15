@@ -19,11 +19,7 @@ const publicRouteLinks = [
 
 export function SeoContent() {
   return (
-    <section
-      className="seo-content"
-      aria-hidden="true"
-      inert
-    >
+    <section className="seo-content" aria-hidden="true" inert>
       <h1>{professionalTitle}</h1>
       <p>
         {profileIntro} Desenvolvedor em Uberlândia, MG, Brasil, com foco em

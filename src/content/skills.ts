@@ -7,8 +7,7 @@ export const skillGroups: SkillGroup[] = [
       "Construção de interfaces web para produtos digitais, com foco em clareza, componentização e experiência de uso.",
     level: 5,
     levelLabel: "Foco principal",
-    note:
-      "Atuação em dashboards, SaaS, painéis administrativos, grids, calendários e Kanban.",
+    note: "Atuação em dashboards, SaaS, painéis administrativos, grids, calendários e Kanban.",
     skills: [
       { label: "React" },
       { label: "Next.js" },
@@ -26,8 +25,7 @@ export const skillGroups: SkillGroup[] = [
       "Cuidado visual e de uso para interfaces claras, consistentes e acessíveis.",
     level: 4,
     levelLabel: "Experiência sólida",
-    note:
-      "Trabalho com atenção a hierarquia visual, responsividade, navegação, acessibilidade e acabamento de interface.",
+    note: "Trabalho com atenção a hierarquia visual, responsividade, navegação, acessibilidade e acabamento de interface.",
     skills: [
       { label: "UX/UI" },
       { label: "WCAG" },
@@ -45,8 +43,7 @@ export const skillGroups: SkillGroup[] = [
       "Estruturação de componentes, manutenção e qualidade para produtos que evoluem.",
     level: 3,
     levelLabel: "Experiência prática",
-    note:
-      "Organizo interfaces pensando em reaproveitamento, separação de responsabilidades, performance e facilidade de manutenção.",
+    note: "Organizo interfaces pensando em reaproveitamento, separação de responsabilidades, performance e facilidade de manutenção.",
     skills: [
       { label: "Arquitetura Front-end" },
       { label: "Manutenibilidade" },
@@ -65,8 +62,7 @@ export const skillGroups: SkillGroup[] = [
       "Ligação entre interface, autenticação, dados e serviços externos.",
     level: 4,
     levelLabel: "Experiência sólida",
-    note:
-      "Experiência com fluxos reais envolvendo autenticação, persistência de dados, APIs e gerenciamento de estado.",
+    note: "Experiência com fluxos reais envolvendo autenticação, persistência de dados, APIs e gerenciamento de estado.",
     skills: [
       { label: "APIs REST" },
       { label: "Firebase Auth" },
@@ -85,8 +81,7 @@ export const skillGroups: SkillGroup[] = [
       "Extensão do trabalho de front-end para aplicações e fluxos mobile.",
     level: 4,
     levelLabel: "Experiência sólida",
-    note:
-      "Criação de telas e navegação mobile com atenção a fluxo, responsividade e contexto de uso.",
+    note: "Criação de telas e navegação mobile com atenção a fluxo, responsividade e contexto de uso.",
     skills: [
       { label: "React Native" },
       { label: "Expo" },
@@ -102,8 +97,7 @@ export const skillGroups: SkillGroup[] = [
       "Projetos experimentais com IA local, automação, ferramentas desktop e fluxos assistidos.",
     level: 3,
     levelLabel: "Experiência prática",
-    note:
-      "Aplicação prática em agentes locais, tradução assistida por IA, automação de pesquisa e ferramentas de apoio ao fluxo de trabalho.",
+    note: "Aplicação prática em agentes locais, tradução assistida por IA, automação de pesquisa e ferramentas de apoio ao fluxo de trabalho.",
     skills: [
       { label: "Ollama" },
       { label: "Qwen" },

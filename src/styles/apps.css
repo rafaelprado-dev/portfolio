@@ -740,7 +740,11 @@
   height: 1.05rem;
   border: 1px solid #111;
   background:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0 4px, transparent 4px 8px),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.12) 0 4px,
+      transparent 4px 8px
+    ),
     rgba(0, 0, 0, 0.48);
   box-shadow:
     inset 1px 1px rgba(255, 255, 255, 0.72),

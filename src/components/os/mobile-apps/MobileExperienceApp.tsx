@@ -73,7 +73,10 @@ export function MobileExperienceApp({
           Experiência
         </button>
 
-        <article className="mobile-app__detail-screen" aria-labelledby="experience-detail">
+        <article
+          className="mobile-app__detail-screen"
+          aria-labelledby="experience-detail"
+        >
           <p className="mobile-app__kicker">Registro selecionado</p>
           <h2 id="experience-detail">{experience.role}</h2>
 
@@ -132,7 +135,10 @@ export function MobileExperienceApp({
           Formação
         </button>
 
-        <article className="mobile-app__detail-screen" aria-labelledby="education-detail">
+        <article
+          className="mobile-app__detail-screen"
+          aria-labelledby="education-detail"
+        >
           <p className="mobile-app__kicker">Formação selecionada</p>
           <h2 id="education-detail">{item.title}</h2>
 
@@ -163,7 +169,11 @@ export function MobileExperienceApp({
         <p>Linha do tempo profissional, formação e contexto de atuação.</p>
       </header>
 
-      <div className="mobile-app__segmented" role="tablist" aria-label="Tipo de registro">
+      <div
+        className="mobile-app__segmented"
+        role="tablist"
+        aria-label="Tipo de registro"
+      >
         <button
           aria-selected={isProfessionalMode}
           className={cn(isProfessionalMode && "is-active")}
@@ -185,7 +195,10 @@ export function MobileExperienceApp({
       </div>
 
       {isProfessionalMode ? (
-        <section className="mobile-app__timeline" aria-label="Experiência profissional">
+        <section
+          className="mobile-app__timeline"
+          aria-label="Experiência profissional"
+        >
           {experiences.map((experience, index) => (
             <button
               className="mobile-app__timeline-row mobile-experience-row"
@@ -193,7 +206,10 @@ export function MobileExperienceApp({
               type="button"
               onClick={() => openDetail({ mode: "professional", index })}
             >
-              <span className="mobile-experience-row__marker" aria-hidden="true" />
+              <span
+                className="mobile-experience-row__marker"
+                aria-hidden="true"
+              />
               <span className="mobile-experience-row__content">
                 <small>{experience.period}</small>
                 <strong>{experience.role}</strong>
@@ -213,7 +229,10 @@ export function MobileExperienceApp({
               type="button"
               onClick={() => openDetail({ mode: "education", index })}
             >
-              <span className="mobile-experience-row__marker" aria-hidden="true" />
+              <span
+                className="mobile-experience-row__marker"
+                aria-hidden="true"
+              />
               <span className="mobile-experience-row__content">
                 <small>{item.period}</small>
                 <strong>{item.title}</strong>

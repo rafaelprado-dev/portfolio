@@ -2,7 +2,11 @@
 
 import { ArrowLeft, Pin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { getFilteredProjectEntries, projectFilters, projects } from "@/content/projects";
+import {
+  getFilteredProjectEntries,
+  projectFilters,
+  projects,
+} from "@/content/projects";
 import { cn } from "@/lib/utils";
 import type { ProjectFilterId } from "@/types/portfolio";
 
@@ -98,7 +102,10 @@ export function MobileProjectsApp({
         >
           <p className="mobile-app__kicker">Detalhes do pacote</p>
           <h2 id="project-detail">{selectedProject.name}</h2>
-          <div className="mobile-app__status-list" aria-label="Status do projeto">
+          <div
+            className="mobile-app__status-list"
+            aria-label="Status do projeto"
+          >
             {selectedProject.status.map((status) => (
               <span key={status}>{status}</span>
             ))}
@@ -184,7 +191,10 @@ export function MobileProjectsApp({
                 ))}
               </span>
               {project.featured ? (
-                <span className="mobile-app__featured-rail" aria-label="Projeto principal">
+                <span
+                  className="mobile-app__featured-rail"
+                  aria-label="Projeto principal"
+                >
                   <Pin
                     aria-hidden="true"
                     className="mobile-app__featured-pin"

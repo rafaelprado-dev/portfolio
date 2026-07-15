@@ -4,7 +4,9 @@
 
 .retro-scrollbar {
   display: grid;
-  grid-template-rows: var(--retro-scrollbar-size) 1fr var(--retro-scrollbar-size);
+  grid-template-rows: var(--retro-scrollbar-size) 1fr var(
+      --retro-scrollbar-size
+    );
   border-left: 1px solid #ffffff;
   background: #c0c0c0;
 }

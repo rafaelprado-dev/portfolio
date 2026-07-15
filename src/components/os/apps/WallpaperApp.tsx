@@ -10,7 +10,8 @@ export function WallpaperApp({
   onSelectWallpaper,
 }: WallpaperAppProps) {
   const selectedWallpaper =
-    wallpapers.find((wallpaper) => wallpaper.id === selectedWallpaperId) ?? wallpapers[0];
+    wallpapers.find((wallpaper) => wallpaper.id === selectedWallpaperId) ??
+    wallpapers[0];
   const selectedFileName = selectedWallpaper?.src.split("/").at(-1) ?? "";
 
   return (
@@ -48,7 +49,10 @@ export function WallpaperApp({
           })}
         </div>
 
-        <section className="wallpaper-preview" aria-label="Prévia do wallpaper selecionado">
+        <section
+          className="wallpaper-preview"
+          aria-label="Prévia do wallpaper selecionado"
+        >
           <div
             aria-hidden="true"
             className="wallpaper-preview__screen"

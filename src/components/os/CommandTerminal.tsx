@@ -86,9 +86,7 @@ const stackLines = [
   "Expo - Ollama - Qwen - Automação local",
 ];
 
-const bugfixLines = [
-  "vai ser adicionado na próxima atualização!",
-];
+const bugfixLines = ["vai ser adicionado na próxima atualização!"];
 
 const toTerminalLines = (items: Array<string | TerminalLine>): TerminalLine[] =>
   items.map((item) => (typeof item === "string" ? { text: item } : item));
@@ -171,13 +169,15 @@ export function CommandTerminal({
             ]
           : ["", "resultado: calculando compatibilidade"];
 
-      setLines(toTerminalLines([
-        commandLine,
-        "analisando Rafael Prado",
-        "",
-        ...metricLines,
-        ...statusLines,
-      ]));
+      setLines(
+        toTerminalLines([
+          commandLine,
+          "analisando Rafael Prado",
+          "",
+          ...metricLines,
+          ...statusLines,
+        ]),
+      );
     };
 
     if (prefersReducedMotion()) {
@@ -212,13 +212,15 @@ export function CommandTerminal({
     ];
 
     const renderResult = () => {
-      setLines(toTerminalLines([
-        commandLine,
-        "preparando café...",
-        "",
-        { text: "ERROR: café acabou", tone: "error" },
-        "fallback aplicado: suco de abacaxi com hortelã",
-      ]));
+      setLines(
+        toTerminalLines([
+          commandLine,
+          "preparando café...",
+          "",
+          { text: "ERROR: café acabou", tone: "error" },
+          "fallback aplicado: suco de abacaxi com hortelã",
+        ]),
+      );
       setIsAnimating(false);
     };
 
@@ -335,7 +337,10 @@ export function CommandTerminal({
         className="terminal-panel__output"
       >
         {lines.map((line, index) => (
-          <p className={line.tone === "error" ? "is-error" : undefined} key={`${line.text}-${index}`}>
+          <p
+            className={line.tone === "error" ? "is-error" : undefined}
+            key={`${line.text}-${index}`}
+          >
             {line.text || "\u00a0"}
           </p>
         ))}

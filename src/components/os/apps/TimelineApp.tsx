@@ -27,7 +27,10 @@ export function TimelineApp() {
   };
 
   return (
-    <section className="app-screen timeline-app" aria-labelledby="timeline-title">
+    <section
+      className="app-screen timeline-app"
+      aria-labelledby="timeline-title"
+    >
       <p className="app-kicker">/experiência.log</p>
       <div className="timeline-app__header">
         <h2 id="timeline-title">Experiência</h2>

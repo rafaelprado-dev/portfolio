@@ -1,0 +1,13 @@
+.next/
+.vercel/
+coverage/
+dist/
+docs/
+node_modules/
+out/
+playwright-report/
+public/assets/
+test-results/
+
+*.md
+package-lock.json

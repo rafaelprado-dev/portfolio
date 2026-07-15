@@ -88,8 +88,16 @@ export function DesktopIcon({
     if (!drag || drag.pointerId !== event.pointerId) return;
 
     const finalPosition = {
-      x: clamp(drag.originX + event.clientX - drag.startX, 8, window.innerWidth - 112),
-      y: clamp(drag.originY + event.clientY - drag.startY, 48, window.innerHeight - 116),
+      x: clamp(
+        drag.originX + event.clientX - drag.startX,
+        8,
+        window.innerWidth - 112,
+      ),
+      y: clamp(
+        drag.originY + event.clientY - drag.startY,
+        48,
+        window.innerHeight - 116,
+      ),
     };
 
     suppressClickRef.current = drag.moved;
