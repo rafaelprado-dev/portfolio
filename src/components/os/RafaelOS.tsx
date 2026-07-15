@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { CommunityProvider } from "@/components/community/CommunityProvider";
 import { BootScreen } from "@/components/os/BootScreen";
 import { Desktop } from "@/components/os/Desktop";
 import { MobileShell } from "@/components/os/MobileShell";
@@ -13,6 +14,7 @@ export type AppId =
   | "skills"
   | "timeline"
   | "contact"
+  | "feedback"
   | "recruiter"
   | "missions";
 
@@ -149,17 +151,19 @@ export function RafaelOS({ initialApp = "home" }: RafaelOSProps) {
     );
   }
 
-  if (isRafaDroid) {
-    return <MobileShell activeApp={activeApp} onActivateApp={setActiveApp} />;
-  }
-
   return (
-    <Desktop
-      activeApp={activeApp}
-      glitchLevel={1}
-      onActivateApp={setActiveApp}
-      onTriggerVirus={triggerVirus}
-      virusAlerts={virusAlerts}
-    />
+    <CommunityProvider>
+      {isRafaDroid ? (
+        <MobileShell activeApp={activeApp} onActivateApp={setActiveApp} />
+      ) : (
+        <Desktop
+          activeApp={activeApp}
+          glitchLevel={1}
+          onActivateApp={setActiveApp}
+          onTriggerVirus={triggerVirus}
+          virusAlerts={virusAlerts}
+        />
+      )}
+    </CommunityProvider>
   );
 }

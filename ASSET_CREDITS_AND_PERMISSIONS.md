@@ -7,6 +7,7 @@ Este arquivo registra assets, fontes, bibliotecas visuais e referências externa
 | Asset | Arquivo/Uso | Fonte | Autor/Criador | Licença | Status | Observação |
 |---|---|---|---|---|---|---|
 | Open Peeps avatar via DiceBear | `public/assets/open-peeps-rafael.svg` | https://www.dicebear.com/styles/open-peeps/ | Open Peeps por Pablo Stanley; DiceBear | CC0 1.0 para o estilo Open Peeps; DiceBear code MIT | OK | Usado como ilustração editorial. Fonte consultada em 2026-05-05. |
+| Pixel Art avatars via DiceBear | `public/assets/avatars/rsn/*.svg` | https://www.dicebear.com/styles/pixel-art/ | DiceBear | CC0 1.0 para o estilo Pixel Art; DiceBear code MIT | OK | Avatares públicos gerados para os perfis de feedback do RSN e RafaDroid. A licença também está preservada nos metadados SVG. |
 | Space Grotesk | `src/app/layout.tsx` via `next/font/google` | Google Fonts / https://fonts.google.com/specimen/Space+Grotesk | Florian Karsten | SIL Open Font License 1.1 | OK | Fonte principal de interface. |
 | Cormorant Garamond | `src/app/layout.tsx` via `next/font/google` | Google Fonts / https://fonts.google.com/specimen/Cormorant+Garamond | Christian Thalmann / Catharsis Fonts | SIL Open Font License 1.1 | OK | Fonte editorial do hero e headings especiais. |
 | Lucide icons | Componentes de UI e seções | https://lucide.dev/ | Lucide contributors | ISC License | OK | Ícones de navegação, links e detalhes de interface. |

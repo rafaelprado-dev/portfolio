@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { ContactApp } from "@/components/os/apps/ContactApp";
 import { DoomApp } from "@/components/os/apps/DoomApp";
+import { RsnMessengerApp } from "@/components/os/apps/RsnMessengerApp";
 import { HomeApp } from "@/components/os/apps/HomeApp";
 import { MissionsApp } from "@/components/os/apps/MissionsApp";
 import { ProjectsApp } from "@/components/os/apps/ProjectsApp";
@@ -11,6 +12,7 @@ import { SkillsApp } from "@/components/os/apps/SkillsApp";
 import { TimelineApp } from "@/components/os/apps/TimelineApp";
 import { WallpaperApp } from "@/components/os/apps/WallpaperApp";
 import { CommandTerminal } from "@/components/os/CommandTerminal";
+import { CommunityWidget } from "@/components/os/CommunityWidget";
 import {
   DesktopIcon,
   type DesktopIconKind,
@@ -123,6 +125,7 @@ const navigationApps: Array<{ id: AppId; title: string }> = [
   { id: "skills", title: "Habilidades" },
   { id: "timeline", title: "Experiência" },
   { id: "contact", title: "Contato" },
+  { id: "feedback", title: "Feedback" },
 ];
 
 const appTitleById: Record<AppId, string> = {
@@ -131,6 +134,7 @@ const appTitleById: Record<AppId, string> = {
   skills: "Habilidades",
   timeline: "Experiência",
   contact: "Contato",
+  feedback: "RSN Messenger",
   recruiter: "Recrutador",
   missions: "Missões",
 };
@@ -144,6 +148,7 @@ const mainWindowSizeByApp: Record<
   skills: "large",
   timeline: "large",
   contact: "compact",
+  feedback: "large",
   recruiter: "standard",
   missions: "standard",
 };
@@ -153,7 +158,7 @@ const referenceViewport = {
   height: 963,
 };
 
-const desktopIconStorageKey = "rafaelos.desktop.icons.v3";
+const desktopIconStorageKey = "rafaelos.desktop.icons.v4";
 const wallpaperStorageKey = "rafaelos.wallpaper";
 
 const scalePosition = (x: number, y: number): DesktopIconPosition => {
@@ -182,7 +187,7 @@ const getDefaultIconPositions = (): Record<
   gcdp: clampPosition(scalePosition(111, 300)),
   luna: clampPosition(scalePosition(72, 571)),
   bordo: clampPosition(scalePosition(348, 419)),
-  rdns: clampPosition(scalePosition(345, 645)),
+  rdns: clampPosition(scalePosition(345, 525)),
   skills: clampPosition(scalePosition(865, 673)),
   timeline: clampPosition(scalePosition(1025, 791)),
   contact: clampPosition(scalePosition(1191, 701)),
@@ -641,7 +646,7 @@ export function Desktop({
     const labels: Record<WindowId, string> = {
       navigation: "Navegação",
       selector: "Principais Projetos",
-      main: `${title}.app`,
+      main: activeApp === "feedback" ? title : `${title}.app`,
       terminal: "cmd.exe",
       wallpapers: "wallpaper.cpl",
       doom: "doom.exe",
@@ -657,7 +662,7 @@ export function Desktop({
         isActive: topWindowId === id,
         isMinimized: window.status === "minimized",
       }));
-  }, [title, topWindowId, windows]);
+  }, [activeApp, title, topWindowId, windows]);
 
   const toggleTaskbarWindow = (windowId: WindowId) => {
     const window = windows[windowId];
@@ -757,6 +762,11 @@ export function Desktop({
 
       {windows.main.status === "open" ? (
         <WindowFrame
+          bodyClassName={
+            activeApp === "feedback"
+              ? "os-window__body rsn-window__body"
+              : undefined
+          }
           className={`main-window main-window--${mainWindowSize}`}
           defaultPosition={windowPositions.main}
           scrollable={
@@ -764,11 +774,12 @@ export function Desktop({
             activeApp !== "skills" &&
             activeApp !== "timeline" &&
             activeApp !== "contact" &&
+            activeApp !== "feedback" &&
             activeApp !== "recruiter" &&
             activeApp !== "missions"
           }
           storageKey="rafaelos.window.main.v1"
-          title={`${title}.app`}
+          title={activeApp === "feedback" ? title : `${title}.app`}
           zIndex={windows.main.zIndex}
           onClose={() => closeWindow("main")}
           onFocus={() => focusWindow("main")}
@@ -784,6 +795,7 @@ export function Desktop({
           {activeApp === "skills" ? <SkillsApp /> : null}
           {activeApp === "timeline" ? <TimelineApp /> : null}
           {activeApp === "contact" ? <ContactApp /> : null}
+          {activeApp === "feedback" ? <RsnMessengerApp /> : null}
           {activeApp === "recruiter" ? <RecruiterApp /> : null}
           {activeApp === "missions" ? (
             <MissionsApp
@@ -871,6 +883,10 @@ export function Desktop({
             <p>{achievements[visibleAchievement].description}</p>
           </div>
         </div>
+      ) : null}
+
+      {activeApp !== "feedback" || windows.main.status !== "open" ? (
+        <CommunityWidget onOpen={() => activateApp("feedback")} />
       ) : null}
 
       <Taskbar

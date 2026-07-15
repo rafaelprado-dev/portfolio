@@ -746,6 +746,8 @@
 }
 
 .rafadroid-widget-tray {
+  display: grid;
+  gap: 0.42rem;
   width: min(19.8rem, 100%);
   border-radius: 1.35rem;
   background:
@@ -773,6 +775,69 @@
     0 0.55rem 1.15rem rgba(0, 0, 0, 0.18),
     0 0 1.35rem rgba(51, 181, 229, 0.12);
   padding: 0.38rem;
+}
+
+.rafadroid-community-widget {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.56rem;
+  min-height: 3.35rem;
+  border-radius: 0.84rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.13), transparent 48%),
+    rgba(5, 8, 12, 0.78);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.18),
+    inset 0 -1px rgba(0, 0, 0, 0.42);
+  padding: 0.52rem 0.62rem;
+  text-align: left;
+}
+
+.rafadroid-community-widget__icon {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--holo-cyan), transparent 76%);
+  color: var(--holo-cyan);
+  box-shadow: inset 0 0 0 1px
+    color-mix(in srgb, var(--holo-cyan), transparent 42%);
+}
+
+.rafadroid-community-widget__copy {
+  display: grid;
+  min-width: 0;
+  gap: 0.1rem;
+}
+
+.rafadroid-community-widget__copy strong {
+  color: var(--text-primary);
+  font-size: 0.82rem;
+}
+
+.rafadroid-community-widget__copy small {
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 0.66rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rafadroid-community-widget__count {
+  display: grid;
+  justify-items: end;
+  color: var(--holo-cyan);
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.rafadroid-community-widget__count small {
+  color: var(--text-secondary);
+  font-size: 0.5rem;
+  text-transform: uppercase;
 }
 
 .rafadroid-recruiter-widget {
@@ -991,6 +1056,315 @@
   font-size: 0.66rem;
   font-weight: 800;
   letter-spacing: 0;
+}
+
+.mobile-messages-app {
+  display: grid;
+  grid-template-rows: auto minmax(12rem, 1fr) auto;
+  min-height: 100%;
+  background: #090d10;
+  color: var(--text-primary);
+}
+
+.mobile-messages-app__contact {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.62rem;
+  min-height: 3.8rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--holo-cyan), transparent 58%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), transparent 48%),
+    color-mix(in srgb, var(--holo-cyan), #0b1014 78%);
+  padding: 0.45rem 0.7rem;
+}
+
+.mobile-messages-app__contact-avatar {
+  display: grid;
+  width: 2.625rem;
+  height: 2.625rem;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--holo-cyan), #ffffff 42%);
+  border-radius: 0.12rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.18), transparent 46%),
+    color-mix(in srgb, var(--holo-cyan), #0a151a 52%);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 900;
+  object-fit: cover;
+}
+
+.mobile-messages-app__contact div {
+  min-width: 0;
+}
+
+.mobile-messages-app__contact h2,
+.mobile-messages-app__contact span {
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-messages-app__contact h2 {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.mobile-messages-app__contact span,
+.mobile-messages-app__contact small {
+  color: color-mix(in srgb, var(--holo-cyan), #ffffff 55%);
+  font-size: 0.63rem;
+}
+
+.mobile-messages-app__contact small {
+  font-weight: 900;
+}
+
+.mobile-messages-app__thread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.58rem;
+  min-height: 0;
+  overflow-y: auto;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px), #080c0e;
+  background-size: 100% 3px;
+  padding: 0.72rem 0.62rem;
+  scrollbar-color: var(--holo-cyan) #080c0e;
+  scrollbar-width: thin;
+}
+
+.mobile-messages-app__thread > time {
+  align-self: center;
+  color: var(--text-muted);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.mobile-message {
+  width: min(86%, 18rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.18rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 44%), #1b2226;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.52);
+  padding: 0.52rem 0.58rem;
+}
+
+.mobile-message--received {
+  align-self: flex-start;
+  border-left: 3px solid #78868d;
+}
+
+.mobile-message--sent {
+  align-self: flex-end;
+  border-right: 3px solid var(--holo-cyan);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent 44%),
+    color-mix(in srgb, var(--holo-cyan), #111a1d 84%);
+}
+
+.mobile-message p {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--text-primary);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.mobile-message > small,
+.mobile-message footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.28rem;
+  margin-top: 0.34rem;
+  color: var(--text-muted);
+  font-size: 0.56rem;
+}
+
+.mobile-message footer img {
+  border-radius: 0.12rem;
+}
+
+.mobile-messages-app__composer {
+  display: grid;
+  gap: 0.42rem;
+  border-top: 1px solid color-mix(in srgb, var(--holo-cyan), transparent 68%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 38%), #12191d;
+  padding: 0.52rem 0.58rem 0.62rem;
+}
+
+.mobile-messages-app__identity {
+  display: grid;
+  grid-template-columns: auto 2.2rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.mobile-messages-app__identity > span {
+  color: var(--text-secondary);
+  font-size: 0.63rem;
+  text-transform: uppercase;
+}
+
+.mobile-messages-app__identity > div {
+  display: grid;
+  gap: 0.16rem;
+  min-width: 0;
+}
+
+.mobile-messages-app__identity small {
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 0.52rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-messages-app__identity input,
+.mobile-messages-app__compose-row textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0.12rem;
+  background: #050708;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.75);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.mobile-messages-app__identity input {
+  height: 1.9rem;
+  padding: 0.3rem 0.42rem;
+}
+
+.mobile-messages-app__identity input:focus-visible,
+.mobile-messages-app__compose-row textarea:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--holo-cyan), #ffffff 22%);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.75),
+    0 0 0 1px color-mix(in srgb, var(--holo-cyan), transparent 55%);
+}
+
+.mobile-messages-app__sender-avatar {
+  display: grid;
+  width: 2.2rem;
+  aspect-ratio: 1;
+  min-height: 0;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0.12rem;
+  background: #050708;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  padding: 0;
+}
+
+.mobile-messages-app__sender-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mobile-messages-app__sender-avatar:hover,
+.mobile-messages-app__sender-avatar:focus-visible {
+  outline: none;
+  border-color: var(--holo-cyan);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--holo-cyan), transparent 48%);
+}
+
+.mobile-messages-app__emoticons {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.mobile-messages-app__emoticons::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-messages-app__emoticons button {
+  flex: 0 0 auto;
+  min-width: 2rem;
+  height: 1.55rem;
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #1b2327;
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+}
+
+.mobile-messages-app__emoticons button:hover,
+.mobile-messages-app__emoticons button:focus-visible {
+  border-color: var(--holo-cyan);
+  background: color-mix(in srgb, var(--holo-cyan), #11191d 82%);
+  color: #ffffff;
+}
+
+.mobile-messages-app__compose-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2.55rem;
+  align-items: stretch;
+  gap: 0.34rem;
+}
+
+.mobile-messages-app__compose-row textarea {
+  min-height: 2.9rem;
+  max-height: 5.5rem;
+  padding: 0.42rem;
+  resize: vertical;
+}
+
+.mobile-messages-app__send {
+  display: grid;
+  min-width: 0;
+  min-height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.12rem;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
+  padding: 0;
+}
+
+.mobile-messages-app__send {
+  border-color: color-mix(in srgb, var(--holo-cyan), transparent 35%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 48%),
+    color-mix(in srgb, var(--holo-cyan), #11191d 66%);
+  color: #ffffff;
+}
+
+.mobile-messages-app__send:disabled {
+  color: var(--text-muted);
+}
+
+.mobile-messages-app__composer > footer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 0.48rem;
+  color: var(--text-muted);
+  font-size: 0.56rem;
+}
+
+.mobile-messages-app__composer > footer p {
+  margin: 0;
+  text-align: right;
+}
+
+.mobile-messages-app__composer > footer p.is-success {
+  color: #8fe380;
+}
+
+.mobile-messages-app__composer > footer p.is-error {
+  color: #ff8e8e;
 }
 
 .mobile-app__status-list {

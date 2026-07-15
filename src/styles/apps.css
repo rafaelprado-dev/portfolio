@@ -1265,3 +1265,434 @@
 .doom-app__note span {
   display: block;
 }
+
+.rsn-messenger {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: #eaf4f8;
+  color: #17252d;
+  font-family: Tahoma, Arial, sans-serif;
+  text-shadow: none;
+}
+
+.rsn-messenger__contact {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 4.6rem;
+  border-bottom: 1px solid #85afc2;
+  background:
+    radial-gradient(
+      circle at 82% 0,
+      rgba(255, 255, 255, 0.92),
+      transparent 32%
+    ),
+    linear-gradient(180deg, #f9fdff 0%, #d9eef5 56%, #c2e0ec 100%);
+  padding: 0.48rem 0.7rem;
+}
+
+.rsn-messenger__contact-avatar {
+  display: grid;
+  width: 3.65rem;
+  height: 3.65rem;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid #7d9fad;
+  border-radius: 0.32rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.88), transparent 42%),
+    linear-gradient(145deg, #8cd8ee, #3a93bf);
+  box-shadow: 0 0 0 2px #dff3fa;
+  color: #ffffff;
+  font-size: 1.22rem;
+  font-weight: 900;
+  object-fit: cover;
+  text-shadow: 0 1px #2b6884;
+}
+
+.rsn-messenger__contact-copy {
+  display: grid;
+  gap: 0.24rem;
+  min-width: 0;
+}
+
+.rsn-messenger__contact-copy strong {
+  overflow: hidden;
+  color: #1f3c4c;
+  font-size: 1.02rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rsn-messenger__online-dot {
+  display: inline-block;
+  width: 0.48rem;
+  height: 0.48rem;
+  border: 1px solid #27782c;
+  border-radius: 50%;
+  background: #4ec653;
+  box-shadow: 0 0 0.28rem rgba(70, 197, 77, 0.58);
+  margin-left: 0.28rem;
+  vertical-align: 0.06rem;
+  animation: rsn-online-pulse 2.4s ease-in-out infinite;
+}
+
+.rsn-messenger__contact-copy small {
+  overflow: hidden;
+  color: #546d78;
+  font-size: 0.72rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rsn-messenger__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  color: #176c9b;
+}
+
+.rsn-messenger__brand span {
+  display: grid;
+  color: #55707c;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.rsn-messenger__brand b {
+  color: #1689bd;
+  font-size: 1rem;
+}
+
+.rsn-messenger__conversation {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 8rem;
+  gap: 0.58rem;
+  min-height: 0;
+  padding: 0.55rem 0.6rem;
+}
+
+.rsn-messenger__history {
+  min-height: 0;
+  overflow-y: auto;
+  border: 1px solid #9bb4bf;
+  background: #ffffff;
+  box-shadow: inset 0 1px 2px rgba(35, 74, 91, 0.16);
+  padding: 0.5rem;
+  scrollbar-color: #9fc4d3 #edf5f8;
+  scrollbar-width: thin;
+}
+
+.rsn-message {
+  display: grid;
+  grid-template-columns: 2.15rem minmax(0, 1fr);
+  gap: 0.42rem;
+  padding: 0.4rem 0.18rem;
+}
+
+.rsn-message + .rsn-message {
+  border-top: 1px dotted #bed0d7;
+}
+
+.rsn-message img,
+.rsn-message__contact-avatar {
+  border: 1px solid #a8bbc3;
+  border-radius: 0.18rem;
+  background: #eef7fa;
+  object-fit: cover;
+}
+
+.rsn-message__contact-avatar {
+  display: grid;
+  width: 2.125rem;
+  height: 2.125rem;
+  place-items: center;
+  background: linear-gradient(145deg, #9fe1f2, #3c91ba);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-shadow: 0 1px #2b6884;
+}
+
+.rsn-message div {
+  display: grid;
+  gap: 0.16rem;
+  min-width: 0;
+}
+
+.rsn-message strong {
+  color: #24749b;
+  font-size: 0.72rem;
+}
+
+.rsn-message--sent strong {
+  color: #5a7f21;
+}
+
+.rsn-message p,
+.rsn-message small {
+  margin: 0;
+}
+
+.rsn-message p {
+  overflow-wrap: anywhere;
+  color: #1d2e35;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.rsn-message small {
+  color: #778b94;
+  font-size: 0.62rem;
+}
+
+.rsn-messenger__profile {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 0.3rem;
+  border: 1px solid #9bb4bf;
+  background: linear-gradient(180deg, #fafdff, #dfeef4);
+  padding: 0.55rem;
+  text-align: center;
+}
+
+.rsn-messenger__sender-avatar {
+  display: grid;
+  width: 5.2rem;
+  aspect-ratio: 1;
+  min-height: 0;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid #7899a8;
+  border-radius: 0.36rem;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px #d4edf7;
+  color: #8aa4af;
+  font-size: 2rem;
+  padding: 0;
+  cursor: pointer;
+}
+
+.rsn-messenger__sender-avatar:hover,
+.rsn-messenger__sender-avatar:focus-visible {
+  outline: none;
+  border-color: #287da3;
+  box-shadow:
+    0 0 0 2px #d4edf7,
+    0 0 0 3px #4c9dbc;
+}
+
+.rsn-messenger__sender-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rsn-messenger__profile > strong {
+  width: 100%;
+  overflow: hidden;
+  color: #2b5367;
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rsn-messenger__profile > span {
+  color: #6d818a;
+  font-size: 0.6rem;
+  line-height: 1.2;
+}
+
+.rsn-messenger__composer {
+  display: grid;
+  border-top: 1px solid #93b1be;
+  background: linear-gradient(180deg, #f8fcfd, #dcecf2);
+}
+
+.rsn-messenger__identity-field {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.48rem;
+  border-bottom: 1px solid #c1d2d9;
+  padding: 0.34rem 0.58rem;
+}
+
+.rsn-messenger__identity-field label {
+  color: #47616c;
+  font-size: 0.68rem;
+}
+
+.rsn-messenger__identity-field input,
+.rsn-messenger__compose-row textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #829faa;
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: inset 1px 1px 2px rgba(34, 64, 76, 0.14);
+  color: #17252d;
+  font: inherit;
+  text-shadow: none;
+}
+
+.rsn-messenger__identity-field input {
+  height: 1.65rem;
+  padding: 0.2rem 0.38rem;
+}
+
+.rsn-messenger__identity-field input:focus-visible,
+.rsn-messenger__compose-row textarea:focus-visible {
+  outline: none;
+  border-color: #3d8cac;
+  box-shadow:
+    inset 1px 1px 2px rgba(34, 64, 76, 0.14),
+    0 0 0 1px #b8e0ef;
+}
+
+.rsn-messenger__compose-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 2rem;
+  border-bottom: 1px solid #bfd0d6;
+  padding: 0.23rem 0.56rem;
+}
+
+.text-emoticon-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.18rem;
+}
+
+.text-emoticon-picker button {
+  display: grid;
+  width: auto;
+  min-width: 1.7rem;
+  height: 1.42rem;
+  min-height: 0;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 0.1rem;
+  background: transparent;
+  box-shadow: none;
+  color: #3f5e6b;
+  font:
+    700 0.68rem Tahoma,
+    Arial,
+    sans-serif;
+  padding: 0 0.18rem;
+}
+
+.text-emoticon-picker button:hover,
+.text-emoticon-picker button:focus-visible {
+  outline: none;
+  border-color: #5797b3;
+  background: #d9eff7;
+  color: #1f708f;
+}
+
+.rsn-messenger__compose-toolbar > span {
+  color: #73868e;
+  font-size: 0.62rem;
+}
+
+.rsn-messenger__compose-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6rem;
+  gap: 0.48rem;
+  padding: 0.42rem 0.56rem;
+}
+
+.rsn-messenger__compose-row textarea {
+  min-height: 3.8rem;
+  max-height: 5.8rem;
+  padding: 0.42rem 0.48rem;
+  resize: vertical;
+}
+
+.rsn-messenger__compose-row > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-height: 2.4rem;
+  align-self: end;
+  border: 1px solid #6d8c99;
+  border-radius: 0.18rem;
+  background: linear-gradient(180deg, #ffffff, #d6e7ee);
+  box-shadow:
+    inset 1px 1px #ffffff,
+    inset -1px -1px #9eb5bf;
+  color: #203b48;
+  font-weight: 700;
+}
+
+.rsn-messenger__compose-row > button:active {
+  background: linear-gradient(180deg, #c8dce4, #edf6f9);
+  box-shadow: inset 1px 1px #7d959f;
+}
+
+.rsn-messenger__compose-row > button:disabled {
+  color: #89999f;
+}
+
+.rsn-messenger__statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  min-height: 1.5rem;
+  border-top: 1px solid #bdced5;
+  padding: 0.24rem 0.58rem;
+}
+
+.rsn-messenger__statusbar p {
+  margin: 0;
+  overflow: hidden;
+  color: #637881;
+  font-size: 0.61rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rsn-messenger__statusbar p.is-success {
+  color: #2c772f;
+}
+
+.rsn-messenger__statusbar p.is-error {
+  color: #a51f2d;
+}
+
+.rsn-messenger__statusbar > span {
+  color: #637881;
+  font-size: 0.61rem;
+  white-space: nowrap;
+}
+
+.os-window__body.rsn-window__body {
+  padding: 0;
+}
+
+@keyframes rsn-online-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rsn-messenger__online-dot {
+    animation: none;
+  }
+}

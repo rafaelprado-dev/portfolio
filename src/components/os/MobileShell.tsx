@@ -9,6 +9,7 @@ import {
   Grid3X3,
   Home,
   Mail,
+  MessageSquareText,
   Menu,
   Radio,
   Search,
@@ -30,6 +31,7 @@ import {
 } from "react";
 import { MobileContactApp } from "@/components/os/mobile-apps/MobileContactApp";
 import { MobileExperienceApp } from "@/components/os/mobile-apps/MobileExperienceApp";
+import { MobileMessagesApp } from "@/components/os/mobile-apps/MobileMessagesApp";
 import { MobileMissionsApp } from "@/components/os/mobile-apps/MobileMissionsApp";
 import { MobileProfileApp } from "@/components/os/mobile-apps/MobileProfileApp";
 import { MobileProjectsApp } from "@/components/os/mobile-apps/MobileProjectsApp";
@@ -48,6 +50,7 @@ import { profile, profileSpecialties } from "@/content/profile";
 import { projects } from "@/content/projects";
 import { skillGroups } from "@/content/skills";
 import { socialLinks } from "@/content/socialLinks";
+import { useCommunity } from "@/components/community/CommunityProvider";
 
 type MobileShellProps = {
   activeApp: AppId;
@@ -217,6 +220,14 @@ const mobileApps: MobileAppShortcut[] = [
     icon: Mail,
   },
   {
+    id: "feedback",
+    label: "Mensagens",
+    packageName: "mensagens.apk",
+    description: "Mensagens de texto",
+    accent: "#42a5f5",
+    icon: MessageSquareText,
+  },
+  {
     id: "recruiter",
     label: "Recrutador",
     packageName: "recrutador.exe",
@@ -251,6 +262,7 @@ const appTitleById: Record<MobileAppId, string> = {
   skills: "Habilidades",
   timeline: "Experiência",
   contact: "Contato",
+  feedback: "Mensagens",
   recruiter: "Recrutador",
   missions: "Missões",
   snake: "Cobrinha",
@@ -263,6 +275,7 @@ const normalizeSearchText = (value: string) =>
     .toLowerCase();
 
 export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
+  const { messages, visitorCount } = useCommunity();
   const appWindowRef = useRef<HTMLDivElement | null>(null);
   const launcherRef = useRef<HTMLDivElement | null>(null);
   const [launcherOpen, setLauncherOpen] = useState(activeApp === "home");
@@ -350,6 +363,7 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
         profile.availability,
         ...socialLinks.map((link) => `${link.label} ${link.href} ${link.kind}`),
       ],
+      feedback: ["feedback", "mensagens", "sms", "comentário", "sugestão"],
       recruiter: [
         profile.headline,
         profile.summary,
@@ -754,6 +768,10 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
       return <MobileContactApp />;
     }
 
+    if (activeApp === "feedback") {
+      return <MobileMessagesApp />;
+    }
+
     if (activeApp === "recruiter") {
       return (
         <MobileRecruiterApp
@@ -900,6 +918,29 @@ export function MobileShell({ activeApp, onActivateApp }: MobileShellProps) {
                       {missionCompletion.completedCount}/
                       {missionCompletion.total} módulos
                     </small>
+                  </span>
+                </button>
+                <button
+                  className="rafadroid-community-widget"
+                  type="button"
+                  onClick={() => openApp("feedback")}
+                >
+                  <span
+                    className="rafadroid-community-widget__icon"
+                    aria-hidden="true"
+                  >
+                    <MessageSquareText size={19} strokeWidth={2.2} />
+                  </span>
+                  <span className="rafadroid-community-widget__copy">
+                    <strong>Mensagens</strong>
+                    <small>
+                      {messages[0]?.message ??
+                        "Envie um feedback pelo RafaDroid"}
+                    </small>
+                  </span>
+                  <span className="rafadroid-community-widget__count">
+                    {visitorCount.toLocaleString("pt-BR")}
+                    <small>visitas</small>
                   </span>
                 </button>
               </div>
