@@ -9,11 +9,18 @@ build/
 !.env.example
 
 .vercel/
+.firebase/
 .qodo/
 .turbo/
 coverage/
 playwright-report/
 test-results/
+
+firebase-debug.log*
+firestore-debug.log*
+ui-debug.log*
+*-firebase-adminsdk-*.json
+service-account*.json
 
 *.tsbuildinfo
 *.log

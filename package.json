@@ -5,6 +5,9 @@
   "description": "Portfólio interativo em Next.js com estética de sistema operacional retrô.",
   "author": "Rafael Prado",
   "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,16 +16,20 @@
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "validate": "npm run format:check && npm run typecheck && npm run lint && npm run build",
+    "test:firestore-rules": "firebase emulators:exec --project demo-portfolio --only firestore \"node --test tests/firestore.rules.test.mjs\"",
+    "validate": "npm run format:check && npm run typecheck && npm run lint && npm run test:firestore-rules && npm run build",
     "prepare": "husky"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
+    "firebase": "^12.16.0",
+    "firebase-admin": "^14.1.0",
     "lucide-react": "^0.562.0",
     "next": "^16.2.6",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "zod": "^4.4.3"
   },
   "overrides": {
     "postcss": "^8.5.10"
@@ -30,12 +37,14 @@
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
+    "@firebase/rules-unit-testing": "^5.0.1",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^24.10.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.2.6",
+    "firebase-tools": "^15.23.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "3.9.5",

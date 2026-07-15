@@ -26,6 +26,10 @@ const nextConfig: NextConfig = {
             value: "nosniff",
           },
           {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
           },
@@ -36,7 +40,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value: "frame-ancestors 'self'",
+            value: "frame-ancestors 'none'",
           },
         ],
       },
