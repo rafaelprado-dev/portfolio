@@ -99,11 +99,15 @@ async function requestCommunityApi<T>(
     method?: "GET" | "POST";
   } = {},
 ) {
-  const headers = await createFirebaseRequestHeaders({
-    limitedUseAppCheckToken: options.limitedUseAppCheckToken,
-  });
+  const method = options.method ?? "GET";
+  const headers =
+    method === "POST"
+      ? await createFirebaseRequestHeaders({
+          limitedUseAppCheckToken: options.limitedUseAppCheckToken,
+        })
+      : {};
   const response = await fetch(path, {
-    method: options.method ?? "GET",
+    method,
     headers: {
       ...headers,
       ...(options.body ? { "Content-Type": "application/json" } : {}),

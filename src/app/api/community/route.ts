@@ -3,17 +3,18 @@ import {
   communityApiErrorResponse,
   readCommunitySnapshot,
 } from "@/lib/community/server";
-import { verifyFirebaseRequest } from "@/lib/firebase/verify-request";
 
 export const runtime = "nodejs";
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    await verifyFirebaseRequest(request);
     const snapshot = await readCommunitySnapshot();
 
     return NextResponse.json(snapshot, {
-      headers: { "Cache-Control": "private, no-store" },
+      headers: {
+        "Cache-Control":
+          "public, max-age=0, s-maxage=30, stale-while-revalidate=120",
+      },
     });
   } catch (error) {
     return communityApiErrorResponse(error);
