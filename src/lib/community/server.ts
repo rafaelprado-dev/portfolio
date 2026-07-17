@@ -15,6 +15,16 @@ import {
   type LeaderboardEntry,
 } from "@/lib/community/contracts";
 import { normalizeCommunityAvatarId } from "@/lib/community/avatars";
+import {
+  evaluateRateLimit,
+  mutationRateLimitPolicies,
+  type CommunityMutationAction,
+  type RateLimitScope,
+} from "@/lib/community/rate-limit";
+import {
+  hashRequestSource,
+  resolveRequestSource,
+} from "@/lib/community/request-source";
 import { getFirebaseAdminFirestore } from "@/lib/firebase/admin";
 import {
   FirebaseRequestVerificationError,
@@ -22,30 +32,6 @@ import {
 } from "@/lib/firebase/verify-request";
 
 const maxRequestBodyBytes = 8_192;
-
-type RateLimitConfig = {
-  limit: number;
-  windowMs: number;
-  minimumIntervalMs: number;
-};
-
-export const rateLimits = {
-  feedback: {
-    limit: 3,
-    windowMs: 24 * 60 * 60 * 1_000,
-    minimumIntervalMs: 2 * 60 * 1_000,
-  },
-  snake: {
-    limit: 30,
-    windowMs: 60 * 60 * 1_000,
-    minimumIntervalMs: 2_000,
-  },
-  doom: {
-    limit: 120,
-    windowMs: 60 * 60 * 1_000,
-    minimumIntervalMs: 10_000,
-  },
-} satisfies Record<string, RateLimitConfig>;
 
 export class CommunityApiError extends Error {
   constructor(
@@ -177,7 +163,10 @@ export async function parseCommunityRequest<T>(
   return schema.parse(body);
 }
 
-export async function verifyCommunityMutation(request: Request) {
+export async function verifyCommunityMutation(
+  request: Request,
+  action: CommunityMutationAction,
+) {
   const origin = request.headers.get("origin");
 
   if (origin) {
@@ -194,64 +183,115 @@ export async function verifyCommunityMutation(request: Request) {
     }
   }
 
-  return verifyFirebaseRequest(request, { consumeAppCheckToken: true });
+  const verifiedRequest = await verifyFirebaseRequest(request, {
+    consumeAppCheckToken: true,
+  });
+  const requestSource = resolveRequestSource(
+    request.headers,
+    process.env.NODE_ENV !== "production",
+  );
+
+  if (!requestSource) {
+    throw new CommunityApiError(403, "Origem de rede não permitida");
+  }
+
+  return {
+    ...verifiedRequest,
+    sourceHash: hashRequestSource(requestSource, action, getHashSalt()),
+  };
 }
 
-export async function applyRateLimit(
+type MutationRateLimitTarget = {
+  hash: string;
+  scope: RateLimitScope;
+};
+
+export async function applyMutationRateLimits(
   transaction: Transaction,
-  identityHash: string,
-  action: keyof typeof rateLimits,
+  action: CommunityMutationAction,
   now: Timestamp,
+  sourceHash: string,
+  identityHash?: string,
 ) {
-  const config = rateLimits[action];
-  const reference = getFirebaseAdminFirestore()
-    .collection("rateLimits")
-    .doc(`${action}_${identityHash}`);
-  const snapshot = await transaction.get(reference);
-  const data = snapshot.data();
-  const nowMs = now.toMillis();
-  const windowStartedAt = asDate(data?.windowStartedAt).getTime();
-  const lastAttemptAt = asDate(data?.lastAttemptAt).getTime();
-  const isCurrentWindow = nowMs - windowStartedAt < config.windowMs;
-  const attempts =
-    isCurrentWindow && typeof data?.attempts === "number" ? data.attempts : 0;
+  const policy = mutationRateLimitPolicies[action];
+  const targets: MutationRateLimitTarget[] = [
+    { hash: sourceHash, scope: "source" },
+  ];
 
-  if (lastAttemptAt > 0 && nowMs - lastAttemptAt < config.minimumIntervalMs) {
-    const retryAfterSeconds = Math.ceil(
-      (config.minimumIntervalMs - (nowMs - lastAttemptAt)) / 1_000,
-    );
+  if (policy.identity) {
+    if (!identityHash) {
+      throw new Error(`Missing identity hash for ${action} rate limit`);
+    }
 
-    throw new CommunityApiError(
-      429,
-      "Aguarde um pouco antes de tentar novamente",
-      retryAfterSeconds,
-    );
+    targets.unshift({ hash: identityHash, scope: "identity" });
   }
 
-  if (attempts >= config.limit) {
-    const retryAfterSeconds = Math.max(
-      1,
-      Math.ceil((windowStartedAt + config.windowMs - nowMs) / 1_000),
-    );
-
-    throw new CommunityApiError(
-      429,
-      "Limite temporário de solicitações atingido",
-      retryAfterSeconds,
-    );
-  }
-
-  transaction.set(
-    reference,
-    {
-      attempts: attempts + 1,
-      lastAttemptAt: now,
-      windowStartedAt: isCurrentWindow
-        ? Timestamp.fromMillis(windowStartedAt)
-        : now,
-    },
-    { merge: true },
+  const rateLimitCollection =
+    getFirebaseAdminFirestore().collection("rateLimits");
+  const references = targets.map(({ hash, scope }) =>
+    rateLimitCollection.doc(
+      scope === "identity" ? `${action}_${hash}` : `source_${action}_${hash}`,
+    ),
   );
+  const snapshots = await transaction.getAll(...references);
+  const nowMs = now.toMillis();
+  const evaluations = snapshots.map((snapshot, index) => {
+    const target = targets[index];
+    const targetPolicy = policy[target.scope];
+    const data = snapshot.data();
+
+    if (!targetPolicy) {
+      throw new Error(`Missing ${target.scope} policy for ${action}`);
+    }
+
+    return {
+      evaluation: evaluateRateLimit(
+        targetPolicy,
+        {
+          attempts: data?.attempts,
+          lastAttemptAtMs: asDate(data?.lastAttemptAt).getTime(),
+          windowStartedAtMs: asDate(data?.windowStartedAt).getTime(),
+        },
+        nowMs,
+      ),
+      reference: references[index],
+    };
+  });
+  const rejected = evaluations
+    .map(({ evaluation }) => evaluation)
+    .filter((evaluation) => !evaluation.allowed)
+    .sort(
+      (first, second) => second.retryAfterSeconds - first.retryAfterSeconds,
+    );
+
+  if (rejected[0]) {
+    throw new CommunityApiError(
+      429,
+      rejected.some(({ reason }) => reason === "window-limit")
+        ? "Limite temporário de solicitações atingido"
+        : "Aguarde um pouco antes de tentar novamente",
+      rejected[0].retryAfterSeconds,
+    );
+  }
+
+  for (const { evaluation, reference } of evaluations) {
+    if (!evaluation.allowed) continue;
+
+    transaction.set(
+      reference,
+      {
+        attempts: evaluation.nextState.attempts,
+        expiresAt: Timestamp.fromMillis(evaluation.nextState.expiresAtMs),
+        lastAttemptAt: Timestamp.fromMillis(
+          evaluation.nextState.lastAttemptAtMs,
+        ),
+        windowStartedAt: Timestamp.fromMillis(
+          evaluation.nextState.windowStartedAtMs,
+        ),
+      },
+      { merge: true },
+    );
+  }
 }
 
 export function communityApiErrorResponse(error: unknown) {

@@ -5,7 +5,7 @@ import {
   type GameSubmissionResult,
 } from "@/lib/community/contracts";
 import {
-  applyRateLimit,
+  applyMutationRateLimits,
   communityApiErrorResponse,
   hashCommunityIdentity,
   parseCommunityRequest,
@@ -17,8 +17,8 @@ export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
-    const [{ uid }, input] = await Promise.all([
-      verifyCommunityMutation(request),
+    const [{ sourceHash, uid }, input] = await Promise.all([
+      verifyCommunityMutation(request, "doom"),
       parseCommunityRequest(request, doomPlaytimeInputSchema),
     ]);
     const db = getFirebaseAdminFirestore();
@@ -28,7 +28,13 @@ export async function POST(request: Request) {
 
     const entry = await db.runTransaction(async (transaction) => {
       const playtimeSnapshot = await transaction.get(playtimeReference);
-      await applyRateLimit(transaction, identityHash, "doom", now);
+      await applyMutationRateLimits(
+        transaction,
+        "doom",
+        now,
+        sourceHash,
+        identityHash,
+      );
       const currentData = playtimeSnapshot.data();
       const currentTotal = currentData?.totalSeconds ?? 0;
       const previousReportAt =

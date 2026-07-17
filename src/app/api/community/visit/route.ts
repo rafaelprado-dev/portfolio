@@ -1,6 +1,7 @@
 import { Timestamp } from "firebase-admin/firestore";
 import { NextResponse } from "next/server";
 import {
+  applyMutationRateLimits,
   communityApiErrorResponse,
   hashCommunityIdentity,
   incrementVisitorCount,
@@ -12,7 +13,7 @@ export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
-    const { uid } = await verifyCommunityMutation(request);
+    const { sourceHash, uid } = await verifyCommunityMutation(request, "visit");
     const identityHash = hashCommunityIdentity(uid);
     const db = getFirebaseAdminFirestore();
     const visitorReference = db.collection("visitors").doc(identityHash);
@@ -30,6 +31,8 @@ export async function POST(request: Request) {
         transaction.set(visitorReference, { lastSeenAt: now }, { merge: true });
         return currentCount;
       }
+
+      await applyMutationRateLimits(transaction, "visit", now, sourceHash);
 
       transaction.create(visitorReference, {
         firstSeenAt: now,

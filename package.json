@@ -15,9 +15,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",
+    "cleanup:rate-limits": "node scripts/cleanup-expired-rate-limits.mjs",
     "typecheck": "tsc --noEmit",
+    "test:community-security": "node --experimental-default-type=module --test tests/community-rate-limit.test.mjs",
     "test:firestore-rules": "firebase emulators:exec --project demo-portfolio --only firestore \"node --test tests/firestore.rules.test.mjs\"",
-    "validate": "npm run format:check && npm run typecheck && npm run lint && npm run test:firestore-rules && npm run build",
+    "validate": "npm run format:check && npm run typecheck && npm run lint && npm run test:community-security && npm run test:firestore-rules && npm run build",
     "prepare": "husky"
   },
   "dependencies": {

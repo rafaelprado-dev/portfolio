@@ -5,7 +5,7 @@ import {
   type GameSubmissionResult,
 } from "@/lib/community/contracts";
 import {
-  applyRateLimit,
+  applyMutationRateLimits,
   communityApiErrorResponse,
   hashCommunityIdentity,
   parseCommunityRequest,
@@ -17,8 +17,8 @@ export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
-    const [{ uid }, input] = await Promise.all([
-      verifyCommunityMutation(request),
+    const [{ sourceHash, uid }, input] = await Promise.all([
+      verifyCommunityMutation(request, "snake"),
       parseCommunityRequest(request, snakeScoreInputSchema),
     ]);
     const db = getFirebaseAdminFirestore();
@@ -28,7 +28,13 @@ export async function POST(request: Request) {
 
     const entry = await db.runTransaction(async (transaction) => {
       const scoreSnapshot = await transaction.get(scoreReference);
-      await applyRateLimit(transaction, identityHash, "snake", now);
+      await applyMutationRateLimits(
+        transaction,
+        "snake",
+        now,
+        sourceHash,
+        identityHash,
+      );
       const currentBest = scoreSnapshot.data()?.bestScore ?? 0;
       const bestScore = Math.max(currentBest, input.score);
 

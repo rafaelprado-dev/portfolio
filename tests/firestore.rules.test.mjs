@@ -9,8 +9,9 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 const projectId = "demo-portfolio";
 const protectedPaths = [
   "feedback/example",
-  "gameSessions/example",
-  "leaderboards/example",
+  "doomPlaytime/example",
+  "rateLimits/example",
+  "snakeScores/example",
   "siteStats/global",
   "visitors/example",
   "unexpected/private",

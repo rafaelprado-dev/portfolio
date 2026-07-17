@@ -5,7 +5,7 @@ import {
   type CommunityMessage,
 } from "@/lib/community/contracts";
 import {
-  applyRateLimit,
+  applyMutationRateLimits,
   communityApiErrorResponse,
   hashCommunityIdentity,
   parseCommunityRequest,
@@ -17,8 +17,8 @@ export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
-    const [{ uid }, input] = await Promise.all([
-      verifyCommunityMutation(request),
+    const [{ sourceHash, uid }, input] = await Promise.all([
+      verifyCommunityMutation(request, "feedback"),
       parseCommunityRequest(request, feedbackInputSchema),
     ]);
     const db = getFirebaseAdminFirestore();
@@ -27,7 +27,13 @@ export async function POST(request: Request) {
     const now = Timestamp.now();
 
     await db.runTransaction(async (transaction) => {
-      await applyRateLimit(transaction, identityHash, "feedback", now);
+      await applyMutationRateLimits(
+        transaction,
+        "feedback",
+        now,
+        sourceHash,
+        identityHash,
+      );
       transaction.create(feedbackReference, {
         authorIdHash: identityHash,
         avatarId: input.avatarId,
