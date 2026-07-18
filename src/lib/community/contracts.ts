@@ -40,7 +40,7 @@ export const feedbackInputSchema = z.object({
         .min(10, "Escreva uma mensagem com pelo menos 10 caracteres")
         .max(500, "Use no máximo 500 caracteres")
         .regex(
-          /^[^<>\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]+$/,
+          /^[^\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]+$/,
           "A mensagem contém caracteres inválidos",
         ),
     ),
