@@ -1,5 +1,22 @@
 import type { NextConfig } from "next";
 
+const contentSecurityPolicyReportOnly = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://va.vercel-scripts.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' blob: data: https://github.com https://www.google-analytics.com https://www.googletagmanager.com",
+  "font-src 'self' data:",
+  "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://content-firebaseappcheck.googleapis.com https://www.google.com/recaptcha/",
+  "frame-src https://archive.org https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/",
+  "worker-src 'self' blob:",
+  "manifest-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
 const isVercelProduction =
   process.env.VERCEL === "1" &&
   process.env.VERCEL_ENV === "production" &&
@@ -56,6 +73,14 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: "frame-ancestors 'none'",
           },
+          ...(process.env.NODE_ENV === "production"
+            ? [
+                {
+                  key: "Content-Security-Policy-Report-Only",
+                  value: contentSecurityPolicyReportOnly,
+                },
+              ]
+            : []),
         ],
       },
     ];
