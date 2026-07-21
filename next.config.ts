@@ -1,5 +1,25 @@
 import type { NextConfig } from "next";
 
+const isVercelPreview =
+  process.env.VERCEL === "1" && process.env.VERCEL_ENV === "preview";
+const vercelToolbarSource = isVercelPreview ? " https://vercel.live" : "";
+
+const contentSecurityPolicyReportOnly = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://va.vercel-scripts.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/${vercelToolbarSource}`,
+  `style-src 'self' 'unsafe-inline'${vercelToolbarSource}`,
+  `img-src 'self' blob: data: https://github.com https://www.google-analytics.com https://www.googletagmanager.com${vercelToolbarSource}${isVercelPreview ? " https://vercel.com" : ""}`,
+  `font-src 'self' data:${vercelToolbarSource}${isVercelPreview ? " https://assets.vercel.com" : ""}`,
+  `connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://content-firebaseappcheck.googleapis.com https://www.google.com/recaptcha/${vercelToolbarSource}${isVercelPreview ? " wss://ws-us3.pusher.com" : ""}`,
+  `frame-src https://archive.org https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/${vercelToolbarSource}`,
+  "worker-src 'self' blob:",
+  "manifest-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+].join("; ");
+
 const isVercelProduction =
   process.env.VERCEL === "1" &&
   process.env.VERCEL_ENV === "production" &&
@@ -56,6 +76,14 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: "frame-ancestors 'none'",
           },
+          ...(process.env.NODE_ENV === "production"
+            ? [
+                {
+                  key: "Content-Security-Policy-Report-Only",
+                  value: contentSecurityPolicyReportOnly,
+                },
+              ]
+            : []),
         ],
       },
     ];
