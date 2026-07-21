@@ -25,6 +25,8 @@ O RafaelOS foi pensado para funcionar como portfólio e demonstração técnica 
 
 ## Rodando Localmente
 
+O ambiente local usa Firebase Authentication e Cloud Firestore Emulator com o projeto isolado `demo-portfolio`. Nenhuma credencial Firebase de produção é necessária. O Java 21 ou superior precisa estar instalado para iniciar os emuladores.
+
 ```bash
 npm install
 npm run dev
@@ -32,10 +34,18 @@ npm run dev
 
 Acesse `http://localhost:3000`.
 
+Para executar os processos em terminais separados:
+
+```bash
+npm run dev:emulators
+npm run dev:app
+```
+
 ## Scripts
 
 ```bash
 npm run dev
+npm run dev:emulators
 npm run lint
 npm run build
 npm run start

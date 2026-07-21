@@ -1,6 +1,20 @@
 import type { NextConfig } from "next";
 
+const isVercelProduction =
+  process.env.VERCEL === "1" &&
+  process.env.VERCEL_ENV === "production" &&
+  Boolean(process.env.VERCEL_URL);
+const deploymentEnvironment =
+  process.env.NODE_ENV === "development"
+    ? "development"
+    : isVercelProduction
+      ? "production"
+      : "disabled";
+
 const nextConfig: NextConfig = {
+  env: {
+    NEXT_PUBLIC_DEPLOYMENT_ENV: deploymentEnvironment,
+  },
   async redirects() {
     return [
       {
