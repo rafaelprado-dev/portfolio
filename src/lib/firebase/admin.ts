@@ -1,15 +1,10 @@
 import "server-only";
 
-import {
-  applicationDefault,
-  cert,
-  getApps,
-  initializeApp,
-  type App,
-} from "firebase-admin/app";
+import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
 import { getAppCheck } from "firebase-admin/app-check";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
+import { firebaseEmulatorConfig } from "@/lib/firebase/emulator-config";
 
 function requireServerEnvironmentVariable(
   name: string,
@@ -22,6 +17,36 @@ function requireServerEnvironmentVariable(
   return value;
 }
 
+export function isFirebaseAdminEmulatorMode() {
+  return process.env.NODE_ENV === "development";
+}
+
+function isVercelProductionEnvironment() {
+  return (
+    process.env.VERCEL === "1" &&
+    process.env.VERCEL_ENV === "production" &&
+    Boolean(process.env.VERCEL_URL)
+  );
+}
+
+function configureFirebaseAdminEmulators() {
+  const expectedEnvironment = {
+    FIREBASE_AUTH_EMULATOR_HOST: firebaseEmulatorConfig.authHost,
+    FIRESTORE_EMULATOR_HOST: firebaseEmulatorConfig.firestoreHost,
+    GCLOUD_PROJECT: firebaseEmulatorConfig.projectId,
+  } as const;
+
+  for (const [name, expectedValue] of Object.entries(expectedEnvironment)) {
+    const currentValue = process.env[name];
+
+    if (currentValue && currentValue !== expectedValue) {
+      throw new Error(`${name} must point to the local demo environment`);
+    }
+
+    process.env[name] = expectedValue;
+  }
+}
+
 export function getFirebaseAdminApp(): App {
   const existingApp = getApps()[0];
 
@@ -29,26 +54,44 @@ export function getFirebaseAdminApp(): App {
     return existingApp;
   }
 
-  const projectId = requireServerEnvironmentVariable(
-    "FIREBASE_PROJECT_ID",
-    process.env.FIREBASE_PROJECT_ID ||
-      process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  );
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY;
+  if (isFirebaseAdminEmulatorMode()) {
+    configureFirebaseAdminEmulators();
 
-  if (process.env.NODE_ENV === "production" && (!clientEmail || !privateKey)) {
-    throw new Error("Missing Firebase Admin credentials in production");
+    return initializeApp({ projectId: firebaseEmulatorConfig.projectId });
   }
 
-  const credential =
-    clientEmail && privateKey
-      ? cert({
-          projectId,
-          clientEmail,
-          privateKey: privateKey.replace(/\\n/g, "\n"),
-        })
-      : applicationDefault();
+  if (!isVercelProductionEnvironment()) {
+    throw new Error(
+      "Firebase Admin access is disabled outside local development and Vercel Production",
+    );
+  }
+
+  const projectId = requireServerEnvironmentVariable(
+    "FIREBASE_PROJECT_ID",
+    process.env.FIREBASE_PROJECT_ID,
+  );
+  const publicProjectId = requireServerEnvironmentVariable(
+    "NEXT_PUBLIC_FIREBASE_PROJECT_ID",
+    process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  );
+
+  if (projectId !== publicProjectId) {
+    throw new Error("Firebase client and Admin project IDs do not match");
+  }
+
+  const clientEmail = requireServerEnvironmentVariable(
+    "FIREBASE_CLIENT_EMAIL",
+    process.env.FIREBASE_CLIENT_EMAIL,
+  );
+  const privateKey = requireServerEnvironmentVariable(
+    "FIREBASE_PRIVATE_KEY",
+    process.env.FIREBASE_PRIVATE_KEY,
+  );
+  const credential = cert({
+    projectId,
+    clientEmail,
+    privateKey: privateKey.replace(/\\n/g, "\n"),
+  });
 
   return initializeApp({
     credential,

@@ -3,7 +3,9 @@ import "server-only";
 import {
   getFirebaseAdminAppCheck,
   getFirebaseAdminAuth,
+  isFirebaseAdminEmulatorMode,
 } from "@/lib/firebase/admin";
+import { firebaseEmulatorConfig } from "@/lib/firebase/emulator-config";
 
 type FirebaseRequestVerificationOptions = {
   consumeAppCheckToken?: boolean;
@@ -49,9 +51,23 @@ export async function verifyFirebaseRequest(
   { consumeAppCheckToken = false }: FirebaseRequestVerificationOptions = {},
 ) {
   const idToken = getBearerToken(request);
-  const appCheckToken = getAppCheckToken(request);
 
   try {
+    if (isFirebaseAdminEmulatorMode()) {
+      const authenticatedUser =
+        await getFirebaseAdminAuth().verifyIdToken(idToken);
+
+      if (authenticatedUser.firebase?.sign_in_provider !== "anonymous") {
+        throw new FirebaseRequestVerificationError();
+      }
+
+      return {
+        uid: authenticatedUser.uid,
+        appId: firebaseEmulatorConfig.projectId,
+      };
+    }
+
+    const appCheckToken = getAppCheckToken(request);
     const [authenticatedUser, verifiedApp] = await Promise.all([
       getFirebaseAdminAuth().verifyIdToken(idToken, true),
       getFirebaseAdminAppCheck().verifyToken(appCheckToken, {

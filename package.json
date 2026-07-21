@@ -9,7 +9,9 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "firebase emulators:exec --ui --project demo-portfolio --only auth,firestore \"next dev\"",
+    "dev:app": "next dev",
+    "dev:emulators": "firebase emulators:start --project demo-portfolio --only auth,firestore",
     "build": "next build",
     "start": "next start",
     "format": "prettier --write .",

@@ -9,6 +9,15 @@
     "indexes": "firestore.indexes.json"
   },
   "emulators": {
+    "ui": {
+      "enabled": true,
+      "host": "127.0.0.1",
+      "port": 4000
+    },
+    "auth": {
+      "host": "127.0.0.1",
+      "port": 9099
+    },
     "firestore": {
       "host": "127.0.0.1",
       "port": 8085

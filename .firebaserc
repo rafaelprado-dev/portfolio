@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "rafaelprado-portfolio"
+    "default": "demo-portfolio",
+    "production": "rafaelprado-portfolio"
   }
 }

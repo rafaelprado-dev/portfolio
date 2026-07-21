@@ -138,6 +138,15 @@ This runs:
 - `npm run lint`
 - `npm run build`
 
+## Firebase Environment Safety
+
+- Local development uses the Firebase Emulator Suite with the `demo-portfolio` project.
+- Run `npm run dev`; it starts Authentication and Cloud Firestore emulators before Next.js.
+- Keep production Firebase identifiers and Admin credentials scoped to Vercel Production.
+- Keep Preview without Firebase credentials unless a separate non-production project is provisioned.
+- Never commit service-account files or App Check debug tokens.
+- Use the explicit `production` Firebase alias for production-only CLI operations.
+
 ## Releases
 
 Use Semantic Versioning for public releases:
