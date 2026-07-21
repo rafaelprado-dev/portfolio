@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { communityAvatarCount } from "@/lib/community/avatars";
 
+z.config({ jitless: true });
+
 const normalizeInlineText = (value: string) =>
   value.replace(/\s+/g, " ").trim();
 const normalizeMessage = (value: string) =>
