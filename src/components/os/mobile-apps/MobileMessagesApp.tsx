@@ -129,11 +129,7 @@ export function MobileMessagesApp() {
               value={displayName}
               onChange={(event) => setDisplayName(event.target.value)}
             />
-            <small>
-              {displayAvatarId
-                ? "Toque na imagem para alterar seu perfil."
-                : "Digite um apelido para escolher sua imagem."}
-            </small>
+            <small>Toque na imagem para escolher ou trocar seu avatar.</small>
           </div>
         </div>
 

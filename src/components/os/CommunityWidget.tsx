@@ -2,41 +2,58 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { useCommunity } from "@/components/community/CommunityProvider";
 import { getCommunityAvatarPath } from "@/lib/community/avatars";
+import {
+  useDraggablePosition,
+  type WindowPosition,
+} from "./useDraggablePosition";
+import { useFeedbackCarousel } from "./useFeedbackCarousel";
+
+const positionStorageKey = "rafaelos.widget.feedback.position.v1";
+
+const getDefaultPosition = (): WindowPosition => {
+  if (typeof window === "undefined") return { x: 13, y: 0 };
+
+  const rootFontSize =
+    Number.parseFloat(
+      window.getComputedStyle(document.documentElement).fontSize,
+    ) || 16;
+
+  return {
+    x: 0.8 * rootFontSize,
+    y: Math.max(0, window.innerHeight - 16.9 * rootFontSize),
+  };
+};
 
 export function CommunityWidget({ onOpen }: { onOpen: () => void }) {
-  const { loading, messages, visitorCount } = useCommunity();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { feedback, loading, pendingMessages, visitorCount } = useCommunity();
   const [isPaused, setIsPaused] = useState(false);
-  const safeActiveIndex = messages.length ? activeIndex % messages.length : 0;
-  const activeMessage = messages[safeActiveIndex];
+  const { position, handlePointerDown, handlePointerMove, handlePointerUp } =
+    useDraggablePosition({
+      defaultPosition: getDefaultPosition,
+      storageKey: positionStorageKey,
+    });
+  const { activeMessage, messages, safeActiveIndex, showNext, showPrevious } =
+    useFeedbackCarousel({
+      approvedMessages: feedback,
+      isPaused,
+      loading,
+      pendingMessages,
+    });
 
-  useEffect(() => {
-    if (messages.length <= 1 || isPaused) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % messages.length);
-    }, 7_000);
-
-    return () => window.clearInterval(timer);
-  }, [isPaused, messages.length]);
-
-  const showPrevious = () => {
-    setActiveIndex(
-      (current) => (current - 1 + messages.length) % messages.length,
-    );
-  };
-  const showNext = () => {
-    setActiveIndex((current) => (current + 1) % messages.length);
-  };
+  const style = {
+    left: position.x,
+    top: position.y,
+    bottom: "auto",
+  } as CSSProperties;
 
   return (
     <aside
       className="community-widget"
       aria-label="Feedback da comunidade"
+      style={style}
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget))
           setIsPaused(false);
@@ -45,7 +62,13 @@ export function CommunityWidget({ onOpen }: { onOpen: () => void }) {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <header className="community-widget__titlebar">
+      <header
+        className="title-bar community-widget__titlebar"
+        onPointerCancel={handlePointerUp}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+      >
         <span>Feedback</span>
         <strong
           aria-label={

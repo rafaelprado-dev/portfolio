@@ -149,11 +149,7 @@ export function RsnMessengerApp() {
             )}
           </button>
           <strong>{displayName || "Seu nome"}</strong>
-          <span>
-            {displayAvatarId
-              ? "Clique na imagem para alterar seu perfil."
-              : "Digite um apelido para escolher sua imagem."}
-          </span>
+          <span>Clique na imagem para escolher ou trocar seu avatar.</span>
         </aside>
       </section>
 
