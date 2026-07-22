@@ -4,7 +4,7 @@ const isVercelPreview =
   process.env.VERCEL === "1" && process.env.VERCEL_ENV === "preview";
 const vercelToolbarSource = isVercelPreview ? " https://vercel.live" : "";
 
-const contentSecurityPolicyReportOnly = [
+const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://va.vercel-scripts.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/${vercelToolbarSource}`,
   `style-src 'self' 'unsafe-inline'${vercelToolbarSource}`,
@@ -74,16 +74,11 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value: "frame-ancestors 'none'",
+            value:
+              process.env.NODE_ENV === "production"
+                ? contentSecurityPolicy
+                : "frame-ancestors 'none'",
           },
-          ...(process.env.NODE_ENV === "production"
-            ? [
-                {
-                  key: "Content-Security-Policy-Report-Only",
-                  value: contentSecurityPolicyReportOnly,
-                },
-              ]
-            : []),
         ],
       },
     ];
