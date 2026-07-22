@@ -767,7 +767,9 @@
     linear-gradient(90deg, #000080, #0758bd);
   color: #ffffff;
   padding: 0.18rem 0.35rem;
+  touch-action: none;
   text-shadow: 1px 1px #000;
+  user-select: none;
 }
 
 .community-widget__titlebar span {

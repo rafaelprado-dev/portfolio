@@ -885,9 +885,7 @@ export function Desktop({
         </div>
       ) : null}
 
-      {activeApp !== "feedback" || windows.main.status !== "open" ? (
-        <CommunityWidget onOpen={() => activateApp("feedback")} />
-      ) : null}
+      <CommunityWidget onOpen={() => activateApp("feedback")} />
 
       <Taskbar
         items={taskbarItems}
