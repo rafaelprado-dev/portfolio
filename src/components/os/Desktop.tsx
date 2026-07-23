@@ -158,7 +158,7 @@ const referenceViewport = {
   height: 963,
 };
 
-const desktopIconStorageKey = "rafaelos.desktop.icons.v4";
+const desktopIconStorageKey = "rafaelos.desktop.icons.v5";
 const wallpaperStorageKey = "rafaelos.wallpaper";
 
 const scalePosition = (x: number, y: number): DesktopIconPosition => {
@@ -183,20 +183,20 @@ const getDefaultIconPositions = (): Record<
   DesktopShortcutId,
   DesktopIconPosition
 > => ({
-  about: clampPosition(scalePosition(699, 786)),
-  gcdp: clampPosition(scalePosition(111, 300)),
-  luna: clampPosition(scalePosition(72, 571)),
-  bordo: clampPosition(scalePosition(348, 419)),
-  rdns: clampPosition(scalePosition(345, 525)),
-  skills: clampPosition(scalePosition(865, 673)),
-  timeline: clampPosition(scalePosition(1025, 791)),
-  contact: clampPosition(scalePosition(1191, 701)),
-  cmd: clampPosition(scalePosition(1499, 372)),
-  doom: clampPosition(scalePosition(1721, 686)),
-  missions: clampPosition(scalePosition(1501, 592)),
-  recruiter: clampPosition(scalePosition(1711, 249)),
-  virus: clampPosition(scalePosition(1725, 477)),
-  wallpaper: clampPosition(scalePosition(1484, 117)),
+  about: clampPosition(scalePosition(619, 828)),
+  gcdp: clampPosition(scalePosition(97, 281)),
+  luna: clampPosition(scalePosition(77, 475)),
+  bordo: clampPosition(scalePosition(296, 352)),
+  rdns: clampPosition(scalePosition(268, 565)),
+  skills: clampPosition(scalePosition(821, 758)),
+  timeline: clampPosition(scalePosition(1005, 829)),
+  contact: clampPosition(scalePosition(1197, 755)),
+  cmd: clampPosition(scalePosition(1493, 369)),
+  doom: clampPosition(scalePosition(1714, 681)),
+  missions: clampPosition(scalePosition(1495, 588)),
+  recruiter: clampPosition(scalePosition(1704, 247)),
+  virus: clampPosition(scalePosition(1718, 474)),
+  wallpaper: clampPosition(scalePosition(1478, 116)),
 });
 
 const getDefaultWindowPositions = (): Record<WindowId, DesktopIconPosition> => {
