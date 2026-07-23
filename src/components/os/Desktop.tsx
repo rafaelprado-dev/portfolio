@@ -147,7 +147,7 @@ const mainWindowSizeByApp: Record<
   projects: "large",
   skills: "large",
   timeline: "large",
-  contact: "compact",
+  contact: "large",
   feedback: "large",
   recruiter: "standard",
   missions: "standard",
