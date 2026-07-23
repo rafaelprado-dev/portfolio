@@ -14,6 +14,7 @@ const minute = 60_000;
 describe("community mutation rate limits", () => {
   test("define a source limit for every mutation route", () => {
     assert.deepEqual(Object.keys(mutationRateLimitPolicies).sort(), [
+      "contact",
       "doom",
       "feedback",
       "snake",
@@ -24,6 +25,21 @@ describe("community mutation rate limits", () => {
       assert.ok(policy.source.limit > 0);
       assert.ok(policy.source.windowMs > 0);
     }
+  });
+
+  test("protect contact delivery by identity and request source", () => {
+    const policy = mutationRateLimitPolicies.contact;
+
+    assert.deepEqual(policy.identity, {
+      limit: 3,
+      windowMs: 24 * 60 * minute,
+      minimumIntervalMs: 2 * minute,
+    });
+    assert.deepEqual(policy.source, {
+      limit: 10,
+      windowMs: 24 * 60 * minute,
+      minimumIntervalMs: 10_000,
+    });
   });
 
   test("allow the first request and persist the next state", () => {
