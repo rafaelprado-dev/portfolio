@@ -31,7 +31,7 @@
     "firebase": "^12.16.0",
     "firebase-admin": "^14.1.0",
     "lucide-react": "^0.562.0",
-    "next": "^16.2.6",
+    "next": "^16.2.11",
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "zod": "^4.4.3"
