@@ -1076,7 +1076,8 @@
   white-space: nowrap;
 }
 
-.contact-form__actions button:active {
+.contact-form__actions
+  button:not(:disabled):not([aria-disabled="true"]):active {
   border-color: #404040 #ffffff #ffffff #404040;
   padding: 0.42rem 0.63rem 0.28rem 0.77rem;
 }
@@ -1893,7 +1894,8 @@
   font-weight: 700;
 }
 
-.rsn-messenger__compose-row > button:active {
+.rsn-messenger__compose-row
+  > button:not(:disabled):not([aria-disabled="true"]):active {
   background: linear-gradient(180deg, #c8dce4, #edf6f9);
   box-shadow: inset 1px 1px #7d959f;
 }

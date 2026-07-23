@@ -95,7 +95,7 @@ button {
   padding: 0.25rem 0.65rem;
 }
 
-button:active {
+button:not(:disabled):not([aria-disabled="true"]):active {
   box-shadow:
     inset 1px 1px #808080,
     inset -1px -1px #fff;

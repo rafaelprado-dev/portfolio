@@ -1990,7 +1990,9 @@
   text-transform: uppercase;
 }
 
-.contact-form--mobile .contact-form__actions button:active {
+.contact-form--mobile
+  .contact-form__actions
+  button:not(:disabled):not([aria-disabled="true"]):active {
   border-color: var(--holo-cyan);
   padding: 0.35rem 0.7rem;
 }
