@@ -7,6 +7,7 @@ const vercelToolbarSource = isVercelPreview ? " https://vercel.live" : "";
 const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://va.vercel-scripts.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/${vercelToolbarSource}`,
+  "script-src-attr 'none'",
   `style-src 'self' 'unsafe-inline'${vercelToolbarSource}`,
   `img-src 'self' blob: data: https://github.com https://*.google-analytics.com https://*.googletagmanager.com${vercelToolbarSource}${isVercelPreview ? " https://vercel.com" : ""}`,
   `font-src 'self' data:${vercelToolbarSource}${isVercelPreview ? " https://assets.vercel.com" : ""}`,
