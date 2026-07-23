@@ -135,7 +135,6 @@
   border: 1px dotted rgba(255, 255, 255, 0.45);
   background: rgba(0, 0, 0, 0.08);
   color: white;
-  cursor: grab;
   padding: 0.45rem 0.2rem;
   pointer-events: auto;
   text-shadow: 1px 1px #000;
@@ -153,10 +152,6 @@
 .desktop-icon--diagnostic strong {
   overflow-wrap: normal;
   white-space: nowrap;
-}
-
-.desktop-icon:active {
-  cursor: grabbing;
 }
 
 .desktop-icon:focus-visible {
