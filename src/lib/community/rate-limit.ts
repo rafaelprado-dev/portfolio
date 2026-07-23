@@ -1,4 +1,5 @@
-export type CommunityMutationAction = "feedback" | "visit" | "snake" | "doom";
+export type CommunityMutationAction =
+  "contact" | "feedback" | "visit" | "snake" | "doom";
 
 export type RateLimitScope = "identity" | "source";
 
@@ -17,6 +18,18 @@ export const mutationRateLimitPolicies: Record<
   CommunityMutationAction,
   MutationRateLimitPolicy
 > = {
+  contact: {
+    identity: {
+      limit: 3,
+      windowMs: 24 * 60 * 60 * 1_000,
+      minimumIntervalMs: 2 * 60 * 1_000,
+    },
+    source: {
+      limit: 10,
+      windowMs: 24 * 60 * 60 * 1_000,
+      minimumIntervalMs: 10_000,
+    },
+  },
   feedback: {
     identity: {
       limit: 3,

@@ -249,6 +249,8 @@
   --surface: rgba(16, 20, 24, 0.82);
   --surface-strong: rgba(7, 10, 13, 0.92);
   --line: rgba(255, 255, 255, 0.11);
+  --line-strong: rgba(255, 255, 255, 0.28);
+  --danger: #ff6b6b;
   --text-primary: #f5f7fb;
   --text-secondary: rgba(238, 245, 248, 0.76);
   --text-muted: rgba(238, 245, 248, 0.52);
@@ -1896,6 +1898,118 @@
   color: var(--text-primary);
   font-size: 0.92rem;
   overflow-wrap: anywhere;
+}
+
+.contact-form--mobile {
+  gap: 0.65rem;
+}
+
+.contact-form--mobile .contact-form__fields {
+  grid-template-columns: 1fr;
+  gap: 0.62rem;
+}
+
+.contact-form--mobile .contact-form__field--wide {
+  grid-column: auto;
+}
+
+.contact-form--mobile .contact-form__field > label {
+  color: var(--holo-cyan);
+  font-size: 0.66rem;
+}
+
+.contact-form--mobile input,
+.contact-form--mobile textarea {
+  min-height: 2.6rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.12rem;
+  background: rgba(0, 0, 0, 0.46);
+  box-shadow: inset 0 -1px var(--holo-cyan);
+  color: var(--text-primary);
+  font-size: 0.86rem;
+  padding: 0.58rem 0.62rem;
+}
+
+.contact-form--mobile textarea {
+  min-height: 7rem;
+}
+
+.contact-form--mobile input::placeholder,
+.contact-form--mobile textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.contact-form--mobile input:focus-visible,
+.contact-form--mobile textarea:focus-visible {
+  outline: 2px solid var(--holo-cyan);
+  outline-offset: 2px;
+}
+
+.contact-form--mobile input[aria-invalid="true"],
+.contact-form--mobile textarea[aria-invalid="true"] {
+  border-color: var(--danger);
+  box-shadow: inset 0 -2px var(--danger);
+}
+
+.contact-form--mobile input:disabled,
+.contact-form--mobile textarea:disabled {
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: inset 0 -1px var(--text-muted);
+  color: var(--text-muted);
+}
+
+.contact-form--mobile .contact-form__message-meta > small:last-child,
+.contact-form--mobile .contact-form__actions p {
+  color: var(--text-muted);
+}
+
+.contact-form--mobile .contact-form__error {
+  color: var(--danger);
+}
+
+.contact-form--mobile .contact-form__actions {
+  display: grid;
+  align-items: stretch;
+  gap: 0.55rem;
+}
+
+.contact-form--mobile .contact-form__actions p {
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.contact-form--mobile .contact-form__actions button {
+  min-height: 2.65rem;
+  border: 1px solid color-mix(in srgb, var(--holo-cyan), #ffffff 24%);
+  border-radius: 0.12rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 45%),
+    color-mix(in srgb, var(--holo-cyan), #0b1014 72%);
+  box-shadow: inset 0 -2px var(--holo-cyan);
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+.contact-form--mobile
+  .contact-form__actions
+  button:not(:disabled):not([aria-disabled="true"]):active {
+  border-color: var(--holo-cyan);
+  padding: 0.35rem 0.7rem;
+}
+
+.contact-form--mobile .contact-form__status {
+  border-color: var(--line-strong);
+  color: var(--text-secondary);
+}
+
+.contact-form--mobile .contact-form__status.is-success {
+  border-color: var(--holo-green);
+  color: var(--holo-green);
+}
+
+.contact-form--mobile .contact-form__status.is-error {
+  border-color: var(--danger);
+  color: var(--danger);
 }
 
 .mobile-snake-app {

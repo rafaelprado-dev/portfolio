@@ -1,68 +1,157 @@
+:root {
+  --cursor-default:
+    url("/assets/cursors/windows-7-live-green/default.cur"), default;
+  --cursor-pointer:
+    url("/assets/cursors/windows-7-live-green/pointer.cur"), pointer;
+  --cursor-text: url("/assets/cursors/windows-7-live-green/text.cur"), text;
+  --cursor-move: url("/assets/cursors/windows-7-live-green/move.cur"), move;
+  --cursor-grab: url("/assets/cursors/windows-7-live-green/move.cur"), grab;
+  --cursor-grabbing:
+    url("/assets/cursors/windows-7-live-green/move.cur"), grabbing;
+  --cursor-disabled:
+    url("/assets/cursors/windows-7-live-green/not-allowed.cur"), not-allowed;
+  --cursor-help: url("/assets/cursors/windows-7-live-green/help.cur"), help;
+  --cursor-wait: url("/assets/cursors/windows-7-live-green/busy.ani"), wait;
+  --cursor-progress:
+    url("/assets/cursors/windows-7-live-green/progress.ani"), progress;
+  --cursor-resize-ew:
+    url("/assets/cursors/windows-7-live-green/resize-ew.cur"), ew-resize;
+  --cursor-resize-ns:
+    url("/assets/cursors/windows-7-live-green/resize-ns.cur"), ns-resize;
+  --cursor-resize-nwse:
+    url("/assets/cursors/windows-7-live-green/resize-nwse.cur"), nwse-resize;
+  --cursor-resize-nesw:
+    url("/assets/cursors/windows-7-live-green/resize-nesw.cur"), nesw-resize;
+}
+
 html,
 body,
-.boot-screen,
-.rafaelos-desktop,
-.window {
-  cursor: url("/assets/cursors/windows-7-live-green/default.cur"), auto;
+body * {
+  cursor: var(--cursor-default);
 }
 
-button,
-a,
-summary,
-[role="button"],
+:is(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  strong,
+  em,
+  b,
+  i,
+  u,
+  small,
+  label,
+  legend,
+  li,
+  dt,
+  dd,
+  blockquote,
+  figcaption,
+  address,
+  code,
+  pre,
+  kbd,
+  samp,
+  td,
+  th,
+  time,
+  mark,
+  output,
+  input,
+  textarea,
+  [contenteditable="true"]
+) {
+  cursor: var(--cursor-text);
+}
+
+:is(
+  button,
+  a,
+  summary,
+  select,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="range"],
+  input[type="color"],
+  input[type="file"],
+  [role="button"],
+  [role="link"],
+  [role="tab"],
+  [role="menuitem"]
+),
+:is(
+    button,
+    a,
+    summary,
+    select,
+    [role="button"],
+    [role="link"],
+    [role="tab"],
+    [role="menuitem"]
+  )
+  * {
+  cursor: var(--cursor-pointer);
+}
+
+.title-bar,
+.title-bar * {
+  cursor: var(--cursor-move);
+}
+
 .desktop-icon,
+.desktop-icon * {
+  cursor: var(--cursor-grab);
+}
+
+.desktop-icon:active,
+.desktop-icon:active * {
+  cursor: var(--cursor-grabbing);
+}
+
 .title-bar-controls button,
-.retro-scrollbar button {
-  cursor: url("/assets/cursors/windows-7-live-green/pointer.cur"), pointer;
+.title-bar-controls button * {
+  cursor: var(--cursor-pointer);
 }
 
-input,
-textarea,
-[contenteditable="true"] {
-  cursor: url("/assets/cursors/windows-7-live-green/text.cur"), text;
-}
-
-.title-bar {
-  cursor: url("/assets/cursors/windows-7-live-green/move.cur"), move;
-}
-
-.desktop-icon,
-.desktop-icon:active {
-  cursor: url("/assets/cursors/windows-7-live-green/move.cur"), grab;
-}
-
-button:disabled,
-[aria-disabled="true"] {
-  cursor:
-    url("/assets/cursors/windows-7-live-green/not-allowed.cur"), not-allowed;
+:is(button, input, textarea, select):disabled,
+:is(button, input, textarea, select):disabled *,
+[aria-disabled="true"],
+[aria-disabled="true"] * {
+  cursor: var(--cursor-disabled);
 }
 
 .cursor-help {
-  cursor: url("/assets/cursors/windows-7-live-green/help.cur"), help;
+  cursor: var(--cursor-help);
 }
 
 .cursor-wait {
-  cursor: url("/assets/cursors/windows-7-live-green/busy.ani"), wait;
+  cursor: var(--cursor-wait);
 }
 
 .cursor-progress {
-  cursor: url("/assets/cursors/windows-7-live-green/progress.ani"), progress;
+  cursor: var(--cursor-progress);
 }
 
 .cursor-resize-ew {
-  cursor: url("/assets/cursors/windows-7-live-green/resize-ew.cur"), ew-resize;
+  cursor: var(--cursor-resize-ew);
 }
 
 .cursor-resize-ns {
-  cursor: url("/assets/cursors/windows-7-live-green/resize-ns.cur"), ns-resize;
+  cursor: var(--cursor-resize-ns);
 }
 
 .cursor-resize-nwse {
-  cursor:
-    url("/assets/cursors/windows-7-live-green/resize-nwse.cur"), nwse-resize;
+  cursor: var(--cursor-resize-nwse);
 }
 
 .cursor-resize-nesw {
-  cursor:
-    url("/assets/cursors/windows-7-live-green/resize-nesw.cur"), nesw-resize;
+  cursor: var(--cursor-resize-nesw);
 }
