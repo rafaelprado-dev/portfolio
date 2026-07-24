@@ -39,6 +39,9 @@
   },
   "overrides": {
     "postcss": "^8.5.10",
+    "@modelcontextprotocol/sdk": {
+      "@hono/node-server": "2.0.11"
+    },
     "firebase-admin": {
       "jwks-rsa": "3.2.2"
     }
