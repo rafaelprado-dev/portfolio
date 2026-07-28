@@ -6,6 +6,7 @@ const routes = [
   { path: "/projetos", priority: 0.9 },
   { path: "/habilidades", priority: 0.8 },
   { path: "/experiencia", priority: 0.8 },
+  { path: "/contato", priority: 0.7 },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
