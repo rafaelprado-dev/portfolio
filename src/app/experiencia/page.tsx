@@ -12,10 +12,10 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/experiencia`,
   },
   robots: {
-    index: false,
+    index: true,
     follow: true,
     googleBot: {
-      index: false,
+      index: true,
       follow: true,
     },
   },

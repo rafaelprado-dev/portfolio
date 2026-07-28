@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/contato`,
   },
   robots: {
-    index: false,
+    index: true,
     follow: true,
     googleBot: {
-      index: false,
+      index: true,
       follow: true,
     },
   },
